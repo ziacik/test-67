@@ -43,6 +43,25 @@ describe("QuestionInteraction", () => {
 		expect(html).toContain("10");
 	});
 
+	it("renders a missing-number equation as large tap tiles", () => {
+		const html = render({
+			id: "equation",
+			topic: "arithmetic",
+			prompt: "missing",
+			answer: "7",
+			explanation: "x",
+			interaction: {
+				kind: "equation-tiles",
+				expression: "□ × 8 = 56",
+				options: [6, 7, 8, 9],
+			},
+		});
+
+		expect(html).toContain("equation-stage");
+		expect(html).toContain("□ × 8 = 56");
+		expect(html).toContain(">7<");
+	});
+
 	it("renders the area question as an SVG grid with answer cards", () => {
 		const html = render({
 			id: "grid",
