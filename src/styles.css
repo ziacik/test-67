@@ -1136,3 +1136,58 @@ input:focus {
 		min-height: 72px;
 	}
 }
+
+
+.number-filter-game {
+	display: grid;
+	gap: 16px;
+}
+
+.number-filter-grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 10px;
+}
+
+.number-filter-grid button {
+	min-height: 64px;
+	border: 2px solid #3a3047;
+	border-radius: 15px;
+	background: #110d19;
+	color: white;
+	font: 800 clamp(17px, 3vw, 24px) "Space Grotesk";
+	transition: transform .12s ease, border-color .12s ease, background .12s ease;
+}
+
+.number-filter-grid button:hover:not(:disabled) {
+	transform: translateY(-2px);
+	border-color: var(--cyan);
+}
+
+.number-filter-grid button.selected {
+	border-color: var(--cyan);
+	background: rgba(124,232,255,.12);
+	box-shadow: inset 0 0 0 1px rgba(124,232,255,.12);
+}
+
+.filter-submit {
+	justify-self: end;
+	border: 0;
+	border-radius: 12px;
+	padding: 13px 20px;
+	background: var(--accent);
+	color: #25180b;
+	font-weight: 900;
+	font-size: 12px;
+	letter-spacing: .06em;
+}
+
+.filter-submit:disabled {
+	opacity: .35;
+}
+
+@media (max-width: 650px) {
+	.number-filter-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
