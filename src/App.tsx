@@ -1,4 +1,5 @@
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
+import { AnswerArea } from "./components/AnswerArea";
 import {
 	isBossQuestion,
 	levelForXp,
@@ -276,33 +277,16 @@ function App() {
 				<h2>{question.prompt}</h2>
 
 				<form onSubmit={submit}>
-					{question.choices ? (
-						<div className="choices">
-							{question.choices.map((choice) => (
-								<button
-									type="button"
-									key={choice}
-									className={answer === choice ? "selected" : ""}
-									onClick={() => checkAnswer(choice)}
-									disabled={Boolean(feedback)}
-								>
-									{choice}
-								</button>
-							))}
-						</div>
-					) : (
-						<input
-							ref={inputRef}
-							inputMode="numeric"
-							autoComplete="off"
-							value={answer}
-							onChange={(event) => setAnswer(event.target.value)}
-							disabled={Boolean(feedback)}
-							placeholder="Napíš odpoveď"
-						/>
-					)}
+					<AnswerArea
+						question={question}
+						answer={answer}
+						disabled={Boolean(feedback)}
+						onAnswer={checkAnswer}
+						onInputChange={setAnswer}
+						inputRef={inputRef}
+					/>
 
-					{!feedback && !question.choices && (
+					{!feedback && !question.interaction && !question.choices && (
 						<div className="answer-actions">
 							{question.hint && (
 								<button type="button" className="hint" onClick={useHint} disabled={showHint}>
@@ -313,7 +297,7 @@ function App() {
 						</div>
 					)}
 
-					{!feedback && question.choices && question.hint && (
+					{!feedback && (question.interaction || question.choices) && question.hint && (
 						<div className="choice-hint-row">
 							<button type="button" className="hint" onClick={useHint} disabled={showHint}>
 								{showHint ? "Nápoveda použitá" : "Nápoveda · −40 % XP"}
