@@ -7,7 +7,7 @@ import {
 	pointsForAnswer,
 	reactionForAnswer,
 } from "./game";
-import { generateQuestion, isCorrect } from "./questions/generator";
+import { generateRoundQuestion, isCorrect } from "./questions/generator";
 import { topics } from "./questions/topics";
 import type { Question, TopicId } from "./questions/types";
 import "./styles.css";
@@ -71,7 +71,7 @@ function App() {
 	const start = (nextTopic: TopicId) => {
 		setStartingHighScore(stats.highScore);
 		setTopic(nextTopic);
-		setQuestion(generateQuestion(nextTopic));
+		setQuestion(generateRoundQuestion(nextTopic, 0));
 		setAnswer("");
 		setIndex(0);
 		setScore(0);
@@ -95,8 +95,9 @@ function App() {
 			return;
 		}
 
-		setIndex((value) => value + 1);
-		setQuestion(generateQuestion(topic));
+		const nextIndex = index + 1;
+		setIndex(nextIndex);
+		setQuestion(generateRoundQuestion(topic, nextIndex));
 		setAnswer("");
 		setFeedback(null);
 		setShowHint(false);
