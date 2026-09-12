@@ -201,7 +201,7 @@ export function compoundStoryQuestion(): Question {
 		id: id(),
 		topic: "arithmetic",
 		kind: "story",
-		prompt: `Na hospodárstve je ${base} kôz. Somárov je ${factor}-krát viac ako kôz. Koľko kôz a somárov je spolu?`,
+		prompt: `Na hospodárstve je ${base} kôz. Somárov je ${factor}-krát toľko ako kôz. Koľko kôz a somárov je spolu?`,
 		answer: String(total),
 		choices: shuffle([String(total), String(multiplied), String(base + factor), String(multiplied - base)]),
 		hint: "Najprv zisti počet somárov, až potom počet všetkých zvierat.",
@@ -265,15 +265,13 @@ export function divisionStoryQuestion(): Question {
 }
 
 export function financeStoryQuestion(): Question {
-	const offers = [
-		{ price: integer(35, 45), shipping: integer(4, 10) },
-		{ price: integer(38, 48), shipping: integer(0, 8) },
-		{ price: integer(32, 44), shipping: integer(6, 12) },
-		{ price: integer(40, 50), shipping: integer(0, 6) },
-	];
-	const totals = offers.map((offer) => offer.price + offer.shipping);
-	let best = 0;
-	for (let i = 1; i < totals.length; i += 1) if (totals[i] < totals[best]) best = i;
+	const cheapest = integer(42, 50);
+	const totals = shuffle([cheapest, cheapest + 2, cheapest + 4, cheapest + 7]);
+	const offers = totals.map((total) => {
+		const shipping = integer(0, Math.min(10, total - 30));
+		return { price: total - shipping, shipping, total };
+	});
+	const best = offers.findIndex((offer) => offer.total === cheapest);
 	const labels = offers.map((offer, index) => `Ponuka ${index + 1}: ${offer.price} € + doprava ${offer.shipping} €`);
 	return storyChoice(
 		"arithmetic",
@@ -282,40 +280,35 @@ export function financeStoryQuestion(): Question {
 		labels[best],
 		labels,
 		"Pri každej ponuke pripočítaj cenu dopravy.",
-		`${totals.map((value, index) => `${index + 1}. ${value} €`).join("; ")}. Najlacnejšia je ponuka ${best + 1}.`,
+		`${offers.map((offer, index) => `${index + 1}. ${offer.total} €`).join("; ")}. Najlacnejšia je ponuka ${best + 1}.`,
 	);
 }
-
 export function numberFilterQuestion(): Question {
 	const threshold = integer(3_000, 8_000);
-	const values = new Set<number>();
-	while (values.size < 9) values.add(integer(1_000, 9_999));
-	let list = [...values];
-	let correct = list.filter((value) => value % 2 === 0 && value < threshold);
-	if (correct.length < 2) {
-		list[0] = threshold - 2;
-		list[1] = threshold - 4;
+	const correctValues = new Set<number>();
+	while (correctValues.size < 2) {
+		const candidate = integer(1_000, threshold - 1);
+		correctValues.add(candidate % 2 === 0 ? candidate : candidate - 1);
 	}
-	correct = list.filter((value) => value % 2 === 0 && value < threshold);
-	if (correct.length > 4) {
-		for (let i = 4; i < correct.length; i += 1) {
-			const index = list.indexOf(correct[i]);
-			list[index] = Math.min(9_999, correct[i] + (correct[i] % 2 === 0 ? 1 : 0));
-		}
-		correct = list.filter((value) => value % 2 === 0 && value < threshold);
+	const otherValues = new Set<number>();
+	while (otherValues.size < 7) {
+		const belowOdd = integer(1_000, threshold - 1);
+		const aboveAny = integer(threshold, 9_999);
+		otherValues.add(belowOdd % 2 === 1 ? belowOdd : belowOdd + 1);
+		if (otherValues.size < 7) otherValues.add(aboveAny);
 	}
-	const answerValues = [...correct].sort((a, b) => a - b);
+	const answerValues = [...correctValues].sort((a, b) => a - b);
+	const values = [...new Set([...answerValues, ...otherValues])].slice(0, 9);
 	return {
 		id: id(),
 		topic: "numbers",
 		prompt: `Vyber všetky čísla, ktoré sú párne a zároveň menšie ako ${sk(threshold)}.`,
 		answer: answerValues.join(","),
-		interaction: { kind: "number-filter", values: shuffle(list), correctValues: answerValues },
+		interaction: { kind: "number-filter", values: shuffle(values), correctValues: answerValues },
 		hint: "Číslo musí spĺňať obe podmienky naraz.",
 		explanation: `Obe podmienky spĺňajú: ${answerValues.map(sk).join(", ")}.`,
 	};
 }
-
 function geometryStoryQuestion(): Question {
 	return differenceStoryQuestion();
 }
