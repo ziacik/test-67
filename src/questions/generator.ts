@@ -288,6 +288,23 @@ export function generateQuestion(topic: TopicId): Question {
 	return factory();
 }
 
+const interactiveGenerators = {
+	numbers: [compareQuestion, parityQuestion, numberLineQuestion, sortNumbersQuestion],
+	arithmetic: [missingFactorQuestion],
+	geometry: [gridAreaQuestion],
+} as const;
+
+export function generateRoundQuestion(topic: TopicId, index: number): Question {
+	if (index % 2 === 0) return generateQuestion(topic);
+
+	const interactiveTopic =
+		topic === "mixed"
+			? pick(["numbers", "arithmetic", "geometry"] as const)
+			: topic;
+	const factory = pick(interactiveGenerators[interactiveTopic]);
+	return factory();
+}
+
 export function normalizeAnswer(value: string): string {
 	return value.trim().replaceAll(" ", "").replace(",", ".").toLocaleLowerCase("sk");
 }
