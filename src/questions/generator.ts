@@ -186,9 +186,73 @@ function wordProblem(): Question {
 	};
 }
 
-const numbers = [roundingQuestion, compareQuestion, parityQuestion] as const;
+export function numberLineQuestion(): Question {
+	const start = integer(0, 40) * 10;
+	const step = pick([5, 10, 20, 25, 50] as const);
+	const values = Array.from({ length: 5 }, (_, index) => start + index * step);
+	const target = pick(values.slice(1, 4));
+
+	return {
+		id: id(),
+		topic: "numbers",
+		prompt: `Kde na číselnej osi leží číslo ${sk(target)}?`,
+		answer: String(target),
+		interaction: { kind: "number-line", values },
+		hint: "Pozri si rozostupy medzi susednými bodmi.",
+		explanation: `Číslo ${sk(target)} patrí presne na označený bod ${sk(target)}.`,
+	};
+}
+
+export function sortNumbersQuestion(): Question {
+	const values = new Set<number>();
+	while (values.size < 4) values.add(integer(100, 9_999));
+	const shuffled = shuffle([...values]);
+	const sorted = [...shuffled].sort((a, b) => a - b);
+
+	return {
+		id: id(),
+		topic: "numbers",
+		prompt: "Ťukaj čísla od najmenšieho po najväčšie.",
+		answer: sorted.join(","),
+		interaction: { kind: "sort", values: shuffled },
+		hint: "Najprv porovnaj tisícky, potom stovky.",
+		explanation: `Správne poradie je ${sorted.map(sk).join(" < ")}.`,
+	};
+}
+
+export function gridAreaQuestion(): Question {
+	const columns = integer(4, 8);
+	const rows = integer(4, 7);
+	const filledColumns = integer(2, columns);
+	const filledRows = integer(2, rows);
+	const area = filledColumns * filledRows;
+	const candidates = new Set<number>([area]);
+	while (candidates.size < 4) {
+		const delta = pick([-4, -3, -2, -1, 1, 2, 3, 4] as const);
+		candidates.add(Math.max(1, area + delta));
+	}
+
+	return {
+		id: id(),
+		topic: "geometry",
+		prompt: "Koľko štvorčekov tvorí vyfarbenú plochu?",
+		answer: String(area),
+		interaction: {
+			kind: "grid-area",
+			columns,
+			rows,
+			filledColumns,
+			filledRows,
+			options: shuffle([...candidates]),
+		},
+		hint: "Nemusíš ich rátať po jednom. Riadky × stĺpce.",
+		explanation: `${filledColumns} × ${filledRows} = ${area} štvorčekov.`,
+	};
+}
+
+const numbers = [roundingQuestion, compareQuestion, parityQuestion, numberLineQuestion, sortNumbersQuestion] as const;
 const arithmetic = [additionQuestion, subtractionQuestion, multiplicationQuestion, divisionQuestion, orderQuestion, wordProblem] as const;
-const geometry = [perimeterQuestion, areaQuestion, unitsQuestion] as const;
+const geometry = [perimeterQuestion, areaQuestion, unitsQuestion, gridAreaQuestion] as const;
 
 export const generators = { numbers, arithmetic, geometry };
 
