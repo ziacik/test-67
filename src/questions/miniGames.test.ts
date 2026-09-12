@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
 	gridAreaQuestion,
+	missingFactorQuestion,
 	numberLineQuestion,
 	sortNumbersQuestion,
 } from "./generator";
@@ -25,6 +26,16 @@ describe("visual mini-game questions", () => {
 		expect(interaction.values).toHaveLength(4);
 		const sorted = [...interaction.values].sort((a, b) => a - b);
 		expect(question.answer).toBe(sorted.join(","));
+	});
+
+	it("builds a missing-factor tile game for arithmetic", () => {
+		const question = missingFactorQuestion();
+		const interaction = question.interaction;
+
+		expect(interaction?.kind).toBe("equation-tiles");
+		if (!interaction || interaction.kind !== "equation-tiles") return;
+		expect(interaction.expression).toContain("□");
+		expect(interaction.options.map(String)).toContain(question.answer);
 	});
 
 	it("builds a visual grid-area question with answer choices", () => {
