@@ -309,6 +309,96 @@ export function numberFilterQuestion(): Question {
 		explanation: `Obe podmienky spĺňajú: ${answerValues.map(sk).join(", ")}.`,
 	};
 }
+
+function decompositionQuestion(): Question {
+	const digits = Array.from({ length: 6 }, (_, index) => index === 0 ? integer(1, 9) : integer(0, 9));
+	const value = digits[0] * 100_000 + digits[1] * 10_000 + digits[2] * 1_000 + digits[3] * 100 + digits[4] * 10 + digits[5];
+	const target = digits[2] * 1_000 + digits[4] * 10;
+	return {
+		id: id(),
+		topic: "numbers",
+		prompt: `V čísle ${sk(value)} sčítaj hodnotu tisícok a desiatok. Aké číslo dostaneš?`,
+		answer: String(target),
+		choices: shuffle([String(target), String(digits[2] + digits[4]), String(digits[2] * 1_000), String(digits[4] * 10)]),
+		hint: "Rozlišuj číslicu od jej hodnoty podľa miesta v čísle.",
+		explanation: `${digits[2]} tisícok je ${sk(digits[2] * 1_000)} a ${digits[4]} desiatok je ${digits[4] * 10}; spolu ${sk(target)}.`,
+	};
+}
+
+function romanQuestion(): Question {
+	const pairs = [["XIV", 14], ["XIX", 19], ["XXIV", 24], ["XXXVI", 36], ["XLII", 42], ["XLIX", 49], ["LVIII", 58], ["LXIV", 64]] as const;
+	const [roman, answerNumber] = pick(pairs);
+	const answer = String(answerNumber);
+	return {
+		id: id(),
+		topic: "numbers",
+		prompt: `Aké číslo zapisuje rímsky zápis ${roman}?`,
+		answer,
+		choices: shuffle([answer, String(answerNumber - 2), String(answerNumber + 2), String(answerNumber + 10)]),
+		explanation: `${roman} = ${answer}.`,
+	};
+}
+
+function shapePropertyQuestion(): Question {
+	const variants = [
+		{ prompt: "Ktorý útvar má práve 4 vrcholy a všetky štyri strany rovnako dlhé?", answer: "štvorec", options: ["štvorec", "obdĺžnik", "trojuholník", "päťuholník"] },
+		{ prompt: "Ktorý útvar nemá žiadny vrchol?", answer: "kruh", options: ["kruh", "trojuholník", "štvorec", "obdĺžnik"] },
+		{ prompt: "Ktorý útvar má práve 3 vrcholy?", answer: "trojuholník", options: ["trojuholník", "štvorec", "kruh", "obdĺžnik"] },
+	] as const;
+	const q = pick(variants);
+	return { id: id(), topic: "geometry", prompt: q.prompt, answer: q.answer, choices: shuffle([...q.options]), explanation: `Správna odpoveď je ${q.answer}.` };
+}
+
+function lineRelationQuestion(): Question {
+	const perpendicular = Math.random() < 0.5;
+	const answer = perpendicular ? "kolmé" : "rovnobežné";
+	return {
+		id: id(),
+		topic: "geometry",
+		prompt: perpendicular ? "Dve priamky sa pretínajú pod pravým uhlom. Aké sú?" : "Dve rôzne priamky v rovine sa nikdy nepretnú. Aké sú?",
+		answer,
+		choices: ["kolmé", "rovnobežné", "totožné", "rôznobežné"],
+		explanation: perpendicular ? "Priamky zvierajúce pravý uhol sú kolmé." : "Dve rôzne priamky, ktoré sa v rovine nepretínajú, sú rovnobežné.",
+	};
+}
+
+function circleQuestion(): Question {
+	const radius = integer(2, 12);
+	return {
+		id: id(),
+		topic: "geometry",
+		prompt: `Kružnica má polomer ${radius} cm. Aký dlhý je jej priemer?`,
+		answer: String(radius * 2),
+		choices: shuffle([String(radius * 2), String(radius), String(radius + 2), String(radius * 4)]),
+		explanation: `Priemer je dvojnásobok polomeru: 2 × ${radius} = ${radius * 2} cm.`,
+	};
+}
+
+function cubeFactsQuestion(): Question {
+	const variants = [
+		["Koľko vrcholov má kocka?", "8", ["6", "8", "10", "12"]],
+		["Koľko hrán má kocka?", "12", ["6", "8", "10", "12"]],
+		["Koľko stien má kocka?", "6", ["4", "6", "8", "12"]],
+	] as const;
+	const [prompt, answer, options] = pick(variants);
+	return { id: id(), topic: "geometry", prompt, answer, choices: shuffle([...options]), explanation: `Správna odpoveď je ${answer}.` };
+}
+
+function quadrilateralQuestion(): Question {
+	const square = Math.random() < 0.5;
+	const answer = square ? "štvorec" : "obdĺžnik";
+	return {
+		id: id(),
+		topic: "geometry",
+		prompt: square
+			? "Ktorý štvoruholník má všetky strany rovnako dlhé a štyri pravé uhly?"
+			: "Ktorý štvoruholník má protiľahlé strany rovnako dlhé a štyri pravé uhly, pričom susedné strany nemusia byť rovnako dlhé?",
+		answer,
+		choices: ["štvorec", "obdĺžnik", "trojuholník", "kruh"],
+		explanation: `Je to ${answer}.`,
+	};
+}
+
 export function generateStoryQuestion(topic: TopicId, group?: "a" | "b"): Question {
 	if (topic === "addition") return additionStoryQuestion();
 	if (topic === "multiplication") return group === "b" ? divisionStoryQuestion() : compoundStoryQuestion();
