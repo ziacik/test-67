@@ -1,4 +1,12 @@
-export type TopicId = "numbers" | "arithmetic" | "geometry" | "mixed";
+export type TopicId =
+	| "numbers"
+	| "geometry"
+	| "addition"
+	| "symmetry"
+	| "multiplication"
+	| "measurement"
+	| "applications"
+	| "mixed";
 
 export type QuestionInteraction =
 	| { kind: "input" }
