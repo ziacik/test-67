@@ -24,7 +24,7 @@ export function QuestionInteraction({ question, disabled, onAnswer }: Props) {
 			<div className="mini-number-line" aria-label="Číselná os">
 				<div className="number-line-track" />
 				<div className="number-line-points">
-					{interaction.values.map((value) => (
+					{interaction.values.map((value, index) => (
 						<button
 							type="button"
 							key={value}
@@ -33,7 +33,7 @@ export function QuestionInteraction({ question, disabled, onAnswer }: Props) {
 							onClick={() => onAnswer(String(value))}
 						>
 							<span className="line-dot" />
-							<span className="line-label">{sk(value)}</span>
+							<span className="line-label">{index === 0 || index === interaction.values.length - 1 ? sk(value) : "\u00A0"}</span>
 						</button>
 					))}
 				</div>
