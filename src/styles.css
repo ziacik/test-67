@@ -1035,3 +1035,104 @@ input:focus {
 		grid-template-columns: repeat(2, 1fr);
 	}
 }
+
+
+/* Word-problem mini-game */
+.story-game {
+	display: grid;
+	grid-template-columns: minmax(150px, .55fr) minmax(0, 1.45fr);
+	gap: 16px;
+	align-items: stretch;
+}
+
+.story-scene {
+	position: relative;
+	display: grid;
+	place-items: center;
+	min-height: 220px;
+	overflow: hidden;
+	border: 1px solid rgba(255,180,84,.18);
+	border-radius: 20px;
+	background:
+		radial-gradient(circle at 50% 40%, rgba(255,180,84,.16), transparent 28%),
+		linear-gradient(145deg, rgba(244,124,255,.08), transparent 55%),
+		#100d18;
+}
+
+.story-scene > span {
+	position: relative;
+	z-index: 2;
+	font-size: clamp(58px, 9vw, 90px);
+	filter: drop-shadow(0 18px 18px rgba(0,0,0,.24));
+	transform: rotate(-5deg);
+}
+
+.story-scene > small {
+	position: absolute;
+	z-index: 2;
+	right: 16px;
+	bottom: 13px;
+	font-size: 24px;
+	letter-spacing: 6px;
+	opacity: .65;
+	transform: rotate(7deg);
+}
+
+.story-orbit {
+	position: absolute;
+	border: 1px solid rgba(255,255,255,.08);
+	border-radius: 50%;
+}
+
+.story-orbit-one {
+	width: 150px;
+	height: 150px;
+}
+
+.story-orbit-two {
+	width: 230px;
+	height: 230px;
+	border-color: rgba(244,124,255,.07);
+}
+
+.story-options {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 10px;
+}
+
+.story-options button {
+	min-height: 92px;
+	padding: 14px;
+	border: 2px solid #3a3047;
+	border-radius: 16px;
+	background: #110d19;
+	color: white;
+	font: 800 clamp(15px, 2.7vw, 21px) "Space Grotesk";
+	line-height: 1.25;
+	transition: transform .12s ease, border-color .12s ease, background .12s ease;
+}
+
+.story-options button:hover:not(:disabled) {
+	transform: translateY(-2px);
+	border-color: var(--accent);
+	background: #251b29;
+}
+
+@media (max-width: 650px) {
+	.story-game {
+		grid-template-columns: 1fr;
+	}
+
+	.story-scene {
+		min-height: 135px;
+	}
+
+	.story-scene > span {
+		font-size: 62px;
+	}
+
+	.story-options button {
+		min-height: 72px;
+	}
+}
