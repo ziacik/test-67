@@ -982,3 +982,56 @@ input:focus {
 		min-height: 62px;
 	}
 }
+
+
+.equation-game {
+	display: grid;
+	gap: 16px;
+}
+
+.equation-stage {
+	display: grid;
+	place-items: center;
+	min-height: 150px;
+	padding: 22px;
+	border: 1px solid rgba(124,232,255,.2);
+	border-radius: 20px;
+	background:
+		radial-gradient(circle at 50% 50%, rgba(124,232,255,.08), transparent 55%),
+		#100d18;
+	color: white;
+	font: 800 clamp(38px, 8vw, 68px) "Space Grotesk";
+	letter-spacing: -.055em;
+}
+
+.equation-options {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 9px;
+}
+
+.equation-options button {
+	min-height: 68px;
+	border: 2px solid #3a3047;
+	border-radius: 15px;
+	background: #15101f;
+	color: white;
+	font: 800 clamp(21px, 4vw, 30px) "Space Grotesk";
+	transition: transform .12s ease, border-color .12s ease, background .12s ease;
+}
+
+.equation-options button:hover:not(:disabled) {
+	transform: translateY(-3px);
+	border-color: var(--cyan);
+	background: #18222a;
+}
+
+@media (max-width: 650px) {
+	.equation-stage {
+		min-height: 125px;
+	}
+
+	.equation-options {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
