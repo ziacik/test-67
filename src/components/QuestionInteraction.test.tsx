@@ -62,6 +62,26 @@ describe("QuestionInteraction", () => {
 		expect(html).toContain(">7<");
 	});
 
+	it("renders a word problem as a visual story choice", () => {
+		const html = render({
+			id: "story",
+			topic: "arithmetic",
+			kind: "story",
+			prompt: "Na výlete...",
+			answer: "6 × 24 + 17",
+			explanation: "x",
+			interaction: {
+				kind: "story-choice",
+				icon: "📦",
+				options: ["6 × 24 + 17", "6 + 24 + 17", "6 × (24 + 17)", "6 × 24 − 17"],
+			},
+		});
+
+		expect(html).toContain("story-game");
+		expect(html).toContain("📦");
+		expect(html).toContain("6 × 24 + 17");
+	});
+
 	it("renders the area question as an SVG grid with answer cards", () => {
 		const html = render({
 			id: "grid",
