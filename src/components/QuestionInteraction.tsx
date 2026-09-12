@@ -101,6 +101,26 @@ export function QuestionInteraction({ question, disabled, onAnswer }: Props) {
 		);
 	}
 
+	if (interaction.kind === "story-choice") {
+		return (
+			<div className="story-game">
+				<div className="story-scene" aria-hidden="true">
+					<div className="story-orbit story-orbit-one" />
+					<div className="story-orbit story-orbit-two" />
+					<span>{interaction.icon}</span>
+					<small>{interaction.icon} {interaction.icon}</small>
+				</div>
+				<div className="story-options">
+					{interaction.options.map((option) => (
+						<button type="button" key={option} disabled={disabled} onClick={() => onAnswer(option)}>
+							{option}
+						</button>
+					))}
+				</div>
+			</div>
+		);
+	}
+
 	if (interaction.kind === "grid-area") {
 		const cell = 44;
 		const width = interaction.columns * cell;
