@@ -260,7 +260,7 @@ export function divisionStoryQuestion(): Question {
 		String(count),
 		options.slice(0, 4).map(String),
 		"Zisti, koľkokrát sa počet špáradiel na jedného ježka zmestí do celkového počtu.",
-		`${total} ÷ ${perItem} = ${count}.`,
+		`${total} ÷ ${perItem} = ${count}, takže zo špáradiel sa dá vyrobiť ${count} ježkov.`,
 	);
 }
 
