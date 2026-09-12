@@ -399,6 +399,132 @@ function quadrilateralQuestion(): Question {
 	};
 }
 
+
+function missingAddendQuestion(): Question {
+	const a = integer(100, 900);
+	const missing = integer(100, 900);
+	const sum = a + missing;
+	const options = [...new Set([missing, missing + 10, Math.max(1, missing - 10), a])];
+	while (options.length < 4) options.push(options[0] + options.length * 10);
+	return {
+		id: id(),
+		topic: "addition",
+		prompt: "Doplň chýbajúce číslo.",
+		answer: String(missing),
+		interaction: { kind: "equation-tiles", expression: `${a} + □ = ${sum}`, options: shuffle(options.slice(0, 4)) },
+		explanation: `${sum} − ${a} = ${missing}.`,
+	};
+}
+
+function differenceComparisonQuestion(): Question {
+	const smaller = integer(1_000, 20_000);
+	const difference = integer(500, 5_000);
+	const larger = smaller + difference;
+	return {
+		id: id(),
+		topic: "addition",
+		prompt: `${sk(larger)} je o koľko viac ako ${sk(smaller)}?`,
+		answer: String(difference),
+		choices: shuffle([String(difference), String(larger + smaller), String(smaller), String(difference + 100)]),
+		explanation: `${sk(larger)} − ${sk(smaller)} = ${sk(difference)}.`,
+	};
+}
+
+function estimateSumQuestion(): Question {
+	const a = integer(1_200, 9_800);
+	const b = integer(1_200, 9_800);
+	const ar = Math.round(a / 1_000) * 1_000;
+	const br = Math.round(b / 1_000) * 1_000;
+	const estimate = ar + br;
+	return {
+		id: id(),
+		topic: "addition",
+		prompt: `Odhadni súčet ${sk(a)} + ${sk(b)} zaokrúhlením oboch čísel na tisícky.`,
+		answer: String(estimate),
+		choices: shuffle([String(estimate), String(estimate + 1_000), String(Math.max(0, estimate - 1_000)), String(a + b)]),
+		explanation: `${sk(a)} ≈ ${sk(ar)} a ${sk(b)} ≈ ${sk(br)}, teda približne ${sk(estimate)}.`,
+	};
+}
+
+function additionStoryQuestion(): Question {
+	const first = integer(120, 480);
+	const second = integer(100, 420);
+	const absent = integer(40, Math.min(150, first + second - 1));
+	const answer = first + second - absent;
+	return storyChoice(
+		"addition",
+		"🎫",
+		`Na podujatie predali dopoludnia ${first} lístkov a popoludní ${second}. ${absent} návštevníkov nakoniec neprišlo. Koľko návštevníkov prišlo?`,
+		String(answer),
+		[String(answer), String(first + second), String(Math.abs(first - second)), String(answer + absent)],
+		"Najprv spočítaj predané lístky a potom odčítaj tých, ktorí neprišli.",
+		`${first} + ${second} − ${absent} = ${answer}.`,
+	);
+}
+
+function axisCountQuestion(): Question {
+	const variants = [["štvorec", "4"], ["obdĺžnik, ktorý nie je štvorcom", "2"], ["rovnostranný trojuholník", "3"]] as const;
+	const [shape, answer] = pick(variants);
+	return {
+		id: id(),
+		topic: "symmetry",
+		prompt: `Koľko osí súmernosti má ${shape}?`,
+		answer,
+		choices: shuffle([answer, "0", "1", "2", "3", "4"].filter((value, index, values) => values.indexOf(value) === index).slice(0, 4)),
+		explanation: `${shape} má ${answer} osí súmernosti.`,
+	};
+}
+
+function symmetryTypeQuestion(): Question {
+	const axial = Math.random() < 0.5;
+	const answer = axial ? "osová" : "stredová";
+	return {
+		id: id(),
+		topic: "symmetry",
+		prompt: axial ? "Pri zrkadlení útvaru podľa priamky vzniká aká súmernosť?" : "Útvar sa pri otočení o 180° okolo jedného bodu prekryje so svojím obrazom. O akú súmernosť ide?",
+		answer,
+		choices: ["osová", "stredová", "žiadna", "kolmá"],
+		explanation: `Ide o ${answer} súmernosť.`,
+	};
+}
+
+function mirrorDistanceQuestion(): Question {
+	const distance = integer(1, 8);
+	const answer = `${distance} vpravo`;
+	return {
+		id: id(),
+		topic: "symmetry",
+		prompt: `Bod A leží ${distance} štvorčekov vľavo od zvislej osi súmernosti. Kde bude jeho obraz A′?`,
+		answer,
+		choices: shuffle([answer, `${distance} vľavo`, `${distance * 2} vpravo`, "na osi"]),
+		explanation: `Obraz leží v rovnakej vzdialenosti na opačnej strane osi: ${distance} štvorčekov vpravo.`,
+	};
+}
+
+function centralSymmetryQuestion(): Question {
+	const rectangle = Math.random() < 0.5;
+	const answer = rectangle ? "áno" : "nie";
+	return {
+		id: id(),
+		topic: "symmetry",
+		prompt: rectangle ? "Má obdĺžnik stred súmernosti?" : "Má bežný trojuholník stred súmernosti?",
+		answer,
+		choices: ["áno", "nie"],
+		explanation: rectangle ? "Priesečník uhlopriečok obdĺžnika je jeho stredom súmernosti." : "Trojuholník nemá stredovú súmernosť.",
+	};
+}
+
+function noAxisSymmetryQuestion(): Question {
+	return {
+		id: id(),
+		topic: "symmetry",
+		prompt: "Ktorý z útvarov nemusí mať žiadnu os súmernosti?",
+		answer: "rôznostranný trojuholník",
+		choices: ["štvorec", "obdĺžnik", "rovnostranný trojuholník", "rôznostranný trojuholník"],
+		explanation: "Všeobecný rôznostranný trojuholník nemá os súmernosti.",
+	};
+}
+
 export function generateStoryQuestion(topic: TopicId, group?: "a" | "b"): Question {
 	if (topic === "addition") return additionStoryQuestion();
 	if (topic === "multiplication") return group === "b" ? divisionStoryQuestion() : compoundStoryQuestion();
