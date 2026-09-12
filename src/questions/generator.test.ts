@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { generateQuestion, isCorrect } from "./generator";
+import { generateQuestion, generateRoundQuestion, isCorrect } from "./generator";
 
 const topics = ["numbers", "arithmetic", "geometry", "mixed"] as const;
 
@@ -11,6 +11,13 @@ describe("question generator", () => {
 			expect(question.answer.length).toBeGreaterThan(0);
 			expect(question.explanation.length).toBeGreaterThan(3);
 			expect(isCorrect(question, question.answer)).toBe(true);
+		}
+	});
+
+	it.each(topics)("forces an interactive question every second slot for %s", (topic) => {
+		for (const index of [1, 3, 5, 7, 9]) {
+			const question = generateRoundQuestion(topic, index);
+			expect(Boolean(question.interaction || question.choices)).toBe(true);
 		}
 	});
 
