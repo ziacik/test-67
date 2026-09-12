@@ -35,7 +35,7 @@ describe("AnswerArea", () => {
 	it("keeps a numeric input for classic calculation questions", () => {
 		const html = render({
 			id: "input",
-			topic: "arithmetic",
+			topic: "addition",
 			prompt: "2 + 2",
 			answer: "4",
 			explanation: "x",
