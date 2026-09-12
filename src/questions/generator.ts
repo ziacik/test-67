@@ -525,6 +525,98 @@ function noAxisSymmetryQuestion(): Question {
 	};
 }
 
+
+function divisionRemainderQuestion(): Question {
+	const divisor = integer(3, 12);
+	const quotient = integer(5, 25);
+	const remainder = integer(1, divisor - 1);
+	const dividend = divisor * quotient + remainder;
+	const answer = `${quotient} zvyšok ${remainder}`;
+	return {
+		id: id(),
+		topic: "multiplication",
+		prompt: `${dividend} ÷ ${divisor} = ?`,
+		answer,
+		choices: shuffle([answer, `${quotient} zvyšok ${Math.max(0, remainder - 1)}`, `${quotient + 1} zvyšok ${remainder}`, String(quotient)]),
+		explanation: `${dividend} = ${divisor} × ${quotient} + ${remainder}.`,
+	};
+}
+
+function xylophoneQuestion(): Question {
+	const first = integer(20, 40);
+	const step = pick([3, 4, 5, 6] as const);
+	const position = integer(4, 8);
+	const answer = first + (position - 1) * step;
+	return storyChoice(
+		"measurement",
+		"🎵",
+		`Doštičky xylofónu sú zoradené od najkratšej. Prvá má ${first} mm a každá ďalšia je o ${step} mm dlhšia. Akú dĺžku má ${position}. doštička?`,
+		String(answer),
+		[String(answer), String(first + position * step), String(first + step), String(answer - step)],
+		"Medzi prvou a hľadanou doštičkou je o jeden krok menej, než je jej poradové číslo.",
+		`${first} + ${position - 1} × ${step} = ${answer} mm.`,
+	);
+}
+
+function possibleDiceSumQuestion(): Question {
+	const dice = integer(3, 5);
+	const min = dice;
+	const max = dice * 6;
+	const possible = integer(min, max);
+	return {
+		id: id(),
+		topic: "applications",
+		prompt: `Hádžeme ${dice} kockami s číslami 1 až 6. Ktorý z týchto súčtov môžeme dostať?`,
+		answer: String(possible),
+		choices: shuffle([String(possible), String(max + 1), String(max + integer(2, 5)), String(Math.max(0, min - 1))]),
+		explanation: `Súčet musí byť od ${min} do ${max}. ${possible} do tohto intervalu patrí.`,
+	};
+}
+
+function chartDataQuestion(): Question {
+	const values = shuffle([integer(8, 11), integer(12, 15), integer(16, 20)]);
+	const [karol, milan, ondrej] = values;
+	const max = Math.max(...values);
+	const answer = karol === max ? "Karol" : milan === max ? "Milan" : "Ondrej";
+	return {
+		id: id(),
+		topic: "applications",
+		prompt: `Údaje zo stĺpcového grafu: Karol ${karol} km, Milan ${milan} km, Ondrej ${ondrej} km. Kto prešiel najviac?`,
+		answer,
+		choices: ["Karol", "Milan", "Ondrej"],
+		explanation: `Najväčšia hodnota je ${max} km, teda ${answer}.`,
+	};
+}
+
+function halfCollectionQuestion(): Question {
+	const total = pick([8, 10, 12, 14, 16] as const);
+	const filled = integer(1, total / 2 - 1);
+	const answer = total / 2 - filled;
+	return {
+		id: id(),
+		topic: "applications",
+		prompt: `Je tu ${total} pohárov, z toho ${filled} sú plné. Koľko treba ešte naplniť, aby bola plná presne polovica?`,
+		answer: String(answer),
+		choices: shuffle([String(answer), String(total / 2), String(answer + 1), String(Math.max(0, answer - 1))]),
+		explanation: `Polovica z ${total} je ${total / 2}. Už sú plné ${filled}, takže treba ešte ${answer}.`,
+	};
+}
+
+function pathsQuestion(): Question {
+	const width = pick([2, 3] as const);
+	const height = pick([2, 3] as const);
+	const factorial = (n: number): number => n <= 1 ? 1 : n * factorial(n - 1);
+	const count = factorial(width + height) / (factorial(width) * factorial(height));
+	return {
+		id: id(),
+		topic: "applications",
+		prompt: `Na mriežke sa z bodu X do Y musíš posunúť presne ${width}× doprava a ${height}× hore. Koľko rôznych najkratších ciest existuje?`,
+		answer: String(count),
+		choices: shuffle([String(count), String(count + 1), String(Math.max(1, count - 1)), String(width * height)]),
+		explanation: `Rôzne poradia ${width} krokov doprava a ${height} krokov hore dávajú ${count} ciest.`,
+	};
+}
+
 export function generateStoryQuestion(topic: TopicId, group?: "a" | "b"): Question {
 	if (topic === "addition") return additionStoryQuestion();
 	if (topic === "multiplication") return group === "b" ? divisionStoryQuestion() : compoundStoryQuestion();
@@ -625,7 +717,7 @@ export function gridAreaQuestion(): Question {
 const numbers = [roundingQuestion, compareQuestion, parityQuestion, numberLineQuestion, numberFilterQuestion, decompositionQuestion, romanQuestion] as const;
 const geometry = [shapePropertyQuestion, lineRelationQuestion, circleQuestion, cubeFactsQuestion, quadrilateralQuestion] as const;
 const addition = [additionQuestion, subtractionQuestion, missingAddendQuestion, differenceComparisonQuestion, estimateSumQuestion, additionStoryQuestion] as const;
-const symmetry = [axisCountQuestion, symmetryTypeQuestion, mirrorDistanceQuestion, centralSymmetryQuestion] as const;
+const symmetry = [axisCountQuestion, symmetryTypeQuestion, mirrorDistanceQuestion, centralSymmetryQuestion, noAxisSymmetryQuestion] as const;
 const multiplication = [multiplicationQuestion, divisionQuestion, orderQuestion, missingFactorQuestion, divisionRemainderQuestion, compoundStoryQuestion, divisionStoryQuestion] as const;
 const measurement = [perimeterQuestion, areaQuestion, unitsQuestion, gridAreaQuestion, differenceStoryQuestion, xylophoneQuestion] as const;
 const applications = [overlapStoryQuestion, financeStoryQuestion, possibleDiceSumQuestion, chartDataQuestion, halfCollectionQuestion, pathsQuestion] as const;
@@ -646,7 +738,7 @@ const interactiveGenerators = {
 	numbers: [compareQuestion, parityQuestion, numberLineQuestion, numberFilterQuestion, romanQuestion],
 	geometry: [shapePropertyQuestion, lineRelationQuestion, circleQuestion, cubeFactsQuestion, quadrilateralQuestion],
 	addition: [missingAddendQuestion, differenceComparisonQuestion, estimateSumQuestion],
-	symmetry: [axisCountQuestion, symmetryTypeQuestion, mirrorDistanceQuestion, centralSymmetryQuestion],
+	symmetry: [axisCountQuestion, symmetryTypeQuestion, mirrorDistanceQuestion, centralSymmetryQuestion, noAxisSymmetryQuestion],
 	multiplication: [missingFactorQuestion, divisionRemainderQuestion, compoundStoryQuestion, divisionStoryQuestion],
 	measurement: [gridAreaQuestion, differenceStoryQuestion, xylophoneQuestion],
 	applications: [overlapStoryQuestion, financeStoryQuestion, possibleDiceSumQuestion, chartDataQuestion, halfCollectionQuestion, pathsQuestion],
