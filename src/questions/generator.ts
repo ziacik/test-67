@@ -186,6 +186,88 @@ function wordProblem(): Question {
 	};
 }
 
+function storyChoice(
+	topic: Exclude<TopicId, "mixed">,
+	icon: string,
+	prompt: string,
+	answer: string,
+	options: string[],
+	hint: string,
+	explanation: string,
+): Question {
+	return {
+		id: id(),
+		topic,
+		kind: "story",
+		prompt,
+		answer,
+		interaction: { kind: "story-choice", icon, options: shuffle(options) },
+		hint,
+		explanation,
+	};
+}
+
+function numbersStoryQuestion(): Question {
+	const visitors = integer(12_000, 89_000);
+	const rounded = Math.round(visitors / 1_000) * 1_000;
+	const options = [
+		String(rounded),
+		String(Math.floor(visitors / 1_000) * 1_000),
+		String(Math.ceil(visitors / 1_000) * 1_000),
+		String(Math.round(visitors / 100) * 100),
+	];
+	return storyChoice(
+		"numbers",
+		"🎟️",
+		`Na mestský festival prišlo v sobotu ${sk(visitors)} ľudí. Organizátori chcú počet návštevníkov uviesť zaokrúhlený na tisícky. Ktorý údaj majú zverejniť?`,
+		String(rounded),
+		[...new Set(options)].slice(0, 4),
+		"Pri zaokrúhľovaní na tisícky sleduj stovky.",
+		`${sk(visitors)} zaokrúhlené na tisícky je ${sk(rounded)}.`,
+	);
+}
+
+function arithmeticStoryQuestion(): Question {
+	const boxes = integer(3, 9);
+	const perBox = integer(12, 28);
+	const extra = integer(5, 24);
+	const total = boxes * perBox + extra;
+	const correct = `${boxes} × ${perBox} + ${extra}`;
+	return storyChoice(
+		"arithmetic",
+		"📦",
+		`Na školský turnaj priniesli ${boxes} krabíc po ${perBox} kartičiek a ešte ${extra} voľných kartičiek. Ktorý výpočet správne zistí, koľko kartičiek je spolu?`,
+		correct,
+		[correct, `${boxes} + ${perBox} + ${extra}`, `${boxes} × (${perBox} + ${extra})`, `${boxes} × ${perBox} − ${extra}`],
+		"Najprv spočítaj kartičky v krabiciach, potom pripočítaj voľné.",
+		`${correct} = ${total}, takže spolu je ${total} kartičiek.`,
+	);
+}
+
+function geometryStoryQuestion(): Question {
+	const a = integer(8, 22);
+	const b = integer(5, 15);
+	const gate = integer(1, 4);
+	const fence = 2 * (a + b) - gate;
+	const correct = `2 × (${a} + ${b}) − ${gate}`;
+	return storyChoice(
+		"geometry",
+		"🌳",
+		`Obdĺžniková záhrada má dĺžku ${a} m a šírku ${b} m. Pri vstupe zostane otvorená brána široká ${gate} m. Ktorý výpočet určí dĺžku plota okolo záhrady?`,
+		correct,
+		[correct, `${a} × ${b} − ${gate}`, `${a} + ${b} − ${gate}`, `2 × (${a} + ${b} + ${gate})`],
+		"Najprv potrebuješ celý obvod a potom odčítať miesto, kde bude brána.",
+		`${correct} = ${fence}, takže treba ${fence} m plota.`,
+	);
+}
+
+export function generateStoryQuestion(topic: TopicId): Question {
+	const resolvedTopic = topic === "mixed" ? pick(["numbers", "arithmetic", "geometry"] as const) : topic;
+	if (resolvedTopic === "numbers") return numbersStoryQuestion();
+	if (resolvedTopic === "geometry") return geometryStoryQuestion();
+	return arithmeticStoryQuestion();
+}
+
 export function numberLineQuestion(): Question {
 	const start = integer(0, 40) * 10;
 	const step = pick([5, 10, 20, 25, 50] as const);
@@ -295,6 +377,7 @@ const interactiveGenerators = {
 } as const;
 
 export function generateRoundQuestion(topic: TopicId, index: number): Question {
+	if (index === 4 || index === 8) return generateStoryQuestion(topic);
 	if (index % 2 === 0) return generateQuestion(topic);
 
 	const interactiveTopic =
