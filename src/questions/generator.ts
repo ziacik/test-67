@@ -220,6 +220,30 @@ export function sortNumbersQuestion(): Question {
 	};
 }
 
+export function missingFactorQuestion(): Question {
+	const factor = integer(2, 12);
+	const answer = integer(2, 12);
+	const product = factor * answer;
+	const candidates = new Set<number>([answer]);
+	while (candidates.size < 4) {
+		candidates.add(Math.max(1, answer + pick([-3, -2, -1, 1, 2, 3] as const)));
+	}
+
+	return {
+		id: id(),
+		topic: "arithmetic",
+		prompt: "Doplň chýbajúce číslo.",
+		answer: String(answer),
+		interaction: {
+			kind: "equation-tiles",
+			expression: `□ × ${factor} = ${product}`,
+			options: shuffle([...candidates]),
+		},
+		hint: `Pýtaj sa: koľkokrát sa ${factor} zmestí do ${product}?`,
+		explanation: `${answer} × ${factor} = ${product}.`,
+	};
+}
+
 export function gridAreaQuestion(): Question {
 	const columns = integer(4, 8);
 	const rows = integer(4, 7);
@@ -251,7 +275,7 @@ export function gridAreaQuestion(): Question {
 }
 
 const numbers = [roundingQuestion, compareQuestion, parityQuestion, numberLineQuestion, sortNumbersQuestion] as const;
-const arithmetic = [additionQuestion, subtractionQuestion, multiplicationQuestion, divisionQuestion, orderQuestion, wordProblem] as const;
+const arithmetic = [additionQuestion, subtractionQuestion, multiplicationQuestion, divisionQuestion, orderQuestion, wordProblem, missingFactorQuestion, missingFactorQuestion] as const;
 const geometry = [perimeterQuestion, areaQuestion, unitsQuestion, gridAreaQuestion] as const;
 
 export const generators = { numbers, arithmetic, geometry };
