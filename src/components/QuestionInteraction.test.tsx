@@ -46,7 +46,7 @@ describe("QuestionInteraction", () => {
 	it("renders a missing-number equation as large tap tiles", () => {
 		const html = render({
 			id: "equation",
-			topic: "arithmetic",
+			topic: "multiplication",
 			prompt: "missing",
 			answer: "7",
 			explanation: "x",
@@ -65,7 +65,7 @@ describe("QuestionInteraction", () => {
 	it("renders a word problem as a visual story choice", () => {
 		const html = render({
 			id: "story",
-			topic: "arithmetic",
+			topic: "multiplication",
 			kind: "story",
 			prompt: "Na výlete...",
 			answer: "6 × 24 + 17",
@@ -105,7 +105,7 @@ describe("QuestionInteraction", () => {
 	it("renders the area question as an SVG grid with answer cards", () => {
 		const html = render({
 			id: "grid",
-			topic: "geometry",
+			topic: "measurement",
 			prompt: "grid",
 			answer: "12",
 			explanation: "x",
