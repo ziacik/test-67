@@ -6,6 +6,7 @@ export type QuestionInteraction =
 	| { kind: "sort"; values: number[] }
 	| { kind: "equation-tiles"; expression: string; options: number[] }
 	| { kind: "story-choice"; icon: string; options: string[] }
+	| { kind: "number-filter"; values: number[]; correctValues: number[] }
 	| {
 		kind: "grid-area";
 		columns: number;
