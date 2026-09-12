@@ -4,6 +4,7 @@ export type QuestionInteraction =
 	| { kind: "input" }
 	| { kind: "number-line"; values: number[] }
 	| { kind: "sort"; values: number[] }
+	| { kind: "equation-tiles"; expression: string; options: number[] }
 	| {
 		kind: "grid-area";
 		columns: number;
