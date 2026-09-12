@@ -5,6 +5,7 @@ export type QuestionInteraction =
 	| { kind: "number-line"; values: number[] }
 	| { kind: "sort"; values: number[] }
 	| { kind: "equation-tiles"; expression: string; options: number[] }
+	| { kind: "story-choice"; icon: string; options: string[] }
 	| {
 		kind: "grid-area";
 		columns: number;
@@ -17,6 +18,7 @@ export type QuestionInteraction =
 export type Question = {
 	id: string;
 	topic: Exclude<TopicId, "mixed">;
+	kind?: "story";
 	prompt: string;
 	answer: string;
 	choices?: string[];
