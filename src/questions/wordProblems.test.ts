@@ -4,7 +4,7 @@ import {
 	generateStoryQuestion,
 } from "./generator";
 
-const topics = ["numbers", "arithmetic", "geometry", "mixed"] as const;
+const topics = ["addition", "multiplication", "measurement", "applications", "mixed"] as const;
 
 describe("word problems", () => {
 	it.each(topics)("builds a substantial %s story problem", (topic) => {
@@ -20,7 +20,7 @@ describe("word problems", () => {
 		let found = false;
 
 		for (let i = 0; i < 100; i += 1) {
-			const question = generateStoryQuestion("arithmetic");
+			const question = generateStoryQuestion("applications");
 			if (question.interaction?.kind === "story-choice") {
 				found = true;
 				expect(question.interaction.options).toHaveLength(4);
