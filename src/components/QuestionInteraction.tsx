@@ -11,10 +11,12 @@ const sk = (value: number) => new Intl.NumberFormat("sk-SK").format(value);
 
 export function QuestionInteraction({ question, disabled, onAnswer }: Props) {
 	const [sortPicks, setSortPicks] = useState<number[]>([]);
+	const [filterPicks, setFilterPicks] = useState<number[]>([]);
 	const interaction = question.interaction;
 
 	useEffect(() => {
 		setSortPicks([]);
+		setFilterPicks([]);
 	}, [question.id]);
 
 	if (!interaction) return null;
@@ -117,6 +119,41 @@ export function QuestionInteraction({ question, disabled, onAnswer }: Props) {
 						</button>
 					))}
 				</div>
+			</div>
+		);
+	}
+
+	if (interaction.kind === "number-filter") {
+		const toggle = (value: number) => {
+			if (disabled) return;
+			setFilterPicks((values) =>
+				values.includes(value) ? values.filter((item) => item !== value) : [...values, value],
+			);
+		};
+
+		return (
+			<div className="number-filter-game">
+				<div className="number-filter-grid">
+					{interaction.values.map((value) => (
+						<button
+							type="button"
+							key={value}
+							disabled={disabled}
+							className={filterPicks.includes(value) ? "selected" : ""}
+							onClick={() => toggle(value)}
+						>
+							{sk(value)}
+						</button>
+					))}
+				</div>
+				<button
+					type="button"
+					className="filter-submit"
+					disabled={disabled || filterPicks.length === 0}
+					onClick={() => onAnswer([...filterPicks].sort((a, b) => a - b).join(","))}
+				>
+					HOTOVO
+				</button>
 			</div>
 		);
 	}
