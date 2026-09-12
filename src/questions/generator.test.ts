@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { generateQuestion, generateRoundQuestion, isCorrect } from "./generator";
 
-const topics = ["numbers", "arithmetic", "geometry", "mixed"] as const;
+const topics = ["numbers", "geometry", "addition", "symmetry", "multiplication", "measurement", "applications", "mixed"] as const;
 
 describe("question generator", () => {
 	it.each(topics)("generates valid %s questions", (topic) => {
