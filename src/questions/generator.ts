@@ -137,7 +137,7 @@ function perimeterQuestion(): Question {
 	const answer = 2 * (a + b);
 	return {
 		id: id(),
-		topic: "geometry",
+		topic: "measurement",
 		prompt: `Obdĺžnik má strany ${a} cm a ${b} cm. Aký má obvod?`,
 		answer: String(answer),
 		explanation: `Obvod obdĺžnika je 2 × (${a} + ${b}) = ${answer} cm.`,
@@ -150,7 +150,7 @@ function areaQuestion(): Question {
 	const answer = a * b;
 	return {
 		id: id(),
-		topic: "geometry",
+		topic: "measurement",
 		prompt: `Obdĺžnik v štvorcovej sieti má ${a} štvorčekov na dĺžku a ${b} na šírku. Koľko štvorčekov tvorí jeho obsah?`,
 		answer: String(answer),
 		explanation: `${a} × ${b} = ${answer} štvorčekov.`,
@@ -163,7 +163,7 @@ function unitsQuestion(): Question {
 	const total = meters * 100 + centimeters;
 	return {
 		id: id(),
-		topic: "geometry",
+		topic: "measurement",
 		prompt: `${meters} m ${centimeters} cm = koľko centimetrov?`,
 		answer: String(total),
 		hint: "1 meter = 100 centimetrov.",
@@ -237,7 +237,7 @@ export function differenceStoryQuestion(): Question {
 	const options = [...new Set([difference, longest - middle, middle - shortest, longest + shortest])];
 	while (options.length < 4) options.push(options[0] + options.length * 10);
 	return storyChoice(
-		"geometry",
+		"measurement",
 		"🚇",
 		`Tri tunely majú dĺžky ${shortest} m, ${middle} m a ${longest} m. O koľko metrov je najdlhší tunel dlhší ako najkratší?`,
 		String(difference),
@@ -254,7 +254,7 @@ export function divisionStoryQuestion(): Question {
 	const options = [...new Set([count, count - 1, count + 1, perItem])];
 	while (options.length < 4) options.push(options[0] + options.length + 1);
 	return storyChoice(
-		"arithmetic",
+		"multiplication",
 		"🦔",
 		`Na výrobu jedného papierového ježka treba ${perItem} špáradiel. V krabičke je ${total} špáradiel. Na koľko ježkov vystačia?`,
 		String(count),
@@ -309,10 +309,6 @@ export function numberFilterQuestion(): Question {
 		explanation: `Obe podmienky spĺňajú: ${answerValues.map(sk).join(", ")}.`,
 	};
 }
-function geometryStoryQuestion(): Question {
-	return differenceStoryQuestion();
-}
-
 export function generateStoryQuestion(topic: TopicId, group?: "a" | "b"): Question {
 	if (topic === "addition") return additionStoryQuestion();
 	if (topic === "multiplication") return group === "b" ? divisionStoryQuestion() : compoundStoryQuestion();
