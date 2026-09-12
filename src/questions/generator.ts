@@ -314,20 +314,15 @@ function geometryStoryQuestion(): Question {
 }
 
 export function generateStoryQuestion(topic: TopicId, group?: "a" | "b"): Question {
-	if (topic === "geometry") return group === "b" ? differenceStoryQuestion() : geometryStoryQuestion();
-	if (topic === "numbers") {
-		return group === "b" ? financeStoryQuestion() : pick([compoundStoryQuestion, overlapStoryQuestion])();
-	}
-	if (topic === "arithmetic") {
-		return group === "b"
-			? pick([overlapStoryQuestion, financeStoryQuestion, differenceStoryQuestion])()
-			: pick([compoundStoryQuestion, divisionStoryQuestion])();
-	}
-	return group === "b"
-		? pick([overlapStoryQuestion, financeStoryQuestion, differenceStoryQuestion])()
-		: pick([compoundStoryQuestion, divisionStoryQuestion])();
+	if (topic === "addition") return additionStoryQuestion();
+	if (topic === "multiplication") return group === "b" ? divisionStoryQuestion() : compoundStoryQuestion();
+	if (topic === "measurement") return group === "b" ? xylophoneQuestion() : differenceStoryQuestion();
+	if (topic === "applications") return group === "b" ? financeStoryQuestion() : overlapStoryQuestion();
+	if (topic === "mixed") return generateStoryQuestion(pick(["addition", "multiplication", "measurement", "applications"] as const), group);
+	return generateQuestion(topic);
 }
-function decompositionQuestion(): Question {\n	const millions = integer(0, 8);\n	const hundredThousands = integer(1, 9);\n	const tenThousands = integer(0, 9);\n	const thousands = integer(0, 9);\n	const hundreds = integer(0, 9);\n	const tens = integer(0, 9);\n	const ones = integer(0, 9);\n	const value = millions * 1_000_000 + hundredThousands * 100_000 + tenThousands * 10_000 + thousands * 1_000 + hundreds * 100 + tens * 10 + ones;\n	const target = hundreds * 100 + tens * 10;\n	return {\n		id: id(),\n		topic: "numbers",\n		prompt: `V čísle ${sk(value)} sčítaj hodnotu stoviek a desiatok. Aké číslo dostaneš?`,\n		answer: String(target),\n		choices: shuffle([String(target), String(hundreds + tens), String(hundreds * 100), String(tens * 10)]),\n		hint: "Číslica a jej hodnota nie sú to isté.",\n		explanation: `${hundreds} stoviek je ${hundreds * 100} a ${tens} desiatok je ${tens * 10}; spolu ${target}.`,\n	};\n}\n\nfunction romanQuestion(): Question {\n	const pairs = [\n		["XIV", "14"], ["XIX", "19"], ["XXIV", "24"], ["XXXVI", "36"],\n		["XLII", "42"], ["XLIX", "49"], ["LVIII", "58"], ["LXIV", "64"],\n	] as const;\n	const [roman, answer] = pick(pairs);\n	const n = Number(answer);\n	const options = [...new Set([n, n - 2, n + 2, n + 10])].map(String);\n	return {\n		id: id(),\n		topic: "numbers",\n		prompt: `Aké číslo zapisuje rímsky zápis ${roman}?`,\n		answer,\n		choices: shuffle(options),\n		explanation: `${roman} = ${answer}.`,\n	};\n}\n\nfunction shapePropertyQuestion(): Question {\n	const variants = [\n		{ prompt: "Ktorý útvar má práve 4 vrcholy a všetky strany rovnako dlhé?", answer: "štvorec", options: ["štvorec", "obdĺžnik", "trojuholník", "päťuholník"] },\n		{ prompt: "Ktorý útvar má práve 3 vrcholy?", answer: "trojuholník", options: ["štvorec", "kruh", "trojuholník", "obdĺžnik"] },\n		{ prompt: "Ktorý útvar nemá žiadny vrchol?", answer: "kruh", options: ["kruh", "trojuholník", "štvorec", "päťuholník"] },\n	] as const;\n	const q = pick(variants);\n	return { id: id(), topic: "geometry", prompt: q.prompt, answer: q.answer, choices: shuffle(q.options), explanation: `Správna odpoveď je ${q.answer}.` };\n}\n\nfunction lineRelationQuestion(): Question {\n	const perpendicular = Math.random() < 0.5;\n	return {\n		id: id(),\n		topic: "geometry",\n		prompt: perpendicular ? "Dve priamky sa pretínajú pod pravým uhlom. Aké sú?" : "Dve priamky v rovine sa nikdy nepretnú. Aké sú?",\n		answer: perpendicular ? "kolmé" : "rovnobežné",\n		choices: ["kolmé", "rovnobežné", "totožné", "rôznobežné"],\n		explanation: perpendicular ? "Priamky zvierajúce pravý uhol sú kolmé." : "Priamky, ktoré sa v rovine nepretínajú, sú rovnobežné.",\n	};\n}\n\nfunction circleQuestion(): Question {\n	const radius = integer(2, 12);\n	return {\n		id: id(),\n		topic: "geometry",\n		prompt: `Kružnica má polomer ${radius} cm. Aký dlhý je jej priemer?`,\n		answer: String(radius * 2),\n		choices: shuffle([String(radius * 2), String(radius), String(radius + 2), String(radius * 4)]),\n		explanation: `Priemer je dvojnásobok polomeru: 2 × ${radius} = ${radius * 2} cm.`,\n	};\n}\n\nfunction cubeFactsQuestion(): Question {\n	const variants = [\n		["Koľko vrcholov má kocka?", "8", ["6", "8", "10", "12"]],\n		["Koľko hrán má kocka?", "12", ["6", "8", "10", "12"]],\n		["Koľko stien má kocka?", "6", ["4", "6", "8", "12"]],\n	] as const;\n	const [prompt, answer, options] = pick(variants);\n	return { id: id(), topic: "geometry", prompt, answer, choices: shuffle(options), explanation: `Správna odpoveď je ${answer}.` };\n}\n\nfunction quadrilateralQuestion(): Question {\n	const answer = pick(["štvorec", "obdĺžnik"] as const);\n	return {\n		id: id(),\n		topic: "geometry",\n		prompt: answer === "štvorec" ? "Ktorý štvoruholník má všetky štyri strany rovnako dlhé a štyri pravé uhly?" : "Ktorý štvoruholník má protiľahlé strany rovnako dlhé a štyri pravé uhly?",\n		answer,\n		choices: ["štvorec", "obdĺžnik", "trojuholník", "kruh"],\n		explanation: `Je to ${answer}.`,\n	};\n}\n\nfunction missingAddendQuestion(): Question {\n	const a = integer(100, 900);\n	const missing = integer(100, 900);\n	const sum = a + missing;\n	return {\n		id: id(), topic: "addition", prompt: "Doplň chýbajúce číslo.", answer: String(missing),\n		interaction: { kind: "equation-tiles", expression: `${a} + □ = ${sum}`, options: shuffle([missing, missing + 10, Math.max(1, missing - 10), a]) },\n		explanation: `${sum} − ${a} = ${missing}.`,\n	};\n}\n\nfunction differenceComparisonQuestion(): Question {\n	const smaller = integer(1_000, 20_000);\n	const difference = integer(500, 5_000);\n	const larger = smaller + difference;\n	return {\n		id: id(), topic: "addition",\n		prompt: `${sk(larger)} je o koľko viac ako ${sk(smaller)}?`,\n		answer: String(difference),\n		choices: shuffle([String(difference), String(larger + smaller), String(smaller), String(difference + 100)]),\n		explanation: `${sk(larger)} − ${sk(smaller)} = ${sk(difference)}.`,\n	};\n}\n\nfunction estimateSumQuestion(): Question {\n	const a = integer(1_200, 9_800);\n	const b = integer(1_200, 9_800);\n	const estimate = Math.round(a / 1000) * 1000 + Math.round(b / 1000) * 1000;\n	return {\n		id: id(), topic: "addition",\n		prompt: `Odhadni súčet ${sk(a)} + ${sk(b)} zaokrúhlením oboch čísel na tisícky.`,\n		answer: String(estimate),\n		choices: shuffle([String(estimate), String(estimate + 1000), String(Math.max(0, estimate - 1000)), String(a + b)]),\n		explanation: `${sk(a)} ≈ ${sk(Math.round(a/1000)*1000)} a ${sk(b)} ≈ ${sk(Math.round(b/1000)*1000)}, teda približne ${sk(estimate)}.`,\n	};\n}\n\nfunction additionStoryQuestion(): Question {\n	const first = integer(120, 480);\n	const second = integer(100, 420);\n	const left = integer(40, Math.min(150, first + second - 1));\n	const answer = first + second - left;\n	return storyChoice("addition", "🎫", `Na podujatie predali dopoludnia ${first} lístkov a popoludní ${second}. ${left} návštevníkov nakoniec neprišlo. Koľko návštevníkov prišlo?`, String(answer), [String(answer), String(first + second), String(Math.abs(first-second)), String(answer + left)], "Najprv spočítaj predané lístky a potom odčítaj tých, ktorí neprišli.", `${first} + ${second} − ${left} = ${answer}.`);\n}\n\nfunction axisCountQuestion(): Question {\n	const variants = [\n		["štvorec", "4"], ["obdĺžnik, ktorý nie je štvorcom", "2"], ["kruh", "nekonečne veľa"], ["rovnostranný trojuholník", "3"],\n	] as const;\n	const [shape, answer] = pick(variants);\n	return { id: id(), topic: "symmetry", prompt: `Koľko osí súmernosti má ${shape}?`, answer, choices: shuffle([answer, "0", "1", "2", "3", "4", "nekonečne veľa"].filter((v,i,a)=>a.indexOf(v)===i).slice(0,4)), explanation: `${shape} má ${answer} osí súmernosti.` };\n}\n\nfunction symmetryTypeQuestion(): Question {\n	const variants = [\n		{ prompt: "Pri zrkadlení podľa priamky vzniká aká súmernosť?", answer: "osová" },\n		{ prompt: "Keď sa útvar otočí o 180° okolo bodu a prekryje svoj obraz, ide o akú súmernosť?", answer: "stredová" },\n	] as const;\n	const q = pick(variants);\n	return { id: id(), topic: "symmetry", prompt: q.prompt, answer: q.answer, choices: ["osová", "stredová", "rotačná", "žiadna"], explanation: `Ide o ${q.answer} súmernosť.` };\n}\n\nfunction mirrorDistanceQuestion(): Question {\n	const distance = integer(1, 8);\n	return { id: id(), topic: "symmetry", prompt: `Bod A leží ${distance} štvorčekov vľavo od zvislej osi súmernosti. Kde bude jeho obraz A′?`, answer: `${distance} vpravo`, choices: shuffle([`${distance} vpravo`, `${distance} vľavo`, `${distance*2} vpravo`, "na osi"]), explanation: `Obraz leží v rovnakej vzdialenosti na opačnej strane osi: ${distance} štvorčekov vpravo.` };\n}\n\nfunction centralSymmetryQuestion(): Question {\n	const answer = pick(["áno", "nie"] as const);\n	return { id: id(), topic: "symmetry", prompt: answer === "áno" ? "Má obdĺžnik stred súmernosti?" : "Má bežný trojuholník stred súmernosti?", answer, choices: ["áno", "nie"], explanation: answer === "áno" ? "Stred obdĺžnika je jeho stredom súmernosti." : "Trojuholník nemá stredovú súmernosť." };\n}\n\nfunction divisionRemainderQuestion(): Question {\n	const divisor = integer(3, 12);\n	const quotient = integer(5, 25);\n	const remainder = integer(1, divisor - 1);\n	const dividend = divisor * quotient + remainder;\n	const answer = `${quotient} zvyšok ${remainder}`;\n	return { id: id(), topic: "multiplication", prompt: `${dividend} ÷ ${divisor} = ?`, answer, choices: shuffle([answer, `${quotient} zvyšok ${Math.max(0,remainder-1)}`, `${quotient+1} zvyšok ${remainder}`, `${quotient}`]), explanation: `${dividend} = ${divisor} × ${quotient} + ${remainder}.` };\n}\n\nfunction xylophoneQuestion(): Question {\n	const first = integer(20, 40);\n	const step = pick([3, 4, 5, 6] as const);\n	const position = integer(4, 8);\n	const answer = first + (position - 1) * step;\n	return { id: id(), topic: "measurement", kind: "story", prompt: `Doštičky xylofónu sú zoradené od najkratšej. Prvá má ${first} mm a každá ďalšia je o ${step} mm dlhšia. Akú dĺžku má ${position}. doštička?`, answer: String(answer), choices: shuffle([String(answer), String(first + position*step), String(first + step), String(answer-step)]), explanation: `${first} + ${position-1} × ${step} = ${answer} mm.` };\n}\n\nfunction possibleDiceSumQuestion(): Question {\n	const dice = integer(3, 5);\n	const min = dice;\n	const max = dice * 6;\n	const possible = integer(min, max);\n	const options = shuffle([possible, max + 1, max + integer(2,5), Math.max(0,min-1)]);\n	return { id: id(), topic: "applications", prompt: `Hádžeme ${dice} kockami s číslami 1 až 6. Ktorý z týchto súčtov môžeme dostať?`, answer: String(possible), choices: options.map(String), explanation: `Súčet musí byť od ${min} do ${max}. ${possible} je v tomto intervale.` };\n}\n\nfunction chartDataQuestion(): Question {\n	const a = integer(8, 20), b = integer(8, 20), c = integer(8, 20);\n	const maxName = a >= b && a >= c ? "Karol" : b >= c ? "Milan" : "Ondrej";\n	return { id: id(), topic: "applications", prompt: `Grafové údaje: Karol ${a} km, Milan ${b} km, Ondrej ${c} km. Kto prešiel najviac?`, answer: maxName, choices: ["Karol", "Milan", "Ondrej"], explanation: `Najväčšia hodnota je ${Math.max(a,b,c)} km, teda ${maxName}.` };\n}\n\nfunction halfCollectionQuestion(): Question {\n	const total = pick([8, 10, 12, 14, 16] as const);\n	const filled = integer(1, total/2 - 1);\n	const answer = total/2 - filled;\n	return { id: id(), topic: "applications", prompt: `Je tu ${total} pohárov, z toho ${filled} sú plné. Koľko treba ešte naplniť, aby bola plná presne polovica?`, answer: String(answer), choices: shuffle([String(answer), String(total/2), String(answer+1), String(Math.max(0,answer-1))]), explanation: `Polovica z ${total} je ${total/2}. Už sú plné ${filled}, takže treba ešte ${answer}.` };\n}\n\nfunction pathsQuestion(): Question {\n	const width = pick([2,3] as const);\n	const height = pick([2,3] as const);\n	const factorial = (n: number) => n <= 1 ? 1 : n * factorial(n - 1);\n	const count = factorial(width + height) / (factorial(width) * factorial(height));\n	return { id: id(), topic: "applications", prompt: `Na mriežke sa z bodu X do Y musíš posunúť presne ${width}× doprava a ${height}× hore. Koľko rôznych najkratších ciest existuje?`, answer: String(count), choices: shuffle([String(count), String(count+1), String(Math.max(1,count-1)), String(width*height)]), explanation: `Rôzne poradia ${width} krokov doprava a ${height} krokov hore dávajú ${count} ciest.` };\n}\n\nexport function numberLineQuestion(): Question {
+
+export function numberLineQuestion(): Question {
 	const start = integer(0, 40) * 10;
 	const step = pick([5, 10, 20, 25, 50] as const);
 	const values = Array.from({ length: 5 }, (_, index) => start + index * step);
@@ -415,36 +410,47 @@ export function gridAreaQuestion(): Question {
 	};
 }
 
-const numbers = [roundingQuestion, compareQuestion, parityQuestion, numberLineQuestion, numberFilterQuestion] as const;
-const arithmetic = [additionQuestion, subtractionQuestion, multiplicationQuestion, divisionQuestion, orderQuestion, missingFactorQuestion, missingFactorQuestion] as const;
-const geometry = [perimeterQuestion, areaQuestion, unitsQuestion, gridAreaQuestion] as const;
+const numbers = [roundingQuestion, compareQuestion, parityQuestion, numberLineQuestion, numberFilterQuestion, decompositionQuestion, romanQuestion] as const;
+const geometry = [shapePropertyQuestion, lineRelationQuestion, circleQuestion, cubeFactsQuestion, quadrilateralQuestion] as const;
+const addition = [additionQuestion, subtractionQuestion, missingAddendQuestion, differenceComparisonQuestion, estimateSumQuestion, additionStoryQuestion] as const;
+const symmetry = [axisCountQuestion, symmetryTypeQuestion, mirrorDistanceQuestion, centralSymmetryQuestion] as const;
+const multiplication = [multiplicationQuestion, divisionQuestion, orderQuestion, missingFactorQuestion, divisionRemainderQuestion, compoundStoryQuestion, divisionStoryQuestion] as const;
+const measurement = [perimeterQuestion, areaQuestion, unitsQuestion, gridAreaQuestion, differenceStoryQuestion, xylophoneQuestion] as const;
+const applications = [overlapStoryQuestion, financeStoryQuestion, possibleDiceSumQuestion, chartDataQuestion, halfCollectionQuestion, pathsQuestion] as const;
 
-export const generators = { numbers, arithmetic, geometry };
+export const generators = { numbers, geometry, addition, symmetry, multiplication, measurement, applications };
+
+const curriculumTopics = ["numbers", "geometry", "addition", "symmetry", "multiplication", "measurement", "applications"] as const;
 
 export function generateQuestion(topic: TopicId): Question {
 	if (topic === "mixed") {
-		return generateQuestion(pick(["numbers", "arithmetic", "geometry"] as const));
+		return generateQuestion(pick(curriculumTopics));
 	}
 	const factory = pick(generators[topic]);
 	return factory();
 }
 
 const interactiveGenerators = {
-	numbers: [compareQuestion, parityQuestion, numberLineQuestion, numberFilterQuestion],
-	arithmetic: [missingFactorQuestion],
-	geometry: [gridAreaQuestion],
+	numbers: [compareQuestion, parityQuestion, numberLineQuestion, numberFilterQuestion, romanQuestion],
+	geometry: [shapePropertyQuestion, lineRelationQuestion, circleQuestion, cubeFactsQuestion, quadrilateralQuestion],
+	addition: [missingAddendQuestion, differenceComparisonQuestion, estimateSumQuestion],
+	symmetry: [axisCountQuestion, symmetryTypeQuestion, mirrorDistanceQuestion, centralSymmetryQuestion],
+	multiplication: [missingFactorQuestion, divisionRemainderQuestion, compoundStoryQuestion, divisionStoryQuestion],
+	measurement: [gridAreaQuestion, differenceStoryQuestion, xylophoneQuestion],
+	applications: [overlapStoryQuestion, financeStoryQuestion, possibleDiceSumQuestion, chartDataQuestion, halfCollectionQuestion, pathsQuestion],
 } as const;
 
+const storyTopics = ["addition", "multiplication", "measurement", "applications"] as const;
+
 export function generateRoundQuestion(topic: TopicId, index: number): Question {
-	if (index === 4) return generateStoryQuestion(topic, "a");
-	if (index === 8) return generateStoryQuestion(topic, "b");
+	const resolvedTopic = topic === "mixed" ? pick(curriculumTopics) : topic;
+
+	if ((index === 4 || index === 8) && (topic === "mixed" || storyTopics.includes(resolvedTopic as typeof storyTopics[number]))) {
+		return generateStoryQuestion(topic === "mixed" ? pick(storyTopics) : resolvedTopic, index === 4 ? "a" : "b");
+	}
 	if (index % 2 === 0) return generateQuestion(topic);
 
-	const interactiveTopic =
-		topic === "mixed"
-			? pick(["numbers", "arithmetic", "geometry"] as const)
-			: topic;
-	const factory = pick(interactiveGenerators[interactiveTopic]);
+	const factory = pick(interactiveGenerators[resolvedTopic]);
 	return factory();
 }
 
