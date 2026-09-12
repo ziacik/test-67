@@ -754,3 +754,231 @@ input:focus {
 		flex-direction: column;
 	}
 }
+
+
+/* Mini-games */
+.mini-number-line {
+	position: relative;
+	margin: 10px 0 4px;
+	padding: 42px 8px 18px;
+	border: 1px solid var(--line);
+	border-radius: 20px;
+	background:
+		linear-gradient(180deg, rgba(124,232,255,.04), transparent),
+		#100d18;
+}
+
+.number-line-track {
+	position: absolute;
+	left: 8%;
+	right: 8%;
+	top: 66px;
+	height: 4px;
+	border-radius: 999px;
+	background: linear-gradient(90deg, #554963, #857690);
+}
+
+.number-line-points {
+	position: relative;
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	z-index: 1;
+}
+
+.number-line-points button {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 18px;
+	border: 0;
+	background: transparent;
+	color: white;
+	padding: 6px 2px;
+	font-weight: 800;
+}
+
+.line-dot {
+	width: 22px;
+	height: 22px;
+	border: 4px solid #8f829a;
+	border-radius: 50%;
+	background: #100d18;
+	box-shadow: 0 0 0 5px #100d18;
+	transition: transform .13s ease, border-color .13s ease, background .13s ease;
+}
+
+.number-line-points button:hover:not(:disabled) .line-dot {
+	transform: scale(1.25);
+	border-color: var(--accent);
+	background: var(--accent);
+}
+
+.line-label {
+	font: 700 clamp(13px, 2.8vw, 18px) "Space Grotesk";
+}
+
+.sort-board {
+	display: grid;
+	gap: 18px;
+}
+
+.sort-slots {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 9px;
+}
+
+.sort-slot {
+	min-height: 82px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	border: 2px dashed #3a3047;
+	border-radius: 15px;
+	background: rgba(255,255,255,.02);
+	color: #6f667b;
+}
+
+.sort-slot > span {
+	font-size: 9px;
+	font-weight: 900;
+	letter-spacing: .12em;
+}
+
+.sort-slot strong {
+	font: 700 clamp(15px, 3vw, 21px) "Space Grotesk";
+}
+
+.sort-slot.filled {
+	border-style: solid;
+	border-color: rgba(124,232,255,.34);
+	background: rgba(124,232,255,.07);
+	color: white;
+	animation: rewardPop .22s ease;
+}
+
+.sort-pool {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 9px;
+}
+
+.sort-pool button,
+.visual-answer-cards button {
+	min-height: 58px;
+	border: 2px solid #3a3047;
+	border-radius: 14px;
+	background: #100d18;
+	color: white;
+	font: 800 clamp(16px, 3.4vw, 23px) "Space Grotesk";
+	transition: transform .12s ease, border-color .12s ease, background .12s ease;
+}
+
+.sort-pool button:hover:not(:disabled),
+.visual-answer-cards button:hover:not(:disabled) {
+	transform: translateY(-2px) scale(1.015);
+	border-color: var(--accent);
+	background: #251a2a;
+}
+
+.sort-undo {
+	justify-self: start;
+	border: 0;
+	background: transparent;
+	color: var(--text-soft);
+	font-size: 12px;
+	font-weight: 800;
+	padding: 0;
+}
+
+.grid-area-game {
+	display: grid;
+	grid-template-columns: minmax(250px, 1.35fr) minmax(150px, .65fr);
+	align-items: stretch;
+	gap: 16px;
+}
+
+.grid-visual {
+	display: grid;
+	place-items: center;
+	min-height: 250px;
+	padding: 18px;
+	border: 1px solid var(--line);
+	border-radius: 19px;
+	background:
+		radial-gradient(circle at 30% 25%, rgba(255,180,84,.08), transparent 45%),
+		#100d18;
+}
+
+.grid-visual svg {
+	width: 100%;
+	max-width: 390px;
+	max-height: 320px;
+	filter: drop-shadow(0 16px 25px rgba(0,0,0,.18));
+}
+
+.grid-cell {
+	fill: #241d31;
+	stroke: #4b4059;
+	stroke-width: 1.5;
+}
+
+.grid-cell-filled {
+	fill: var(--accent);
+	stroke: #ffcc89;
+}
+
+.visual-answer-cards {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 9px;
+}
+
+.visual-answer-cards button {
+	min-height: 82px;
+}
+
+.choice-cards button {
+	min-height: 64px;
+}
+
+@media (max-width: 650px) {
+	.mini-number-line {
+		padding-left: 2px;
+		padding-right: 2px;
+	}
+
+	.number-line-track {
+		left: 10%;
+		right: 10%;
+	}
+
+	.line-dot {
+		width: 18px;
+		height: 18px;
+		border-width: 3px;
+	}
+
+	.sort-slots,
+	.sort-pool {
+		gap: 6px;
+	}
+
+	.sort-slot {
+		min-height: 70px;
+	}
+
+	.grid-area-game {
+		grid-template-columns: 1fr;
+	}
+
+	.grid-visual {
+		min-height: 210px;
+	}
+
+	.visual-answer-cards button {
+		min-height: 62px;
+	}
+}
