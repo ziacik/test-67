@@ -83,6 +83,24 @@ export function QuestionInteraction({ question, disabled, onAnswer }: Props) {
 		);
 	}
 
+
+	if (interaction.kind === "equation-tiles") {
+		return (
+			<div className="equation-game">
+				<div className="equation-stage" aria-label="Rovnica s chýbajúcim číslom">
+					{interaction.expression}
+				</div>
+				<div className="equation-options">
+					{interaction.options.map((option) => (
+						<button type="button" key={option} disabled={disabled} onClick={() => onAnswer(String(option))}>
+							{option}
+						</button>
+					))}
+				</div>
+			</div>
+		);
+	}
+
 	if (interaction.kind === "grid-area") {
 		const cell = 44;
 		const width = interaction.columns * cell;
