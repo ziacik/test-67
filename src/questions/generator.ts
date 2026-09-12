@@ -171,21 +171,6 @@ function unitsQuestion(): Question {
 	};
 }
 
-function wordProblem(): Question {
-	const boxes = integer(3, 12);
-	const each = integer(12, 48);
-	const extra = integer(5, 30);
-	const answer = boxes * each + extra;
-	return {
-		id: id(),
-		topic: "arithmetic",
-		prompt: `Na školský turnaj priniesli ${boxes} balení po ${each} kartičiek a ešte ${extra} samostatných. Koľko kartičiek je spolu?`,
-		answer: String(answer),
-		hint: "Najprv zisti počet kartičiek v baleniach.",
-		explanation: `${boxes} × ${each} + ${extra} = ${answer}.`,
-	};
-}
-
 function storyChoice(
 	topic: Exclude<TopicId, "mixed">,
 	icon: string,
@@ -207,67 +192,148 @@ function storyChoice(
 	};
 }
 
-function numbersStoryQuestion(): Question {
-	const visitors = integer(12_000, 89_000);
-	const rounded = Math.round(visitors / 1_000) * 1_000;
-	const options = [
-		String(rounded),
-		String(Math.floor(visitors / 1_000) * 1_000),
-		String(Math.ceil(visitors / 1_000) * 1_000),
-		String(Math.round(visitors / 100) * 100),
-	];
+export function compoundStoryQuestion(): Question {
+	const base = integer(4, 9);
+	const factor = integer(5, 9);
+	const multiplied = base * factor;
+	const total = base + multiplied;
+	return {
+		id: id(),
+		topic: "arithmetic",
+		kind: "story",
+		prompt: `Na hospodárstve je ${base} kôz. Somárov je ${factor}-krát viac ako kôz. Koľko kôz a somárov je spolu?`,
+		answer: String(total),
+		choices: shuffle([String(total), String(multiplied), String(base + factor), String(multiplied - base)]),
+		hint: "Najprv zisti počet somárov, až potom počet všetkých zvierat.",
+		explanation: `${base} × ${factor} = ${multiplied}; ${base} + ${multiplied} = ${total}.`,
+	};
+}
+
+export function overlapStoryQuestion(): Question {
+	const total = integer(20, 30);
+	const both = integer(5, Math.floor(total / 2));
+	const firstOnly = integer(3, total - both - 3);
+	const secondOnly = total - both - firstOnly;
+	const first = firstOnly + both;
+	const second = secondOnly + both;
+	const options = [...new Set([both, Math.abs(first - second), first + second, total - both])];
+	while (options.length < 4) options.push(options[options.length - 1] + 1);
 	return storyChoice(
-		"numbers",
-		"🎟️",
-		`Na mestský festival prišlo v sobotu ${sk(visitors)} ľudí. Organizátori chcú počet návštevníkov uviesť zaokrúhlený na tisícky. Ktorý údaj majú zverejniť?`,
-		String(rounded),
-		[...new Set(options)].slice(0, 4),
-		"Pri zaokrúhľovaní na tisícky sleduj stovky.",
-		`${sk(visitors)} zaokrúhlené na tisícky je ${sk(rounded)}.`,
+		"arithmetic",
+		"🗣️",
+		`V triede je ${total} detí. Angličtinu sa učí ${first} detí a nemčinu ${second} detí. Každé dieťa sa učí aspoň jeden z týchto jazykov. Koľko detí sa učí oba jazyky?`,
+		String(both),
+		options.slice(0, 4).map(String),
+		"Keď oba počty sčítaš, deti učiace sa oba jazyky si započítal dvakrát.",
+		`${first} + ${second} − ${total} = ${both}.`,
 	);
 }
 
-function arithmeticStoryQuestion(): Question {
-	const boxes = integer(3, 9);
-	const perBox = integer(12, 28);
-	const extra = integer(5, 24);
-	const total = boxes * perBox + extra;
-	const correct = `${boxes} × ${perBox} + ${extra}`;
+export function differenceStoryQuestion(): Question {
+	const shortest = integer(140, 260);
+	const middle = shortest + integer(30, 100);
+	const longest = middle + integer(40, 120);
+	const difference = longest - shortest;
+	const options = [...new Set([difference, longest - middle, middle - shortest, longest + shortest])];
+	while (options.length < 4) options.push(options[0] + options.length * 10);
+	return storyChoice(
+		"geometry",
+		"🚇",
+		`Tri tunely majú dĺžky ${shortest} m, ${middle} m a ${longest} m. O koľko metrov je najdlhší tunel dlhší ako najkratší?`,
+		String(difference),
+		options.slice(0, 4).map(String),
+		"Porovnaj najväčšiu a najmenšiu dĺžku.",
+		`${longest} − ${shortest} = ${difference} m.`,
+	);
+}
+
+export function divisionStoryQuestion(): Question {
+	const perItem = pick([6, 7, 8, 9] as const);
+	const count = integer(8, 18);
+	const total = perItem * count;
+	const options = [...new Set([count, count - 1, count + 1, perItem])];
+	while (options.length < 4) options.push(options[0] + options.length + 1);
 	return storyChoice(
 		"arithmetic",
-		"📦",
-		`Na školský turnaj priniesli ${boxes} krabíc po ${perBox} kartičiek a ešte ${extra} voľných kartičiek. Ktorý výpočet správne zistí, koľko kartičiek je spolu?`,
-		correct,
-		[correct, `${boxes} + ${perBox} + ${extra}`, `${boxes} × (${perBox} + ${extra})`, `${boxes} × ${perBox} − ${extra}`],
-		"Najprv spočítaj kartičky v krabiciach, potom pripočítaj voľné.",
-		`${correct} = ${total}, takže spolu je ${total} kartičiek.`,
+		"🦔",
+		`Na výrobu jedného papierového ježka treba ${perItem} špáradiel. V krabičke je ${total} špáradiel. Na koľko ježkov vystačia?`,
+		String(count),
+		options.slice(0, 4).map(String),
+		"Zisti, koľkokrát sa počet špáradiel na jedného ježka zmestí do celkového počtu.",
+		`${total} ÷ ${perItem} = ${count}.`,
 	);
+}
+
+export function financeStoryQuestion(): Question {
+	const offers = [
+		{ price: integer(35, 45), shipping: integer(4, 10) },
+		{ price: integer(38, 48), shipping: integer(0, 8) },
+		{ price: integer(32, 44), shipping: integer(6, 12) },
+		{ price: integer(40, 50), shipping: integer(0, 6) },
+	];
+	const totals = offers.map((offer) => offer.price + offer.shipping);
+	let best = 0;
+	for (let i = 1; i < totals.length; i += 1) if (totals[i] < totals[best]) best = i;
+	const labels = offers.map((offer, index) => `Ponuka ${index + 1}: ${offer.price} € + doprava ${offer.shipping} €`);
+	return storyChoice(
+		"arithmetic",
+		"🛒",
+		`E-shop ponúka rovnaký výrobok v štyroch ponukách. Ktorá vyjde po započítaní dopravy najlacnejšie? ${labels.join(" · ")}`,
+		labels[best],
+		labels,
+		"Pri každej ponuke pripočítaj cenu dopravy.",
+		`${totals.map((value, index) => `${index + 1}. ${value} €`).join("; ")}. Najlacnejšia je ponuka ${best + 1}.`,
+	);
+}
+
+export function numberFilterQuestion(): Question {
+	const threshold = integer(3_000, 8_000);
+	const values = new Set<number>();
+	while (values.size < 9) values.add(integer(1_000, 9_999));
+	let list = [...values];
+	let correct = list.filter((value) => value % 2 === 0 && value < threshold);
+	if (correct.length < 2) {
+		list[0] = threshold - 2;
+		list[1] = threshold - 4;
+	}
+	correct = list.filter((value) => value % 2 === 0 && value < threshold);
+	if (correct.length > 4) {
+		for (let i = 4; i < correct.length; i += 1) {
+			const index = list.indexOf(correct[i]);
+			list[index] = Math.min(9_999, correct[i] + (correct[i] % 2 === 0 ? 1 : 0));
+		}
+		correct = list.filter((value) => value % 2 === 0 && value < threshold);
+	}
+	const answerValues = [...correct].sort((a, b) => a - b);
+	return {
+		id: id(),
+		topic: "numbers",
+		prompt: `Vyber všetky čísla, ktoré sú párne a zároveň menšie ako ${sk(threshold)}.`,
+		answer: answerValues.join(","),
+		interaction: { kind: "number-filter", values: shuffle(list), correctValues: answerValues },
+		hint: "Číslo musí spĺňať obe podmienky naraz.",
+		explanation: `Obe podmienky spĺňajú: ${answerValues.map(sk).join(", ")}.`,
+	};
 }
 
 function geometryStoryQuestion(): Question {
-	const a = integer(8, 22);
-	const b = integer(5, 15);
-	const gate = integer(1, 4);
-	const fence = 2 * (a + b) - gate;
-	const correct = `2 × (${a} + ${b}) − ${gate}`;
-	return storyChoice(
-		"geometry",
-		"🌳",
-		`Obdĺžniková záhrada má dĺžku ${a} m a šírku ${b} m. Pri vstupe zostane otvorená brána široká ${gate} m. Ktorý výpočet určí dĺžku plota okolo záhrady?`,
-		correct,
-		[correct, `${a} × ${b} − ${gate}`, `${a} + ${b} − ${gate}`, `2 × (${a} + ${b} + ${gate})`],
-		"Najprv potrebuješ celý obvod a potom odčítať miesto, kde bude brána.",
-		`${correct} = ${fence}, takže treba ${fence} m plota.`,
-	);
+	return differenceStoryQuestion();
 }
 
-export function generateStoryQuestion(topic: TopicId): Question {
-	const resolvedTopic = topic === "mixed" ? pick(["numbers", "arithmetic", "geometry"] as const) : topic;
-	if (resolvedTopic === "numbers") return numbersStoryQuestion();
-	if (resolvedTopic === "geometry") return geometryStoryQuestion();
-	return arithmeticStoryQuestion();
+export function generateStoryQuestion(topic: TopicId, group?: "a" | "b"): Question {
+	if (topic === "geometry") return group === "b" ? differenceStoryQuestion() : geometryStoryQuestion();
+	if (topic === "numbers") {
+		return group === "b" ? financeStoryQuestion() : pick([compoundStoryQuestion, overlapStoryQuestion])();
+	}
+	if (topic === "arithmetic") {
+		return group === "b"
+			? pick([overlapStoryQuestion, financeStoryQuestion, differenceStoryQuestion])()
+			: pick([compoundStoryQuestion, divisionStoryQuestion])();
+	}
+	return group === "b"
+		? pick([overlapStoryQuestion, financeStoryQuestion, differenceStoryQuestion])()
+		: pick([compoundStoryQuestion, divisionStoryQuestion])();
 }
-
 export function numberLineQuestion(): Question {
 	const start = integer(0, 40) * 10;
 	const step = pick([5, 10, 20, 25, 50] as const);
@@ -356,8 +422,8 @@ export function gridAreaQuestion(): Question {
 	};
 }
 
-const numbers = [roundingQuestion, compareQuestion, parityQuestion, numberLineQuestion, sortNumbersQuestion] as const;
-const arithmetic = [additionQuestion, subtractionQuestion, multiplicationQuestion, divisionQuestion, orderQuestion, wordProblem, missingFactorQuestion, missingFactorQuestion] as const;
+const numbers = [roundingQuestion, compareQuestion, parityQuestion, numberLineQuestion, numberFilterQuestion] as const;
+const arithmetic = [additionQuestion, subtractionQuestion, multiplicationQuestion, divisionQuestion, orderQuestion, missingFactorQuestion, missingFactorQuestion] as const;
 const geometry = [perimeterQuestion, areaQuestion, unitsQuestion, gridAreaQuestion] as const;
 
 export const generators = { numbers, arithmetic, geometry };
@@ -371,13 +437,14 @@ export function generateQuestion(topic: TopicId): Question {
 }
 
 const interactiveGenerators = {
-	numbers: [compareQuestion, parityQuestion, numberLineQuestion, sortNumbersQuestion],
+	numbers: [compareQuestion, parityQuestion, numberLineQuestion, numberFilterQuestion],
 	arithmetic: [missingFactorQuestion],
 	geometry: [gridAreaQuestion],
 } as const;
 
 export function generateRoundQuestion(topic: TopicId, index: number): Question {
-	if (index === 4 || index === 8) return generateStoryQuestion(topic);
+	if (index === 4) return generateStoryQuestion(topic, "a");
+	if (index === 8) return generateStoryQuestion(topic, "b");
 	if (index % 2 === 0) return generateQuestion(topic);
 
 	const interactiveTopic =
