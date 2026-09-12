@@ -82,6 +82,26 @@ describe("QuestionInteraction", () => {
 		expect(html).toContain("6 × 24 + 17");
 	});
 
+	it("renders a multi-select number filtering task", () => {
+		const html = render({
+			id: "filter",
+			topic: "numbers",
+			prompt: "Vyber čísla",
+			answer: "1750,2016",
+			explanation: "x",
+			interaction: {
+				kind: "number-filter",
+				values: [1371, 2585, 2108, 3074, 2317, 1965, 2016, 1750],
+				correctValues: [2016, 1750],
+			},
+		});
+
+		expect(html).toContain("number-filter-game");
+		expect(html).toContain("1 750");
+		expect(html).toContain("2 016");
+		expect(html).toContain("HOTOVO");
+	});
+
 	it("renders the area question as an SVG grid with answer cards", () => {
 		const html = render({
 			id: "grid",
