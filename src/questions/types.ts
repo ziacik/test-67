@@ -1,11 +1,25 @@
 export type TopicId = "numbers" | "arithmetic" | "geometry" | "mixed";
 
+export type QuestionInteraction =
+	| { kind: "input" }
+	| { kind: "number-line"; values: number[] }
+	| { kind: "sort"; values: number[] }
+	| {
+		kind: "grid-area";
+		columns: number;
+		rows: number;
+		filledColumns: number;
+		filledRows: number;
+		options: number[];
+	};
+
 export type Question = {
 	id: string;
 	topic: Exclude<TopicId, "mixed">;
 	prompt: string;
 	answer: string;
 	choices?: string[];
+	interaction?: QuestionInteraction;
 	hint?: string;
 	explanation: string;
 };
