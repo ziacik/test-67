@@ -26,6 +26,8 @@ export type QuestionInteraction =
 	| { kind: "number-line-target"; start: number; step: number; count: number; targetIndex: number; options: number[] }
 	| { kind: "route-map"; labels: string[]; edges: Array<[number, number, number]>; options: string[] }
 	| { kind: "cube-code"; columns: number[]; options: string[] }
+	| { kind: "cube-build-choice"; code: number[]; options: Array<{ answer: string; columns: number[] }> }
+	| { kind: "grid-scale-choice"; width: number; height: number; scale: number; options: Array<{ answer: string; width: number; height: number }> }
 	| { kind: "symmetry-shape"; mode: "axis" | "center"; points: Array<[number, number]>; options: Array<{ answer: string; points: Array<[number, number]> }> }
 	| { kind: "chart-choice"; labels: string[]; targetValues: number[]; options: Array<{ answer: string; values: number[] }> }
 	| {
