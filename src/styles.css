@@ -1328,3 +1328,155 @@ input:focus {
 		height: 40px;
 	}
 }
+
+
+/* Remaining curriculum visuals */
+.ruler-game,
+.symmetry-grid-game,
+.data-table-game {
+	display: grid;
+	grid-template-columns: minmax(260px, 1.25fr) minmax(160px, .75fr);
+	gap: 16px;
+	align-items: stretch;
+}
+
+.ruler-visual,
+.symmetry-grid-visual,
+.data-table-wrap {
+	position: relative;
+	display: grid;
+	place-items: center;
+	min-height: 230px;
+	padding: 18px;
+	border: 1px solid var(--line);
+	border-radius: 20px;
+	background: #100d18;
+	overflow: hidden;
+}
+
+.ruler-visual svg,
+.symmetry-grid-visual svg {
+	width: 100%;
+	max-width: 540px;
+	height: auto;
+}
+
+.ruler-visual small {
+	position: absolute;
+	right: 22px;
+	bottom: 12px;
+	color: var(--text-soft);
+	font-weight: 800;
+}
+
+.measured-segment {
+	stroke: var(--accent);
+	stroke-width: 7;
+	stroke-linecap: round;
+}
+
+.segment-end {
+	fill: var(--accent-2);
+}
+
+.ruler-line,
+.ruler-tick {
+	stroke: #82778d;
+	stroke-width: 2;
+}
+
+.ruler-label {
+	fill: #d9d3e2;
+	font: 700 11px "Space Grotesk";
+}
+
+.sym-grid-line {
+	stroke: rgba(255,255,255,.09);
+	stroke-width: 1;
+}
+
+.sym-axis {
+	stroke: var(--accent);
+	stroke-width: 3;
+}
+
+.secondary-axis {
+	stroke: rgba(255,180,84,.45);
+}
+
+.sym-point {
+	fill: var(--accent-2);
+	stroke: white;
+	stroke-width: 2;
+}
+
+.sym-center {
+	fill: var(--accent);
+}
+
+.sym-label {
+	fill: white;
+	font: 800 16px "Space Grotesk";
+}
+
+.data-table-wrap table {
+	width: min(100%, 430px);
+	border-collapse: collapse;
+	overflow: hidden;
+	border-radius: 14px;
+	font: 700 17px "Space Grotesk";
+}
+
+.data-table-wrap th,
+.data-table-wrap td {
+	padding: 13px 16px;
+	text-align: center;
+	border: 1px solid #3b3247;
+}
+
+.data-table-wrap th {
+	background: rgba(255,180,84,.12);
+	color: var(--accent);
+}
+
+.data-table-wrap td {
+	background: rgba(255,255,255,.025);
+}
+
+.table-answer-cards {
+	display: grid;
+	gap: 9px;
+}
+
+.table-answer-cards button {
+	min-height: 58px;
+	padding: 12px;
+	border: 2px solid #3a3047;
+	border-radius: 14px;
+	background: #100d18;
+	color: white;
+	font: 800 15px "Space Grotesk";
+	line-height: 1.3;
+	transition: transform .12s ease, border-color .12s ease, background .12s ease;
+}
+
+.table-answer-cards button:hover:not(:disabled) {
+	transform: translateY(-2px);
+	border-color: var(--accent);
+	background: #251a2a;
+}
+
+@media (max-width: 650px) {
+	.ruler-game,
+	.symmetry-grid-game,
+	.data-table-game {
+		grid-template-columns: 1fr;
+	}
+
+	.ruler-visual,
+	.symmetry-grid-visual,
+	.data-table-wrap {
+		min-height: 190px;
+		padding: 12px;
+	}
+}
