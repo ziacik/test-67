@@ -1,5 +1,7 @@
 export type TopicId =
 	| "numbers"
+	| "decimals"
+	| "fractions"
 	| "geometry"
 	| "addition"
 	| "symmetry"
@@ -15,6 +17,9 @@ export type QuestionInteraction =
 	| { kind: "equation-tiles"; expression: string; options: number[] }
 	| { kind: "story-choice"; icon: string; options: string[] }
 	| { kind: "number-filter"; values: number[]; correctValues: number[] }
+	| { kind: "fraction-grid"; parts: number; filled: number; options: string[] }
+	| { kind: "bar-chart"; labels: string[]; values: number[]; options: string[] }
+	| { kind: "cube-stack"; columns: number[]; options: number[] }
 	| {
 		kind: "grid-area";
 		columns: number;
