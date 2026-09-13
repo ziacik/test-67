@@ -158,6 +158,74 @@ export function QuestionInteraction({ question, disabled, onAnswer }: Props) {
 		);
 	}
 
+
+	if (interaction.kind === "fraction-grid") {
+		return (
+			<div className="fraction-game">
+				<div className="fraction-visual" role="img" aria-label={`${interaction.filled} z ${interaction.parts} častí je vyfarbených`}>
+					{Array.from({ length: interaction.parts }, (_, index) => (
+						<div key={index} className={index < interaction.filled ? "fraction-part filled" : "fraction-part"} />
+					))}
+				</div>
+				<div className="visual-answer-cards">
+					{interaction.options.map((option) => (
+						<button type="button" key={option} disabled={disabled} onClick={() => onAnswer(option)}>
+							{option}
+						</button>
+					))}
+				</div>
+			</div>
+		);
+	}
+
+	if (interaction.kind === "bar-chart") {
+		const max = Math.max(...interaction.values);
+		return (
+			<div className="chart-game">
+				<div className="bar-chart" role="img" aria-label="Stĺpcový graf">
+					{interaction.values.map((value, index) => (
+						<div className="bar-column" key={interaction.labels[index]}>
+							<span>{value}</span>
+							<div className="bar" style={{ height: `${Math.max(18, (value / max) * 150)}px` }} />
+							<strong>{interaction.labels[index]}</strong>
+						</div>
+					))}
+				</div>
+				<div className="visual-answer-cards">
+					{interaction.options.map((option) => (
+						<button type="button" key={option} disabled={disabled} onClick={() => onAnswer(option)}>
+							{option}
+						</button>
+					))}
+				</div>
+			</div>
+		);
+	}
+
+	if (interaction.kind === "cube-stack") {
+		return (
+			<div className="cube-game">
+				<div className="cube-stack" role="img" aria-label="Stavba zo stĺpcov kociek">
+					{interaction.columns.map((height, column) => (
+						<div className="cube-column" key={column}>
+							{Array.from({ length: height }, (_, index) => (
+								<div className="cube" key={index} />
+							))}
+						</div>
+					))}
+				</div>
+				<div className="visual-answer-cards">
+					{interaction.options.map((option) => (
+						<button type="button" key={option} disabled={disabled} onClick={() => onAnswer(String(option))}>
+							{option}
+						</button>
+					))}
+				</div>
+			</div>
+		);
+	}
+
+
 	if (interaction.kind === "grid-area") {
 		const cell = 44;
 		const width = interaction.columns * cell;
