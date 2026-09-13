@@ -1550,21 +1550,21 @@ function zeroEndingOperationQuestion(): Question {
 	};
 }
 
-function operationPropertyQuestion(): Question {
-	const multiplicationMode = Math.random() < 0.5;
-	if (multiplicationMode) {
-		const a = integer(3, 30);
-		const b = integer(3, 30);
-		const answer = `${b} × ${a}`;
-		return {
-			id: id(),
-			topic: "multiplication",
-			prompt: `Ktorý výraz má určite rovnakú hodnotu ako ${a} × ${b}?`,
-			answer,
-			choices: shuffle([answer, `${a} + ${b}`, `${a} × (${b} + 1)`, `${b} − ${a}`]),
-			explanation: "Pri násobení môžeme činitele vymeniť: a × b = b × a.",
-		};
-	}
+function multiplicationCommutativityQuestion(): Question {
+	const a = integer(3, 30);
+	const b = integer(3, 30);
+	const answer = `${b} × ${a}`;
+	return {
+		id: id(),
+		topic: "multiplication",
+		prompt: `Ktorý výraz má určite rovnakú hodnotu ako ${a} × ${b}?`,
+		answer,
+		choices: shuffle([answer, `${a} + ${b}`, `${a} × (${b} + 1)`, `${b} − ${a}`]),
+		explanation: "Pri násobení môžeme činitele vymeniť: a × b = b × a.",
+	};
+}
+
+function additionGroupingQuestion(): Question {
 	const a = integer(10, 60);
 	const b = 100 - a;
 	const cValue = integer(5, 80);
@@ -1832,9 +1832,9 @@ const numbers = [roundingQuestion, directedRoundingQuestion, compareQuestion, pa
 const decimals = [decimalMoneyQuestion, decimalSubtractionQuestion, decimalCompareQuestion, decimalSortQuestion, decimalRoundingQuestion, decimalDirectedRoundingQuestion, decimalPowerQuestion] as const;
 const fractions = [fractionGridQuestion, fractionOfCollectionQuestion, fractionCompareQuestion] as const;
 const geometry = [shapePropertyQuestion, lineRelationQuestion, circleQuestion, cubeFactsQuestion, quadrilateralQuestion, solidQuestion, cubeStackQuestion, cubeCodeQuestion, cubeCodeToBuildQuestion, cuboidUnitCubesQuestion, scaleGridQuestion, constructionQuestion] as const;
-const addition = [additionQuestion, subtractionQuestion, multiAddendQuestion, operationPropertyQuestion, missingAddendQuestion, differenceComparisonQuestion, estimateSumQuestion, additionStoryQuestion] as const;
+const addition = [additionQuestion, subtractionQuestion, multiAddendQuestion, additionGroupingQuestion, missingAddendQuestion, differenceComparisonQuestion, estimateSumQuestion, additionStoryQuestion] as const;
 const symmetry = [axisCountQuestion, symmetryTypeQuestion, mirrorDistanceQuestion, symmetryGridQuestion, axisFromPointPairQuestion, centerFromPointPairQuestion, symmetryShapeQuestion, centralSymmetryQuestion, noAxisSymmetryQuestion] as const;
-const multiplication = [multiplicationQuestion, multiDigitMultiplicationQuestion, zeroEndingOperationQuestion, divisionQuestion, orderQuestion, mixedOrderQuestion, bracketQuestion, powerOfTenQuestion, operationPropertyQuestion, quotientComparisonQuestion, distributiveQuestion, repeatedOperationQuestion, missingFactorQuestion, divisionRemainderQuestion, compoundStoryQuestion, divisionStoryQuestion] as const;
+const multiplication = [multiplicationQuestion, multiDigitMultiplicationQuestion, zeroEndingOperationQuestion, divisionQuestion, orderQuestion, mixedOrderQuestion, bracketQuestion, powerOfTenQuestion, multiplicationCommutativityQuestion, quotientComparisonQuestion, distributiveQuestion, repeatedOperationQuestion, missingFactorQuestion, divisionRemainderQuestion, compoundStoryQuestion, divisionStoryQuestion] as const;
 const measurement = [perimeterQuestion, squarePerimeterQuestion, trianglePerimeterQuestion, areaQuestion, areaUnitQuestion, rulerQuestion, estimateDistanceQuestion, unitsQuestion, unitConversionQuestion, compoundLengthQuestion, compareLengthQuestion, unitConversionStoryQuestion, gridAreaQuestion, differenceStoryQuestion, xylophoneQuestion] as const;
 const applications = [overlapStoryQuestion, financeStoryQuestion, ratioQuestion, directProportionQuestion, inverseProportionQuestion, mapSchemeQuestion, possibleDiceSumQuestion, probabilityQuestion, chartDataQuestion, barChartQuestion, dataTableQuestion, chartFromTableQuestion, chartChoiceQuestion, enumeratePossibilitiesQuestion, classificationQuestion, halfCollectionQuestion, pathsQuestion] as const;
 
@@ -1893,9 +1893,9 @@ const interactiveGenerators = {
 	decimals: [decimalCompareQuestion, decimalSortQuestion, decimalRoundingQuestion, decimalDirectedRoundingQuestion, decimalPowerQuestion],
 	fractions: [fractionGridQuestion, fractionOfCollectionQuestion, fractionCompareQuestion],
 	geometry: [shapePropertyQuestion, lineRelationQuestion, circleQuestion, cubeFactsQuestion, quadrilateralQuestion, solidQuestion, cubeStackQuestion, cubeCodeQuestion, cubeCodeToBuildQuestion, cuboidUnitCubesQuestion, scaleGridQuestion, constructionQuestion],
-	addition: [operationPropertyQuestion, missingAddendQuestion, differenceComparisonQuestion, estimateSumQuestion],
+	addition: [additionGroupingQuestion, missingAddendQuestion, differenceComparisonQuestion, estimateSumQuestion],
 	symmetry: [axisCountQuestion, symmetryTypeQuestion, mirrorDistanceQuestion, symmetryGridQuestion, axisFromPointPairQuestion, centerFromPointPairQuestion, symmetryShapeQuestion, centralSymmetryQuestion, noAxisSymmetryQuestion],
-	multiplication: [zeroEndingOperationQuestion, mixedOrderQuestion, operationPropertyQuestion, missingFactorQuestion, divisionRemainderQuestion, bracketQuestion, powerOfTenQuestion, quotientComparisonQuestion, distributiveQuestion, repeatedOperationQuestion, compoundStoryQuestion, divisionStoryQuestion],
+	multiplication: [zeroEndingOperationQuestion, mixedOrderQuestion, multiplicationCommutativityQuestion, missingFactorQuestion, divisionRemainderQuestion, bracketQuestion, powerOfTenQuestion, quotientComparisonQuestion, distributiveQuestion, repeatedOperationQuestion, compoundStoryQuestion, divisionStoryQuestion],
 	measurement: [gridAreaQuestion, rulerQuestion, estimateDistanceQuestion, areaUnitQuestion, unitConversionQuestion, compoundLengthQuestion, compareLengthQuestion, unitConversionStoryQuestion, differenceStoryQuestion, xylophoneQuestion],
 	applications: [overlapStoryQuestion, financeStoryQuestion, ratioQuestion, directProportionQuestion, inverseProportionQuestion, mapSchemeQuestion, possibleDiceSumQuestion, probabilityQuestion, barChartQuestion, dataTableQuestion, chartFromTableQuestion, chartChoiceQuestion, enumeratePossibilitiesQuestion, classificationQuestion, chartDataQuestion, halfCollectionQuestion, pathsQuestion],
 } as const;
