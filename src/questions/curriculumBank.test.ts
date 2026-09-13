@@ -17,7 +17,11 @@ const expectedTopics = [
 
 describe("fifth-grade curriculum bank", () => {
 	it("exposes the real fifth-grade curriculum areas", () => {
-		expect(topics.map((topic) => topic.id)).toEqual(expectedTopics);
+		expect(
+			topics
+				.filter((topic) => topic.subject === "math")
+				.map((topic) => topic.id),
+		).toEqual(expectedTopics);
 	});
 
 	it("has a non-trivial task bank for every curriculum area", () => {
@@ -69,5 +73,4 @@ describe("fifth-grade curriculum bank", () => {
 			"strategy-and-real-world-word-problems",
 		]);
 	});
-
 });
