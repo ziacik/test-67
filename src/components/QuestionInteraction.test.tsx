@@ -220,4 +220,137 @@ describe("QuestionInteraction", () => {
 		expect(html).toContain("Po → Ut");
 	});
 
+	it("renders the reverse-direction number-line task", () => {
+		const html = render({
+			id: "line-target",
+			topic: "numbers",
+			prompt: "line",
+			answer: "300",
+			explanation: "x",
+			interaction: { kind: "number-line-target", start: 100, step: 100, count: 6, targetIndex: 2, options: [200, 300, 400, 600] },
+		});
+
+		expect(html).toContain("target-line-visual");
+		expect(html).toContain("target-line-point target");
+		expect(html).toContain("300");
+	});
+
+	it("renders a map/scheme task", () => {
+		const html = render({
+			id: "map",
+			topic: "applications",
+			prompt: "map",
+			answer: "Dom → Park → Škola",
+			explanation: "x",
+			interaction: {
+				kind: "route-map",
+				labels: ["Dom", "Park", "Škola", "Ihrisko"],
+				edges: [[0, 1, 3], [1, 2, 4], [0, 3, 5], [3, 2, 3]],
+				options: ["Dom → Park → Škola", "Dom → Ihrisko → Škola"],
+			},
+		});
+
+		expect(html).toContain("route-map-visual");
+		expect(html).toContain("3 km");
+		expect(html).toContain("Dom → Park → Škola");
+	});
+
+	it("renders both directions of cube coding", () => {
+		const encoded = render({
+			id: "cube-code",
+			topic: "geometry",
+			prompt: "code",
+			answer: "1-3-2",
+			explanation: "x",
+			interaction: { kind: "cube-code", columns: [1, 3, 2], options: ["1-3-2", "2-3-1", "1-2-2", "1-3-3"] },
+		});
+		const decoded = render({
+			id: "cube-build",
+			topic: "geometry",
+			prompt: "build",
+			answer: "A",
+			explanation: "x",
+			interaction: {
+				kind: "cube-build-choice",
+				code: [1, 3, 2],
+				options: [
+					{ answer: "A", columns: [1, 3, 2] },
+					{ answer: "B", columns: [2, 3, 1] },
+				],
+			},
+		});
+
+		expect(encoded).toContain("cube-code-visual");
+		expect(decoded).toContain("cube-build-options");
+		expect(decoded).toContain("Kód:");
+	});
+
+	it("renders visual grid scaling choices", () => {
+		const html = render({
+			id: "scale",
+			topic: "geometry",
+			prompt: "scale",
+			answer: "A",
+			explanation: "x",
+			interaction: {
+				kind: "grid-scale-choice",
+				width: 2,
+				height: 3,
+				scale: 2,
+				options: [
+					{ answer: "A", width: 4, height: 6 },
+					{ answer: "B", width: 3, height: 4 },
+				],
+			},
+		});
+
+		expect(html).toContain("grid-scale-source");
+		expect(html).toContain("scale-grid-cell");
+		expect(html).toContain("4 × 6");
+	});
+
+	it("renders whole-shape symmetry choices", () => {
+		const html = render({
+			id: "sym-shape",
+			topic: "symmetry",
+			prompt: "symmetry",
+			answer: "A",
+			explanation: "x",
+			interaction: {
+				kind: "symmetry-shape",
+				mode: "axis",
+				points: [[1, 1], [3, 1], [2, 3]],
+				options: [
+					{ answer: "A", points: [[-1, 1], [-3, 1], [-2, 3]] },
+					{ answer: "B", points: [[1, -1], [3, -1], [2, -3]] },
+				],
+			},
+		});
+
+		expect(html).toContain("symmetry-shape-game");
+		expect(html).toContain("sym-polygon source");
+	});
+
+	it("renders actual chart choices from data", () => {
+		const html = render({
+			id: "chart-choice",
+			topic: "applications",
+			prompt: "chart",
+			answer: "A",
+			explanation: "x",
+			interaction: {
+				kind: "chart-choice",
+				labels: ["A", "B", "C"],
+				targetValues: [3, 6, 9],
+				options: [
+					{ answer: "A", values: [3, 6, 9] },
+					{ answer: "B", values: [9, 6, 3] },
+				],
+			},
+		});
+
+		expect(html).toContain("chart-choice-grid");
+		expect(html).toContain("mini-bar");
+	});
+
 });
