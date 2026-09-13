@@ -123,4 +123,51 @@ describe("QuestionInteraction", () => {
 		expect(html).toContain("grid-cell-filled");
 		expect(html).toContain(">12<");
 	});
+
+	it("renders a visual fraction task", () => {
+		const html = render({
+			id: "fraction",
+			topic: "fractions",
+			prompt: "fraction",
+			answer: "3/4",
+			explanation: "x",
+			interaction: { kind: "fraction-grid", parts: 4, filled: 3, options: ["1/4", "2/4", "3/4", "4/4"] },
+		});
+
+		expect(html).toContain("fraction-visual");
+		expect(html.match(/fraction-part filled/g)).toHaveLength(3);
+		expect(html).toContain("3/4");
+	});
+
+	it("renders a real bar chart", () => {
+		const html = render({
+			id: "chart",
+			topic: "applications",
+			prompt: "chart",
+			answer: "St",
+			explanation: "x",
+			interaction: { kind: "bar-chart", labels: ["Po", "Ut", "St", "Št"], values: [3, 6, 9, 4], options: ["Po", "Ut", "St", "Št"] },
+		});
+
+		expect(html).toContain("bar-chart");
+		expect(html).toContain("St");
+		expect(html).toContain("9");
+	});
+
+	it("renders a cube construction", () => {
+		const html = render({
+			id: "cubes",
+			topic: "geometry",
+			prompt: "cubes",
+			answer: "6",
+			explanation: "x",
+			interaction: { kind: "cube-stack", columns: [1, 2, 3], options: [5, 6, 7, 8] },
+		});
+
+		expect(html).toContain("cube-stack");
+		expect(html.match(/class="cube"/g)).toHaveLength(6);
+		expect(html).toContain(">6<");
+	});
+
+
 });
