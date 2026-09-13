@@ -21,14 +21,14 @@ describe("fifth-grade curriculum bank", () => {
 	});
 
 	it("has a non-trivial task bank for every curriculum area", () => {
-		expect(generators.numbers.length).toBeGreaterThanOrEqual(5);
-		expect(generators.decimals.length).toBeGreaterThanOrEqual(5);
+		expect(generators.numbers.length).toBeGreaterThanOrEqual(9);
+		expect(generators.decimals.length).toBeGreaterThanOrEqual(7);
 		expect(generators.fractions.length).toBeGreaterThanOrEqual(3);
-		expect(generators.geometry.length).toBeGreaterThanOrEqual(8);
-		expect(generators.addition.length).toBeGreaterThanOrEqual(4);
-		expect(generators.symmetry.length).toBeGreaterThanOrEqual(3);
-		expect(generators.multiplication.length).toBeGreaterThanOrEqual(8);
-		expect(generators.measurement.length).toBeGreaterThanOrEqual(9);
-		expect(generators.applications.length).toBeGreaterThanOrEqual(7);
+		expect(generators.geometry.length).toBeGreaterThanOrEqual(10);
+		expect(generators.addition.length).toBeGreaterThanOrEqual(7);
+		expect(generators.symmetry.length).toBeGreaterThanOrEqual(6);
+		expect(generators.multiplication.length).toBeGreaterThanOrEqual(13);
+		expect(generators.measurement.length).toBeGreaterThanOrEqual(14);
+		expect(generators.applications.length).toBeGreaterThanOrEqual(12);
 	});
 });
