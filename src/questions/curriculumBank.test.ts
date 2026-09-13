@@ -5,6 +5,8 @@ import { topics } from "./topics";
 const expectedTopics = [
 	"mixed",
 	"numbers",
+	"decimals",
+	"fractions",
 	"geometry",
 	"addition",
 	"symmetry",
@@ -20,11 +22,13 @@ describe("fifth-grade curriculum bank", () => {
 
 	it("has a non-trivial task bank for every curriculum area", () => {
 		expect(generators.numbers.length).toBeGreaterThanOrEqual(5);
-		expect(generators.geometry.length).toBeGreaterThanOrEqual(4);
+		expect(generators.decimals.length).toBeGreaterThanOrEqual(5);
+		expect(generators.fractions.length).toBeGreaterThanOrEqual(3);
+		expect(generators.geometry.length).toBeGreaterThanOrEqual(8);
 		expect(generators.addition.length).toBeGreaterThanOrEqual(4);
 		expect(generators.symmetry.length).toBeGreaterThanOrEqual(3);
-		expect(generators.multiplication.length).toBeGreaterThanOrEqual(5);
-		expect(generators.measurement.length).toBeGreaterThanOrEqual(4);
-		expect(generators.applications.length).toBeGreaterThanOrEqual(5);
+		expect(generators.multiplication.length).toBeGreaterThanOrEqual(8);
+		expect(generators.measurement.length).toBeGreaterThanOrEqual(9);
+		expect(generators.applications.length).toBeGreaterThanOrEqual(7);
 	});
 });
