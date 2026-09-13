@@ -170,4 +170,54 @@ describe("QuestionInteraction", () => {
 	});
 
 
+	it("renders a millimeter ruler", () => {
+		const html = render({
+			id: "ruler",
+			topic: "measurement",
+			prompt: "ruler",
+			answer: "37",
+			explanation: "x",
+			interaction: { kind: "ruler", millimeters: 37, options: [32, 37, 42, 47] },
+		});
+
+		expect(html).toContain("ruler-visual");
+		expect(html).toContain("measured-segment");
+		expect(html).toContain("37 mm");
+	});
+
+	it("renders a symmetry construction grid", () => {
+		const html = render({
+			id: "symmetry-grid",
+			topic: "symmetry",
+			prompt: "symmetry",
+			answer: "(2;3)",
+			explanation: "x",
+			interaction: { kind: "symmetry-grid", mode: "axis", x: -2, y: 3, options: ["(2;3)", "(-2;-3)", "(-2;3)", "(2;-3)"] },
+		});
+
+		expect(html).toContain("symmetry-grid-visual");
+		expect(html).toContain("sym-point");
+		expect(html).toContain("(2;3)");
+	});
+
+	it("renders a real data table", () => {
+		const html = render({
+			id: "table",
+			topic: "applications",
+			prompt: "table",
+			answer: "Po → Ut",
+			explanation: "x",
+			interaction: {
+				kind: "data-table",
+				headers: ["Deň", "Počet"],
+				rows: [["Po", "3"], ["Ut", "7"]],
+				options: ["Po → Ut", "Ut → Po"],
+			},
+		});
+
+		expect(html).toContain("<table>");
+		expect(html).toContain("Deň");
+		expect(html).toContain("Po → Ut");
+	});
+
 });
