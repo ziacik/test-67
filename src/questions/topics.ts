@@ -10,13 +10,25 @@ export const topics: Topic[] = [
 	{
 		id: "numbers",
 		name: "Prirodzené čísla",
-		description: "Rozklad, číselná os, porovnávanie, zaokrúhľovanie, rímske čísla.",
+		description: "Rozklad, číselná os, porovnávanie, zaokrúhľovanie a rímske čísla.",
 		icon: "🔢",
+	},
+	{
+		id: "decimals",
+		name: "Desatinné čísla",
+		description: "Peniaze, porovnávanie, zaokrúhľovanie, sčítanie a násobenie 10, 100, 1000.",
+		icon: "🔟",
+	},
+	{
+		id: "fractions",
+		name: "Zlomky",
+		description: "Časť celku, polovice, tretiny, štvrtiny a jednoduché porovnávanie.",
+		icon: "🍕",
 	},
 	{
 		id: "geometry",
 		name: "Geometria",
-		description: "Útvary, kružnica, kolmice, rovnobežky a telesá.",
+		description: "Útvary, kružnica, kolmice, rovnobežky, telesá a stavby z kociek.",
 		icon: "📐",
 	},
 	{
@@ -34,19 +46,19 @@ export const topics: Topic[] = [
 	{
 		id: "multiplication",
 		name: "Násobenie & delenie",
-		description: "Násobenie, delenie, zvyšok, zátvorky a chýbajúci činiteľ.",
+		description: "Viacciferné násobenie, delenie, zvyšok, zátvorky a násobky 10, 100, 1000.",
 		icon: "✖️",
 	},
 	{
 		id: "measurement",
-		name: "Meranie, obvod & obsah",
-		description: "Jednotky dĺžky, obvod a obsah v štvorcovej sieti.",
+		name: "Jednotky, obvod & obsah",
+		description: "Premeny mm–km, obvody trojuholníka/štvorca/obdĺžnika a obsah v sieti.",
 		icon: "📏",
 	},
 	{
 		id: "applications",
 		name: "Dáta & logika",
-		description: "Slovné úlohy, peniaze, diagramy, pravdepodobnosť a možnosti.",
+		description: "Slovné úlohy, peniaze, skutočné grafy, pravdepodobnosť a kombinatorika.",
 		icon: "🧠",
 	},
 ];
