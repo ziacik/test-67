@@ -20,6 +20,9 @@ export type QuestionInteraction =
 	| { kind: "fraction-grid"; parts: number; filled: number; options: string[] }
 	| { kind: "bar-chart"; labels: string[]; values: number[]; options: string[] }
 	| { kind: "cube-stack"; columns: number[]; options: number[] }
+	| { kind: "ruler"; millimeters: number; options: number[] }
+	| { kind: "symmetry-grid"; mode: "axis" | "center"; x: number; y: number; options: string[] }
+	| { kind: "data-table"; headers: string[]; rows: string[][]; options: string[] }
 	| {
 		kind: "grid-area";
 		columns: number;
