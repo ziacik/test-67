@@ -31,4 +31,16 @@ describe("question generator", () => {
 		};
 		expect(isCorrect(question, "123 456")).toBe(true);
 	});
+	it("accepts equivalent decimal forms", () => {
+		const question = {
+			id: "decimal",
+			topic: "decimals" as const,
+			prompt: "x",
+			answer: "2,50",
+			explanation: "x",
+		};
+		expect(isCorrect(question, "2,5")).toBe(true);
+		expect(isCorrect(question, "2.500")).toBe(true);
+	});
+
 });
