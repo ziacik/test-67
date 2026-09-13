@@ -43,4 +43,10 @@ describe("question generator", () => {
 		expect(isCorrect(question, "2.500")).toBe(true);
 	});
 
+	it.each(topics.filter((topic) => topic !== "mixed"))("keeps generated questions inside the selected %s topic", (topic) => {
+		for (let i = 0; i < 300; i += 1) {
+			expect(generateQuestion(topic).topic).toBe(topic);
+		}
+	});
+
 });
