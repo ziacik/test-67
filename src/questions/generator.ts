@@ -1334,7 +1334,11 @@ function symmetryGridQuestion(): Question {
 	const targetY = mode === "axis" ? y : -y;
 	const answer = `(${targetX};${targetY})`;
 	const options = new Set([answer, `(${x};${-y})`, `(${x};${y})`, `(${targetX};${-targetY})`]);
-	while (options.size < 4) options.add(`(${targetX + options.size};${targetY})`);
+	let optionOffset = 1;
+	while (options.size < 4) {
+		options.add(`(${targetX + 10 + optionOffset};${targetY + optionOffset})`);
+		optionOffset += 1;
+	}
 	return {
 		id: id(),
 		topic: "symmetry",
