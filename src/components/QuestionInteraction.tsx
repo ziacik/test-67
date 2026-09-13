@@ -416,6 +416,71 @@ export function QuestionInteraction({ question, disabled, onAnswer }: Props) {
 		);
 	}
 
+
+	if (interaction.kind === "cube-build-choice") {
+		return (
+			<div className="cube-build-choice-game">
+				<div className="cube-code-label">Kód: <strong>{interaction.code.join("-")}</strong></div>
+				<div className="cube-build-options">
+					{interaction.options.map((option) => (
+						<button type="button" key={option.answer} disabled={disabled} onClick={() => onAnswer(option.answer)}>
+							<strong>{option.answer}</strong>
+							<div className="mini-cube-build" aria-label={`Stavba ${option.answer}`}>
+								{option.columns.map((height, column) => (
+									<div className="mini-cube-column" key={column}>
+										{Array.from({ length: height }, (_, index) => <div className="mini-cube" key={index} />)}
+									</div>
+								))}
+							</div>
+						</button>
+					))}
+				</div>
+			</div>
+		);
+	}
+
+	if (interaction.kind === "grid-scale-choice") {
+		const renderGrid = (width: number, height: number, className: string) => {
+			const cell = 18;
+			return (
+				<svg viewBox={`0 0 ${width * cell} ${height * cell}`} className={className} aria-hidden="true">
+					{Array.from({ length: height }, (_, row) =>
+						Array.from({ length: width }, (_, column) => (
+							<rect
+								key={`${row}-${column}`}
+								x={column * cell + 1}
+								y={row * cell + 1}
+								width={cell - 2}
+								height={cell - 2}
+								rx="3"
+								className="scale-grid-cell"
+							/>
+						)),
+					)}
+				</svg>
+			);
+		};
+		return (
+			<div className="grid-scale-game">
+				<div className="grid-scale-source">
+					<span>Pôvodný</span>
+					{renderGrid(interaction.width, interaction.height, "scale-source-svg")}
+					<small>× {interaction.scale}</small>
+				</div>
+				<div className="grid-scale-options">
+					{interaction.options.map((option) => (
+						<button type="button" key={option.answer} disabled={disabled} onClick={() => onAnswer(option.answer)}>
+							<strong>{option.answer}</strong>
+							{renderGrid(option.width, option.height, "scale-option-svg")}
+							<small>{option.width} × {option.height}</small>
+						</button>
+					))}
+				</div>
+			</div>
+		);
+	}
+
+
 	if (interaction.kind === "symmetry-shape") {
 		const size = 180;
 		const cell = 24;
