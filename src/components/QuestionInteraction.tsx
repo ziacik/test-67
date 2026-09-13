@@ -329,6 +329,149 @@ export function QuestionInteraction({ question, disabled, onAnswer }: Props) {
 	}
 
 
+
+	if (interaction.kind === "number-line-target") {
+		const values = Array.from({ length: interaction.count }, (_, index) => interaction.start + index * interaction.step);
+		return (
+			<div className="target-line-game">
+				<div className="target-line-visual" role="img" aria-label="Číselná os so zvýrazneným bodom">
+					<div className="target-line-track" />
+					<div className="target-line-points">
+						{values.map((value, index) => (
+							<div key={value} className={index === interaction.targetIndex ? "target-line-point target" : "target-line-point"}>
+								<span />
+								<strong>{index === 0 || index === values.length - 1 ? sk(value) : index === interaction.targetIndex ? "?" : "·"}</strong>
+							</div>
+						))}
+					</div>
+				</div>
+				<div className="visual-answer-cards">
+					{interaction.options.map((option) => (
+						<button type="button" key={option} disabled={disabled} onClick={() => onAnswer(String(option))}>
+							{sk(option)}
+						</button>
+					))}
+				</div>
+			</div>
+		);
+	}
+
+	if (interaction.kind === "route-map") {
+		const positions = [[55, 55], [245, 45], [250, 205], [55, 215]] as const;
+		return (
+			<div className="route-map-game">
+				<div className="route-map-visual">
+					<svg viewBox="0 0 300 260" role="img" aria-label="Mapa so vzdialenosťami medzi miestami">
+						{interaction.edges.map(([from, to, distance], index) => {
+							const [x1, y1] = positions[from];
+							const [x2, y2] = positions[to];
+							return (
+								<g key={index}>
+									<line x1={x1} y1={y1} x2={x2} y2={y2} className="map-edge" />
+									<text x={(x1 + x2) / 2} y={(y1 + y2) / 2 - 7} textAnchor="middle" className="map-distance">{distance} km</text>
+								</g>
+							);
+						})}
+						{interaction.labels.map((label, index) => {
+							const [x, y] = positions[index];
+							return (
+								<g key={label}>
+									<circle cx={x} cy={y} r="23" className="map-node" />
+									<text x={x} y={y + 4} textAnchor="middle" className="map-node-label">{label.slice(0, 1)}</text>
+									<text x={x} y={y + 39} textAnchor="middle" className="map-place-label">{label}</text>
+								</g>
+							);
+						})}
+					</svg>
+				</div>
+				<div className="table-answer-cards">
+					{interaction.options.map((option) => (
+						<button type="button" key={option} disabled={disabled} onClick={() => onAnswer(option)}>
+							{option}
+						</button>
+					))}
+				</div>
+			</div>
+		);
+	}
+
+	if (interaction.kind === "cube-code") {
+		return (
+			<div className="cube-code-game">
+				<div className="cube-code-visual" role="img" aria-label="Stavba z kociek na zakódovanie">
+					{interaction.columns.map((height, column) => (
+						<div className="cube-column" key={column}>
+							{Array.from({ length: height }, (_, index) => <div className="cube" key={index} />)}
+						</div>
+					))}
+				</div>
+				<div className="visual-answer-cards">
+					{interaction.options.map((option) => (
+						<button type="button" key={option} disabled={disabled} onClick={() => onAnswer(option)}>
+							{option}
+						</button>
+					))}
+				</div>
+			</div>
+		);
+	}
+
+	if (interaction.kind === "symmetry-shape") {
+		const size = 180;
+		const cell = 24;
+		const origin = size / 2;
+		const polygon = (points: Array<[number, number]>) =>
+			points.map(([x, y]) => `${origin + x * cell},${origin - y * cell}`).join(" ");
+		return (
+			<div className="symmetry-shape-game">
+				<div className="symmetry-source">
+					<svg viewBox="0 0 180 180" role="img" aria-label="Pôvodný útvar a os alebo stred súmernosti">
+						<line x1={origin} y1="0" x2={origin} y2={size} className="sym-axis" />
+						{interaction.mode === "center" && <line x1="0" y1={origin} x2={size} y2={origin} className="sym-axis secondary-axis" />}
+						{interaction.mode === "center" && <circle cx={origin} cy={origin} r="5" className="sym-center" />}
+						<polygon points={polygon(interaction.points)} className="sym-polygon source" />
+					</svg>
+				</div>
+				<div className="symmetry-option-grid">
+					{interaction.options.map((option) => (
+						<button type="button" key={option.answer} disabled={disabled} onClick={() => onAnswer(option.answer)}>
+							<strong>{option.answer}</strong>
+							<svg viewBox="0 0 180 180" aria-hidden="true">
+								<line x1={origin} y1="0" x2={origin} y2={size} className="sym-axis" />
+								{interaction.mode === "center" && <line x1="0" y1={origin} x2={size} y2={origin} className="sym-axis secondary-axis" />}
+								<polygon points={polygon(option.points)} className="sym-polygon" />
+							</svg>
+						</button>
+					))}
+				</div>
+			</div>
+		);
+	}
+
+	if (interaction.kind === "chart-choice") {
+		const max = Math.max(...interaction.options.flatMap((option) => option.values));
+		return (
+			<div className="chart-choice-game">
+				<div className="chart-choice-grid">
+					{interaction.options.map((option) => (
+						<button type="button" key={option.answer} disabled={disabled} onClick={() => onAnswer(option.answer)}>
+							<strong>{option.answer}</strong>
+							<div className="mini-chart" aria-label={`Graf ${option.answer}`}>
+								{option.values.map((value, index) => (
+									<div className="mini-chart-column" key={interaction.labels[index]}>
+										<div className="mini-bar" style={{ height: `${Math.max(12, (value / max) * 100)}px` }} />
+										<span>{interaction.labels[index]}</span>
+									</div>
+								))}
+							</div>
+						</button>
+					))}
+				</div>
+			</div>
+		);
+	}
+
+
 	if (interaction.kind === "grid-area") {
 		const cell = 44;
 		const width = interaction.columns * cell;
