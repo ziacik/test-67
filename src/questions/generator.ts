@@ -938,17 +938,30 @@ function cubeStackQuestion(): Question {
 }
 
 function scaleGridQuestion(): Question {
-	const width = integer(2, 5);
-	const height = integer(2, 4);
+	const width = integer(2, 4);
+	const height = integer(2, 3);
 	const scale = pick([2, 3] as const);
-	const answer = `${width * scale} × ${height * scale}`;
+	const scaledWidth = width * scale;
+	const scaledHeight = height * scale;
+	const answer = "A";
 	return {
 		id: id(),
 		topic: "geometry",
-		prompt: `Obdĺžnik v štvorcovej sieti má rozmery ${width} × ${height} štvorčekov. Zväčšíme ho ${scale}-krát v oboch smeroch. Aké budú nové rozmery?`,
+		prompt: `Ktorý obdĺžnik vznikne, keď pôvodný útvar zväčšíme ${scale}-krát v oboch smeroch?`,
 		answer,
-		choices: shuffle([answer, `${width + scale} × ${height + scale}`, `${width * scale} × ${height}`, `${width} × ${height * scale}`]),
-		explanation: `${width} × ${scale} = ${width * scale} a ${height} × ${scale} = ${height * scale}.`,
+		interaction: {
+			kind: "grid-scale-choice",
+			width,
+			height,
+			scale,
+			options: shuffle([
+				{ answer: "A", width: scaledWidth, height: scaledHeight },
+				{ answer: "B", width: width + scale, height: height + scale },
+				{ answer: "C", width: scaledWidth, height },
+				{ answer: "D", width, height: scaledHeight },
+			]),
+		},
+		explanation: `${width} × ${scale} = ${scaledWidth} a ${height} × ${scale} = ${scaledHeight}.`,
 	};
 }
 
@@ -1702,19 +1715,24 @@ function cubeCodeQuestion(): Question {
 
 function cubeCodeToBuildQuestion(): Question {
 	const code = [integer(1, 4), integer(1, 4), integer(1, 4)];
-	const answer = `${code[0]}, ${code[1]}, ${code[2]}`;
+	const changedMiddle = code.map((value, index) => index === 1 ? (value === 4 ? 3 : value + 1) : value);
+	const changedLast = code.map((value, index) => index === 2 ? (value === 1 ? 2 : value - 1) : value);
 	return {
 		id: id(),
 		topic: "geometry",
-		prompt: `Kód stavby je ${code.join("-")}. Ktorý opis výšok stĺpcov zľava doprava je správny?`,
-		answer,
-		choices: shuffle([
-			answer,
-			`${code[2]}, ${code[1]}, ${code[0]}`,
-			`${code[0]}, ${Math.min(4, code[1] + 1)}, ${code[2]}`,
-			`${Math.max(1, code[0] - 1)}, ${code[1]}, ${code[2]}`,
-		]),
-		explanation: "Každá číslica kódu udáva výšku príslušného stĺpca.",
+		prompt: `Kód stavby je ${code.join("-")}. Ktorá stavba mu zodpovedá?`,
+		answer: "A",
+		interaction: {
+			kind: "cube-build-choice",
+			code,
+			options: shuffle([
+				{ answer: "A", columns: [...code] },
+				{ answer: "B", columns: [...code].reverse() },
+				{ answer: "C", columns: changedMiddle },
+				{ answer: "D", columns: changedLast },
+			]),
+		},
+		explanation: "Každá číslica kódu udáva výšku príslušného stĺpca zľava doprava.",
 	};
 }
 
