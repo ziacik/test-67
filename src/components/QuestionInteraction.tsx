@@ -226,6 +226,109 @@ export function QuestionInteraction({ question, disabled, onAnswer }: Props) {
 	}
 
 
+
+	if (interaction.kind === "ruler") {
+		const width = 520;
+		const left = 20;
+		const scale = 4.8;
+		const endX = left + interaction.millimeters * scale;
+		return (
+			<div className="ruler-game">
+				<div className="ruler-visual">
+					<svg viewBox="0 0 540 120" role="img" aria-label="Úsečka na milimetrovom pravítku">
+						<line x1={left} y1="35" x2={endX} y2="35" className="measured-segment" />
+						<circle cx={left} cy="35" r="5" className="segment-end" />
+						<circle cx={endX} cy="35" r="5" className="segment-end" />
+						<line x1={left} y1="72" x2={width} y2="72" className="ruler-line" />
+						{Array.from({ length: 101 }, (_, index) => {
+							const x = left + index * scale;
+							const major = index % 10 === 0;
+							const medium = index % 5 === 0;
+							return (
+								<g key={index}>
+									<line x1={x} y1="72" x2={x} y2={major ? 96 : medium ? 90 : 84} className="ruler-tick" />
+									{major && <text x={x} y="112" textAnchor="middle" className="ruler-label">{index / 10}</text>}
+								</g>
+							);
+						})}
+					</svg>
+					<small>cm</small>
+				</div>
+				<div className="visual-answer-cards">
+					{interaction.options.map((option) => (
+						<button type="button" key={option} disabled={disabled} onClick={() => onAnswer(String(option))}>
+							{option} mm
+						</button>
+					))}
+				</div>
+			</div>
+		);
+	}
+
+	if (interaction.kind === "symmetry-grid") {
+		const size = 360;
+		const cell = 40;
+		const origin = size / 2;
+		const pointX = origin + interaction.x * cell;
+		const pointY = origin - interaction.y * cell;
+		return (
+			<div className="symmetry-grid-game">
+				<div className="symmetry-grid-visual">
+					<svg viewBox="0 0 360 360" role="img" aria-label="Súradnicová sieť pre súmernosť">
+						{Array.from({ length: 10 }, (_, index) => (
+							<g key={index}>
+								<line x1={index * cell} y1="0" x2={index * cell} y2={size} className="sym-grid-line" />
+								<line x1="0" y1={index * cell} x2={size} y2={index * cell} className="sym-grid-line" />
+							</g>
+						))}
+						<line x1={origin} y1="0" x2={origin} y2={size} className="sym-axis" />
+						{interaction.mode === "center" && <line x1="0" y1={origin} x2={size} y2={origin} className="sym-axis secondary-axis" />}
+						{interaction.mode === "center" && <circle cx={origin} cy={origin} r="6" className="sym-center" />}
+						{interaction.mode === "center" && <text x={origin + 10} y={origin - 10} className="sym-label">O</text>}
+						<circle cx={pointX} cy={pointY} r="8" className="sym-point" />
+						<text x={pointX + 11} y={pointY - 10} className="sym-label">A</text>
+					</svg>
+				</div>
+				<div className="visual-answer-cards">
+					{interaction.options.map((option) => (
+						<button type="button" key={option} disabled={disabled} onClick={() => onAnswer(option)}>
+							{option}
+						</button>
+					))}
+				</div>
+			</div>
+		);
+	}
+
+	if (interaction.kind === "data-table") {
+		return (
+			<div className="data-table-game">
+				<div className="data-table-wrap">
+					<table>
+						<thead>
+							<tr>{interaction.headers.map((header) => <th key={header}>{header}</th>)}</tr>
+						</thead>
+						<tbody>
+							{interaction.rows.map((row, rowIndex) => (
+								<tr key={rowIndex}>
+									{row.map((cell, cellIndex) => <td key={cellIndex}>{cell}</td>)}
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</div>
+				<div className="table-answer-cards">
+					{interaction.options.map((option) => (
+						<button type="button" key={option} disabled={disabled} onClick={() => onAnswer(option)}>
+							{option}
+						</button>
+					))}
+				</div>
+			</div>
+		);
+	}
+
+
 	if (interaction.kind === "grid-area") {
 		const cell = 44;
 		const width = interaction.columns * cell;
