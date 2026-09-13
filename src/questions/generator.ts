@@ -868,6 +868,7 @@ function bracketQuestion(): Question {
 		topic: "multiplication",
 		prompt: `${expression} = ?`,
 		answer: String(answer),
+		choices: shuffle([String(answer), String(answer + a), String(Math.max(1, answer - a)), String(a + b + d)]),
 		hint: "Najprv vypočítaj to, čo je v zátvorke.",
 		explanation: `${expression} = ${answer}.`,
 	};
