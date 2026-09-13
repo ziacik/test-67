@@ -4,6 +4,11 @@ import {
 	generateSlovakRoundQuestion,
 	slovakCurriculumCoverage,
 } from "./slovakGenerator";
+import {
+	nonSelectedWords,
+	selectedCoreWords,
+	spellingQuestions,
+} from "./slovakSpelling";
 
 const topics = [
 	"sk-spelling",
@@ -37,6 +42,26 @@ describe("Slovak question generator", () => {
 		for (let index = 0; index < 100; index += 1) {
 			expect(generateSlovakQuestion(topic).topic).toBe(topic);
 		}
+	});
+
+	it("has the complete large selected-word bank plus at least as many non-selected words", () => {
+		expect(selectedCoreWords.length).toBeGreaterThanOrEqual(130);
+		expect(nonSelectedWords.length).toBeGreaterThanOrEqual(selectedCoreWords.length);
+		expect(spellingQuestions.length).toBeGreaterThanOrEqual(300);
+	});
+
+	it("uses exactly one underscore for a one-letter spelling blank", () => {
+		for (const question of spellingQuestions) {
+			expect(question.prompt).not.toContain("__");
+			expect((question.prompt.match(/_/g) ?? []).length).toBe(1);
+		}
+	});
+
+	it("does not repeat spelling questions inside a ten-question round", () => {
+		const prompts = Array.from({ length: 10 }, (_, index) =>
+			generateSlovakRoundQuestion("sk-spelling", index).prompt,
+		);
+		expect(new Set(prompts).size).toBe(10);
 	});
 
 	it("tracks the main fifth-grade curriculum areas covered by the bank", () => {

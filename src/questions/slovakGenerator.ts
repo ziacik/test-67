@@ -1,4 +1,5 @@
 import type { Question, SlovakTopicId } from "./types";
+import { spellingQuestions } from "./slovakSpelling";
 
 type SlovakConcreteTopicId = Exclude<SlovakTopicId, "sk-mixed">;
 
@@ -39,105 +40,7 @@ function fromSpec(topic: SlovakConcreteTopicId, spec: ChoiceSpec): Question {
 	};
 }
 
-const spelling: ChoiceSpec[] = [
-	{
-		prompt: "Doplň správne písmeno: b__strý chlapec",
-		answer: "y",
-		choices: ["i", "í", "y", "ý"],
-		explanation: "Slovo bystrý patrí medzi vybrané slová po b, preto píšeme y.",
-	},
-	{
-		prompt: "Doplň správne písmeno: m__dlo",
-		answer: "y",
-		choices: ["i", "í", "y", "ý"],
-		explanation: "Mydlo je vybrané slovo po m.",
-	},
-	{
-		prompt: "Doplň správne písmeno: p__tať sa",
-		answer: "ý",
-		choices: ["i", "í", "y", "ý"],
-		explanation: "Pýtať sa patrí medzi vybrané slová po p a píše sa s dlhým ý.",
-	},
-	{
-		prompt: "Doplň správne písmeno: r__chly vlak",
-		answer: "ý",
-		choices: ["i", "í", "y", "ý"],
-		explanation: "Rýchly je vybrané slovo po r.",
-	},
-	{
-		prompt: "Doplň správne písmeno: v__dra pláva",
-		answer: "y",
-		choices: ["i", "í", "y", "ý"],
-		explanation: "Vydra je vybrané slovo po v.",
-	},
-	{
-		prompt: "Doplň správne písmeno: l__žica",
-		answer: "y",
-		choices: ["i", "í", "y", "ý"],
-		explanation: "Lyžica sa píše s y.",
-	},
-	{
-		prompt: "Doplň správne písmeno: t__chý hlas",
-		answer: "i",
-		choices: ["i", "í", "y", "ý"],
-		explanation: "V slove tichý píšeme po t mäkké i.",
-	},
-	{
-		prompt: "Doplň správne písmeno: š__roká cesta",
-		answer: "i",
-		choices: ["i", "í", "y", "ý"],
-		explanation: "Slovo široký sa píše s i.",
-	},
-	{
-		prompt: "Doplň správne písmeno: cudz__ človek",
-		answer: "í",
-		choices: ["i", "í", "y", "ý"],
-		explanation: "Prídavné meno cudzí má v základnom tvare dlhé í.",
-	},
-	{
-		prompt: "Doplň správne písmeno: mal__ chlapci",
-		answer: "í",
-		choices: ["i", "í", "y", "ý"],
-		explanation: "V množnom čísle pri mužskom životnom rode píšeme malí chlapci.",
-	},
-	{
-		prompt: "Doplň správne písmeno: dobr__ kamarát",
-		answer: "ý",
-		choices: ["i", "í", "y", "ý"],
-		explanation: "V jednotnom čísle mužského rodu je správny tvar dobrý.",
-	},
-	{
-		prompt: "Doplň správne písmeno: dobr__ kamaráti",
-		answer: "í",
-		choices: ["i", "í", "y", "ý"],
-		explanation: "Pri mužskom životnom rode v množnom čísle je správny tvar dobrí.",
-	},
-	{
-		prompt: "Ktorý tvar je napísaný správne?",
-		answer: "krásny",
-		choices: ["krásny", "krásný", "krásni", "krásní"],
-		explanation: "Po dlhej slabike sa v tomto tvare uplatňuje rytmické krátenie: krásny.",
-	},
-	{
-		prompt: "Ktorý tvar je napísaný správne?",
-		answer: "biely",
-		choices: ["biely", "bielý", "bieli", "bielí"],
-		explanation: "Správny základný tvar je biely.",
-	},
-	{
-		prompt: "Ktoré slovo je napísané správne?",
-		answer: "myšlienka",
-		choices: ["myšlienka", "mišlienka", "myšlianka", "mišlianka"],
-		explanation: "Slovo myšlienka je odvodené od vybraného slova myslieť.",
-	},
-	{
-		prompt: "Pri spodobovaní môže znieť spoluhláska inak, než sa píše. Ktorý zápis je správny?",
-		answer: "prosba",
-		choices: ["prosba", "prozba", "prospa", "prozpa"],
-		explanation: "Píšeme prosba podľa stavby slova, hoci vo výslovnosti sa spoluhlásky prispôsobujú.",
-	},
-];
-
+const spelling: ChoiceSpec[] = spellingQuestions;
 const nouns: ChoiceSpec[] = [
 	{
 		prompt: "Podstatné meno učiteľ je...",
@@ -521,6 +424,14 @@ export function generateSlovakQuestion(topic: SlovakTopicId): Question {
 	return fromSpec(resolved, pick(banks[resolved]));
 }
 
-export function generateSlovakRoundQuestion(topic: SlovakTopicId, _index: number): Question {
+let spellingRound: ChoiceSpec[] = [];
+
+export function generateSlovakRoundQuestion(topic: SlovakTopicId, index: number): Question {
+	if (topic === "sk-spelling") {
+		if (index === 0 || spellingRound.length !== 10) {
+			spellingRound = shuffle(spelling).slice(0, 10);
+		}
+		return fromSpec("sk-spelling", spellingRound[index % spellingRound.length]);
+	}
 	return generateSlovakQuestion(topic);
 }
