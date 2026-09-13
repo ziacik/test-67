@@ -1481,7 +1481,7 @@ export function isCorrect(question: Question, answer: string): boolean {
 	const expected = normalizeAnswer(question.answer);
 	if (actual === expected) return true;
 
-	const numericPattern = /^-?\\d+(?:\\.\\d+)?$/;
+	const numericPattern = /^-?\d+(?:\.\d+)?$/;
 	if (numericPattern.test(actual) && numericPattern.test(expected)) {
 		return Number(actual) === Number(expected);
 	}
