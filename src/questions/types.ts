@@ -23,6 +23,11 @@ export type QuestionInteraction =
 	| { kind: "ruler"; millimeters: number; options: number[] }
 	| { kind: "symmetry-grid"; mode: "axis" | "center"; x: number; y: number; options: string[] }
 	| { kind: "data-table"; headers: string[]; rows: string[][]; options: string[] }
+	| { kind: "number-line-target"; start: number; step: number; count: number; targetIndex: number; options: number[] }
+	| { kind: "route-map"; labels: string[]; edges: Array<[number, number, number]>; options: string[] }
+	| { kind: "cube-code"; columns: number[]; options: string[] }
+	| { kind: "symmetry-shape"; mode: "axis" | "center"; points: Array<[number, number]>; options: Array<{ answer: string; points: Array<[number, number]> }> }
+	| { kind: "chart-choice"; labels: string[]; targetValues: number[]; options: Array<{ answer: string; values: number[] }> }
 	| {
 		kind: "grid-area";
 		columns: number;
