@@ -10,6 +10,18 @@ export type TopicId =
 	| "applications"
 	| "mixed";
 
+export type SlovakTopicId =
+	| "sk-mixed"
+	| "sk-spelling"
+	| "sk-nouns"
+	| "sk-vocabulary"
+	| "sk-sentences"
+	| "sk-reading"
+	| "sk-literature";
+
+export type AnyTopicId = TopicId | SlovakTopicId;
+export type SubjectId = "math" | "slovak";
+
 export type QuestionInteraction =
 	| { kind: "input" }
 	| { kind: "number-line"; values: number[] }
@@ -39,9 +51,13 @@ export type QuestionInteraction =
 		options: number[];
 	};
 
+export type QuestionTopicId =
+	| Exclude<TopicId, "mixed">
+	| Exclude<SlovakTopicId, "sk-mixed">;
+
 export type Question = {
 	id: string;
-	topic: Exclude<TopicId, "mixed">;
+	topic: QuestionTopicId;
 	kind?: "story";
 	prompt: string;
 	answer: string;
@@ -52,7 +68,8 @@ export type Question = {
 };
 
 export type Topic = {
-	id: TopicId;
+	id: AnyTopicId;
+	subject: SubjectId;
 	name: string;
 	description: string;
 	icon: string;

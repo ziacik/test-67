@@ -7,9 +7,9 @@ import {
 	pointsForAnswer,
 	reactionForAnswer,
 } from "./game";
-import { generateRoundQuestion, isCorrect } from "./questions/generator";
+import { generateRoundQuestion, isCorrect } from "./questions/quizGenerator";
 import { topics } from "./questions/topics";
-import type { Question, TopicId } from "./questions/types";
+import type { AnyTopicId, Question, SubjectId } from "./questions/types";
 import "./styles.css";
 
 const ROUND_SIZE = 10;
@@ -40,7 +40,8 @@ function readStats(): Stats {
 }
 
 function App() {
-	const [topic, setTopic] = useState<TopicId | null>(null);
+	const [subject, setSubject] = useState<SubjectId>("math");
+	const [topic, setTopic] = useState<AnyTopicId | null>(null);
 	const [question, setQuestion] = useState<Question | null>(null);
 	const [answer, setAnswer] = useState("");
 	const [index, setIndex] = useState(0);
@@ -58,6 +59,7 @@ function App() {
 	const inputRef = useRef<HTMLInputElement>(null);
 
 	const activeTopic = useMemo(() => topics.find((item) => item.id === topic), [topic]);
+	const visibleTopics = useMemo(() => topics.filter((item) => item.subject === subject), [subject]);
 	const boss = isBossQuestion(index, ROUND_SIZE);
 	const level = levelForXp(stats.totalXp);
 	const xpInLevel = stats.totalXp % XP_PER_LEVEL;
@@ -68,7 +70,7 @@ function App() {
 		localStorage.setItem("test-67-stats", JSON.stringify(stats));
 	}, [stats]);
 
-	const start = (nextTopic: TopicId) => {
+	const start = (nextTopic: AnyTopicId) => {
 		setStartingHighScore(stats.highScore);
 		setTopic(nextTopic);
 		setQuestion(generateRoundQuestion(nextTopic, 0));
@@ -158,6 +160,7 @@ function App() {
 
 	if (!topic) {
 		const success = stats.totalAnswered ? Math.round((stats.totalCorrect / stats.totalAnswered) * 100) : 0;
+		const slovak = subject === "slovak";
 
 		return (
 			<main className="shell home-shell">
@@ -166,8 +169,12 @@ function App() {
 						<div className="brand">TEST <b>67</b></div>
 						<div className="level-chip">LVL {level}</div>
 					</div>
-					<h1>Matika.<br /><em>Ale nech to žije.</em></h1>
-					<p>Vyber si mód, zbieraj XP, drž combo a na konci zlož bossa. Áno, stále je to učenie. Len menej podozrivé.</p>
+					<h1>{slovak ? "Slovenčina." : "Matika."}<br /><em>Ale nech to žije.</em></h1>
+					<p>
+						{slovak
+							? "Pravopis, gramatika, čítanie aj literatúra. Desať otázok, combo a boss na konci."
+							: "Vyber si mód, zbieraj XP, drž combo a na konci zlož bossa. Áno, stále je to učenie. Len menej podozrivé."}
+					</p>
 				</header>
 
 				<section className="player-card">
@@ -187,10 +194,27 @@ function App() {
 					<div><span>ACCURACY</span><strong>{success}%</strong></div>
 				</section>
 
+				<div className="result-actions" style={{ marginBottom: "28px" }} aria-label="Predmet">
+					<button
+						type="button"
+						className={subject === "math" ? "primary big-button" : "secondary big-button"}
+						onClick={() => setSubject("math")}
+					>
+						➗ MATEMATIKA
+					</button>
+					<button
+						type="button"
+						className={subject === "slovak" ? "primary big-button" : "secondary big-button"}
+						onClick={() => setSubject("slovak")}
+					>
+						✍️ SLOVENČINA
+					</button>
+				</div>
+
 				<section className="topic-grid">
-					{topics.map((item, topicIndex) => (
+					{visibleTopics.map((item, topicIndex) => (
 						<button className="topic-card" key={item.id} onClick={() => start(item.id)}>
-							<span className="topic-index">0{topicIndex + 1}</span>
+							<span className="topic-index">{String(topicIndex + 1).padStart(2, "0")}</span>
 							<span className="topic-icon">{item.icon}</span>
 							<span className="topic-copy">
 								<strong>{item.name}</strong>
