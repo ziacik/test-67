@@ -956,7 +956,7 @@ function scaleGridQuestion(): Question {
 			scale,
 			options: shuffle([
 				{ answer: "A", width: scaledWidth, height: scaledHeight },
-				{ answer: "B", width: width + scale, height: height + scale },
+				{ answer: "B", width: scaledWidth + 1, height: scaledHeight },
 				{ answer: "C", width: scaledWidth, height },
 				{ answer: "D", width, height: scaledHeight },
 			]),
@@ -1696,25 +1696,33 @@ function unitConversionStoryQuestion(): Question {
 function cubeCodeQuestion(): Question {
 	const columns = [integer(1, 4), integer(1, 4), integer(1, 4), integer(1, 4)];
 	const answer = columns.join("-");
-	const alternatives = [
-		[...columns].reverse().join("-"),
-		columns.map((value, index) => index === 1 ? Math.min(4, value + 1) : value).join("-"),
-		columns.map((value, index) => index === 2 ? Math.max(1, value - 1) : value).join("-"),
+	const options = new Set<string>([answer]);
+	const candidates = [
+		[...columns].reverse(),
+		columns.map((value, index) => index === 1 ? (value === 4 ? 3 : value + 1) : value),
+		columns.map((value, index) => index === 2 ? (value === 1 ? 2 : value - 1) : value),
+		columns.map((value) => 5 - value),
 	];
-	const options = [...new Set([answer, ...alternatives])];
-	while (options.length < 4) options.push(columns.map((value) => Math.max(1, 5 - value)).join("-"));
+	for (const candidate of candidates) options.add(candidate.join("-"));
+	let offset = 1;
+	while (options.size < 4) {
+		const candidate = columns.map((value, index) => index === 0 ? ((value - 1 + offset) % 4) + 1 : value);
+		options.add(candidate.join("-"));
+		offset += 1;
+	}
 	return {
 		id: id(),
 		topic: "geometry",
 		prompt: "Ak kód udáva výšku stĺpcov kociek zľava doprava, ktorý kód opisuje stavbu?",
 		answer,
-		interaction: { kind: "cube-code", columns, options: shuffle(options.slice(0, 4)) },
+		interaction: { kind: "cube-code", columns, options: shuffle([...options].slice(0, 4)) },
 		explanation: `Výšky stĺpcov zľava doprava sú ${columns.join(", ")}, teda kód ${answer}.`,
 	};
 }
 
 function cubeCodeToBuildQuestion(): Question {
 	const code = [integer(1, 4), integer(1, 4), integer(1, 4)];
+	while (code[2] === code[0]) code[2] = code[2] === 4 ? 1 : code[2] + 1;
 	const changedMiddle = code.map((value, index) => index === 1 ? (value === 4 ? 3 : value + 1) : value);
 	const changedLast = code.map((value, index) => index === 2 ? (value === 1 ? 2 : value - 1) : value);
 	return {
