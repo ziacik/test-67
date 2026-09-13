@@ -1480,3 +1480,358 @@ input:focus {
 		padding: 12px;
 	}
 }
+
+
+/* Full curriculum coverage visuals */
+.target-line-game,
+.route-map-game,
+.cube-code-game,
+.cube-build-choice-game,
+.grid-scale-game,
+.symmetry-shape-game,
+.chart-choice-game {
+	display: grid;
+	gap: 16px;
+}
+
+.target-line-game,
+.route-map-game,
+.cube-code-game {
+	grid-template-columns: minmax(260px, 1.2fr) minmax(170px, .8fr);
+}
+
+.target-line-visual,
+.route-map-visual,
+.cube-code-visual,
+.grid-scale-source,
+.symmetry-source {
+	position: relative;
+	min-height: 220px;
+	padding: 20px;
+	border: 1px solid var(--line);
+	border-radius: 20px;
+	background: #100d18;
+}
+
+.target-line-visual {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.target-line-track {
+	position: absolute;
+	left: 8%;
+	right: 8%;
+	top: 49%;
+	height: 4px;
+	border-radius: 999px;
+	background: #675b73;
+}
+
+.target-line-points {
+	position: relative;
+	z-index: 1;
+	width: 88%;
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+}
+
+.target-line-point {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 15px;
+}
+
+.target-line-point > span {
+	width: 19px;
+	height: 19px;
+	border-radius: 50%;
+	border: 4px solid #8f829a;
+	background: #100d18;
+	box-shadow: 0 0 0 5px #100d18;
+}
+
+.target-line-point.target > span {
+	border-color: var(--accent);
+	background: var(--accent);
+	transform: scale(1.25);
+}
+
+.target-line-point strong {
+	font: 800 15px "Space Grotesk";
+}
+
+.route-map-visual {
+	display: grid;
+	place-items: center;
+}
+
+.route-map-visual svg {
+	width: 100%;
+	max-width: 430px;
+}
+
+.map-edge {
+	stroke: #665a73;
+	stroke-width: 4;
+}
+
+.map-distance {
+	fill: var(--accent);
+	font: 800 12px "Space Grotesk";
+	paint-order: stroke;
+	stroke: #100d18;
+	stroke-width: 5px;
+}
+
+.map-node {
+	fill: #21192f;
+	stroke: var(--cyan);
+	stroke-width: 3;
+}
+
+.map-node-label,
+.map-place-label {
+	fill: white;
+	font: 800 12px "Space Grotesk";
+}
+
+.map-place-label {
+	fill: #d7d0df;
+}
+
+.cube-code-visual {
+	display: flex;
+	align-items: end;
+	justify-content: center;
+	gap: 8px;
+}
+
+.cube-code-label {
+	justify-self: center;
+	padding: 10px 15px;
+	border: 1px solid rgba(255,180,84,.25);
+	border-radius: 999px;
+	background: rgba(255,180,84,.07);
+	color: var(--text-soft);
+}
+
+.cube-code-label strong {
+	color: var(--accent);
+	font: 800 20px "Space Grotesk";
+	margin-left: 5px;
+}
+
+.cube-build-options,
+.grid-scale-options,
+.symmetry-option-grid,
+.chart-choice-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 10px;
+}
+
+.cube-build-options > button,
+.grid-scale-options > button,
+.symmetry-option-grid > button,
+.chart-choice-grid > button {
+	position: relative;
+	min-height: 175px;
+	padding: 12px;
+	border: 2px solid #3a3047;
+	border-radius: 16px;
+	background: #100d18;
+	color: white;
+	transition: transform .12s ease, border-color .12s ease, background .12s ease;
+}
+
+.cube-build-options > button:hover:not(:disabled),
+.grid-scale-options > button:hover:not(:disabled),
+.symmetry-option-grid > button:hover:not(:disabled),
+.chart-choice-grid > button:hover:not(:disabled) {
+	transform: translateY(-2px);
+	border-color: var(--accent);
+	background: #211827;
+}
+
+.cube-build-options > button > strong,
+.grid-scale-options > button > strong,
+.symmetry-option-grid > button > strong,
+.chart-choice-grid > button > strong {
+	position: absolute;
+	top: 9px;
+	left: 11px;
+	z-index: 2;
+	color: var(--accent);
+	font: 900 14px "Space Grotesk";
+}
+
+.mini-cube-build {
+	height: 145px;
+	display: flex;
+	align-items: end;
+	justify-content: center;
+	gap: 5px;
+	padding-top: 24px;
+}
+
+.mini-cube-column {
+	display: flex;
+	flex-direction: column-reverse;
+	gap: 3px;
+}
+
+.mini-cube {
+	width: 30px;
+	height: 30px;
+	border: 2px solid rgba(124,232,255,.45);
+	border-radius: 5px;
+	background: rgba(124,232,255,.12);
+}
+
+.grid-scale-game {
+	grid-template-columns: minmax(210px, .8fr) minmax(0, 1.2fr);
+	align-items: stretch;
+}
+
+.grid-scale-source {
+	display: grid;
+	place-items: center;
+	align-content: center;
+	gap: 10px;
+}
+
+.grid-scale-source > span {
+	color: var(--text-soft);
+	font-weight: 800;
+}
+
+.grid-scale-source > small {
+	color: var(--accent);
+	font: 900 18px "Space Grotesk";
+}
+
+.scale-source-svg {
+	width: min(180px, 90%);
+	max-height: 150px;
+}
+
+.scale-option-svg {
+	width: min(145px, 92%);
+	height: 105px;
+	margin: 24px auto 5px;
+}
+
+.scale-grid-cell {
+	fill: rgba(255,180,84,.16);
+	stroke: #a98557;
+	stroke-width: 1;
+}
+
+.grid-scale-options small {
+	display: block;
+	color: var(--text-soft);
+	font-weight: 800;
+}
+
+.symmetry-shape-game {
+	grid-template-columns: minmax(190px, .7fr) minmax(0, 1.3fr);
+}
+
+.symmetry-source {
+	display: grid;
+	place-items: center;
+}
+
+.symmetry-source svg,
+.symmetry-option-grid svg {
+	width: 100%;
+	max-width: 180px;
+}
+
+.sym-polygon {
+	fill: rgba(124,232,255,.18);
+	stroke: var(--cyan);
+	stroke-width: 3;
+}
+
+.sym-polygon.source {
+	fill: rgba(255,180,84,.15);
+	stroke: var(--accent);
+}
+
+.chart-choice-grid > button {
+	min-height: 190px;
+}
+
+.mini-chart {
+	height: 145px;
+	display: flex;
+	align-items: end;
+	justify-content: center;
+	gap: 12px;
+	padding: 28px 8px 8px;
+}
+
+.mini-chart-column {
+	flex: 1;
+	max-width: 52px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: end;
+	gap: 5px;
+}
+
+.mini-bar {
+	width: 100%;
+	min-height: 12px;
+	border-radius: 7px 7px 2px 2px;
+	background: linear-gradient(180deg, var(--accent-2), var(--accent));
+}
+
+.mini-chart-column span {
+	font: 800 11px "Space Grotesk";
+	color: var(--text-soft);
+}
+
+@media (max-width: 650px) {
+	.target-line-game,
+	.route-map-game,
+	.cube-code-game,
+	.grid-scale-game,
+	.symmetry-shape-game {
+		grid-template-columns: 1fr;
+	}
+
+	.target-line-visual,
+	.route-map-visual,
+	.cube-code-visual,
+	.grid-scale-source,
+	.symmetry-source {
+		min-height: 180px;
+		padding: 13px;
+	}
+
+	.cube-build-options > button,
+	.grid-scale-options > button,
+	.symmetry-option-grid > button,
+	.chart-choice-grid > button {
+		min-height: 150px;
+	}
+
+	.mini-cube {
+		width: 25px;
+		height: 25px;
+	}
+
+	.mini-cube-build {
+		height: 120px;
+	}
+
+	.scale-option-svg {
+		height: 85px;
+	}
+}
