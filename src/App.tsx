@@ -279,6 +279,7 @@ function App() {
 
 				<form onSubmit={submit}>
 					<AnswerArea
+						key={question.id}
 						question={question}
 						answer={answer}
 						disabled={Boolean(feedback)}
