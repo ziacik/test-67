@@ -796,7 +796,7 @@ function decimalPowerQuestion(): Question {
 	const power = pick([10, 100, 1_000] as const);
 	const baseTenths = integer(11, 250);
 	const base = baseTenths / 10;
-	const result = base * power;
+	const result = baseTenths * (power / 10);
 	return {
 		id: id(),
 		topic: "decimals",
@@ -917,7 +917,7 @@ function solidQuestion(): Question {
 		topic: "geometry",
 		prompt: q.prompt,
 		answer: q.answer,
-		choices: shuffle(["kocka", "kváder", "valec", "kužeľ", "ihlan", "guľa"].filter((v) => v === q.answer || Math.random() < 0.6).slice(0, 4).concat(q.answer).filter((v, i, a) => a.indexOf(v) === i).slice(0, 4)),
+		choices: shuffle([q.answer, ...shuffle(["kocka", "kváder", "valec", "kužeľ", "ihlan", "guľa"].filter((value) => value !== q.answer)).slice(0, 3)]),
 		explanation: `Je to ${q.answer}.`,
 	};
 }
@@ -952,16 +952,46 @@ function scaleGridQuestion(): Question {
 }
 
 function constructionQuestion(): Question {
-	const circle = Math.random() < 0.5;
+	const variants = [
+		{
+			prompt: "Ktorý postup správne zostrojí kružnicu s polomerom 4 cm?",
+			answer: "Kružidlo nastavím na 4 cm a opíšem kružnicu.",
+			wrong: ["Nakreslím úsečku dlhú 8 cm.", "Odmeriam 4 cm iba pravítkom.", "Nakreslím ľubovoľný kruh."],
+			explanation: "Polomer sa nastaví ako vzdialenosť hrotu kružidla od ceruzky.",
+		},
+		{
+			prompt: "Ako zostrojíš priamku kolmú na danú priamku?",
+			answer: "Pomocou pravítka s ryskou alebo trojuholníka vytvorím pravý uhol.",
+			wrong: ["Nakreslím dve čiary, ktoré sa nepretínajú.", "Stačí odmerať rovnakú dĺžku.", "Nakreslím kružnicu."],
+			explanation: "Kolmé priamky sa pretínajú pod uhlom 90°.",
+		},
+		{
+			prompt: "Ako zostrojíš rovnobežku s danou priamkou?",
+			answer: "Posuniem pravítko bez zmeny smeru a vediem druhú priamku.",
+			wrong: ["Vytvorím pravý uhol.", "Obe priamky musia mať spoločný bod.", "Stačí nakresliť ľubovoľnú čiaru."],
+			explanation: "Rovnobežné priamky majú rovnaký smer a nepretínajú sa.",
+		},
+		{
+			prompt: "Máš narysovať štvorec so stranou 5 cm. Čo musí platiť?",
+			answer: "Všetky štyri strany majú 5 cm a všetky uhly sú pravé.",
+			wrong: ["Stačí, aby dve strany mali 5 cm.", "Všetky strany sú rôzne dlhé.", "Musí mať iba dva pravé uhly."],
+			explanation: "Štvorec má štyri rovnako dlhé strany a štyri pravé uhly.",
+		},
+		{
+			prompt: "Máš narysovať trojuholník so stranami 4 cm, 5 cm a 6 cm. Čím odmeriaš dĺžky strán?",
+			answer: "Pravítkom; jednotlivé vrcholy spojím úsečkami danej dĺžky.",
+			wrong: ["Iba kružidlom bez merania.", "Stačí odhadnúť dĺžky.", "Strany nemusia mať zadané dĺžky."],
+			explanation: "Pri konštrukcii treba dodržať zadané dĺžky strán.",
+		},
+	] as const;
+	const q = pick(variants);
 	return {
 		id: id(),
 		topic: "geometry",
-		prompt: circle ? "Ktorý postup správne zostrojí kružnicu s polomerom 4 cm?" : "Ako zostrojíš priamku kolmú na danú priamku?",
-		answer: circle ? "Kružidlo nastavím na 4 cm a opíšem kružnicu." : "Použijem pravítko s ryskou alebo trojuholník a vytvorím pravý uhol.",
-		choices: circle
-			? ["Kružidlo nastavím na 4 cm a opíšem kružnicu.", "Nakreslím úsečku dlhú 8 cm.", "Odmeriam 4 cm iba pravítkom.", "Nakreslím ľubovoľný kruh."]
-			: ["Použijem pravítko s ryskou alebo trojuholník a vytvorím pravý uhol.", "Nakreslím dve čiary, ktoré sa nepretínajú.", "Stačí odmerať rovnakú dĺžku.", "Nakreslím kružnicu."],
-		explanation: circle ? "Polomer sa nastaví ako vzdialenosť hrotu kružidla od ceruzky." : "Kolmé priamky sa pretínajú pod uhlom 90°.",
+		prompt: q.prompt,
+		answer: q.answer,
+		choices: shuffle([q.answer, ...q.wrong]),
+		explanation: q.explanation,
 	};
 }
 
@@ -1078,7 +1108,7 @@ function probabilityQuestion(): Question {
 
 function barChartQuestion(): Question {
 	const labels = ["Po", "Ut", "St", "Št"];
-	const values = labels.map(() => integer(3, 12));
+	const values = shuffle([integer(3, 5), integer(6, 8), integer(9, 11), integer(12, 14)]);
 	const max = Math.max(...values);
 	const maxIndex = values.indexOf(max);
 	const answer = labels[maxIndex];
@@ -1092,15 +1122,317 @@ function barChartQuestion(): Question {
 	};
 }
 
-const numbers = [roundingQuestion, compareQuestion, parityQuestion, numberLineQuestion, numberFilterQuestion, decompositionQuestion, romanQuestion] as const;
-const decimals = [decimalMoneyQuestion, decimalSubtractionQuestion, decimalCompareQuestion, decimalRoundingQuestion, decimalPowerQuestion] as const;
+
+function directedRoundingQuestion(): Question {
+	const step = pick([10, 100, 1_000, 10_000] as const);
+	const value = integer(step + 1, Math.min(9_999_999, step * 999));
+	const down = Math.floor(value / step) * step;
+	const up = Math.ceil(value / step) * step;
+	const roundUp = Math.random() < 0.5;
+	const answer = roundUp ? up : down;
+	return {
+		id: id(),
+		topic: "numbers",
+		prompt: `Zaokrúhli ${sk(value)} ${roundUp ? "nahor" : "nadol"} na násobok ${sk(step)}.`,
+		answer: String(answer),
+		choices: shuffle([String(answer), String(roundUp ? down : up), String(value), String(answer + step)]),
+		explanation: `Pri zaokrúhlení ${roundUp ? "nahor" : "nadol"} dostaneme ${sk(answer)}.`,
+	};
+}
+
+function negativeIntroQuestion(): Question {
+	const value = integer(1, 12);
+	const contexts = [
+		{ prompt: `Teplota je ${value} °C pod nulou. Ako ju zapíšeme číslom?`, answer: -value },
+		{ prompt: `Výťah je ${value} podlaží pod prízemím označeným 0. Aké číslo označuje jeho polohu?`, answer: -value },
+	] as const;
+	const q = pick(contexts);
+	return {
+		id: id(),
+		topic: "numbers",
+		prompt: q.prompt,
+		answer: String(q.answer),
+		choices: shuffle([String(q.answer), String(value), "0", String(-(value + 1))]),
+		explanation: `Hodnoty pod nulou zapisujeme záporným číslom: ${q.answer}.`,
+	};
+}
+
+function decimalSortQuestion(): Question {
+	const raw = new Set<number>();
+	while (raw.size < 4) raw.add(integer(101, 999));
+	const values = [...raw].map((value) => value / 100);
+	const shuffled = shuffle(values);
+	const sorted = [...values].sort((a, b) => a - b);
+	return {
+		id: id(),
+		topic: "decimals",
+		prompt: "Ťukaj desatinné čísla od najmenšieho po najväčšie.",
+		answer: sorted.join(","),
+		interaction: { kind: "sort", values: shuffled },
+		explanation: `Správne poradie je ${sorted.map(decimalTrim).join(" < ")}.`,
+	};
+}
+
+function decimalDirectedRoundingQuestion(): Question {
+	const hundredths = integer(101, 9_999);
+	const value = hundredths / 100;
+	const upward = Math.random() < 0.5;
+	const answer = upward ? Math.ceil(value) : Math.floor(value);
+	return {
+		id: id(),
+		topic: "decimals",
+		prompt: `Zaokrúhli ${decimalTrim(value)} ${upward ? "nahor" : "nadol"} na celé číslo.`,
+		answer: String(answer),
+		choices: shuffle([String(answer), String(upward ? Math.floor(value) : Math.ceil(value)), String(Math.round(value)), String(answer + 1)]),
+		explanation: `Pri zaokrúhlení ${upward ? "nahor" : "nadol"} na celé číslo dostaneme ${answer}.`,
+	};
+}
+
+function multiAddendQuestion(): Question {
+	const values = Array.from({ length: integer(3, 5) }, () => integer(100, 9_999));
+	const answer = values.reduce((sum, value) => sum + value, 0);
+	return {
+		id: id(),
+		topic: "addition",
+		prompt: `${values.map(sk).join(" + ")} = ?`,
+		answer: String(answer),
+		hint: "Môžeš si sčítance vhodne preskupiť.",
+		explanation: `Súčet je ${sk(answer)}.`,
+	};
+}
+
+function quotientComparisonQuestion(): Question {
+	const smaller = integer(2, 20);
+	const factor = integer(2, 12);
+	const larger = smaller * factor;
+	return {
+		id: id(),
+		topic: "multiplication",
+		prompt: `${larger} je koľkokrát viac ako ${smaller}?`,
+		answer: String(factor),
+		choices: shuffle([String(factor), String(larger - smaller), String(smaller), String(factor + 1)]),
+		explanation: `${larger} ÷ ${smaller} = ${factor}.`,
+	};
+}
+
+function distributiveQuestion(): Question {
+	const factor = integer(2, 12);
+	const tens = integer(2, 9) * 10;
+	const units = integer(1, 9);
+	const answer = factor * (tens + units);
+	return {
+		id: id(),
+		topic: "multiplication",
+		prompt: `${factor} × (${tens} + ${units}) = ?`,
+		answer: String(answer),
+		choices: shuffle([String(answer), String(factor * tens + units), String(factor + tens + units), String(factor * tens)]),
+		hint: `Môžeš použiť ${factor} × ${tens} + ${factor} × ${units}.`,
+		explanation: `${factor} × ${tens} + ${factor} × ${units} = ${answer}.`,
+	};
+}
+
+function repeatedOperationQuestion(): Question {
+	const factor = integer(3, 8);
+	const value = integer(4, 15);
+	const product = factor * value;
+	const multiplicationMode = Math.random() < 0.5;
+	return {
+		id: id(),
+		topic: "multiplication",
+		prompt: multiplicationMode
+			? `Ktorý zápis znamená ${factor} × ${value}?`
+			: `Ktorý zápis ukazuje ${product} ÷ ${value} ako postupné odčítanie?`,
+		answer: multiplicationMode
+			? Array.from({ length: factor }, () => String(value)).join(" + ")
+			: Array.from({ length: factor }, (_, index) => String(product - (index + 1) * value)).join(", "),
+		choices: multiplicationMode
+			? shuffle([
+				Array.from({ length: factor }, () => String(value)).join(" + "),
+				`${factor} + ${value}`,
+				`${factor} + ${factor} + ${value}`,
+				`${value} − ${factor}`,
+			])
+			: shuffle([
+				Array.from({ length: factor }, (_, index) => String(product - (index + 1) * value)).join(", "),
+				`${product - value}, ${product - value * 2}`,
+				`${product + value}, ${product + value * 2}`,
+				`${product}, ${product - 1}, ${product - 2}`,
+			]),
+		explanation: multiplicationMode
+			? "Násobenie možno chápať ako opakované sčítanie rovnakého čísla."
+			: "Pri delení postupne odčítavame deliteľa, až kým sa dostaneme na nulu.",
+	};
+}
+
+function rulerQuestion(): Question {
+	const millimeters = integer(12, 87);
+	const options = new Set([millimeters, millimeters + 5, Math.max(1, millimeters - 5), millimeters + 10]);
+	return {
+		id: id(),
+		topic: "measurement",
+		prompt: "Odmeraj dĺžku úsečky na pravítku. Koľko má milimetrov?",
+		answer: String(millimeters),
+		interaction: { kind: "ruler", millimeters, options: shuffle([...options]) },
+		explanation: `Úsečka siaha od 0 po ${millimeters} mm.`,
+	};
+}
+
+function estimateDistanceQuestion(): Question {
+	const variants = [
+		{ prompt: "Aká je rozumná dĺžka bežnej triedy?", answer: "8 m", options: ["8 mm", "8 cm", "8 m", "8 km"] },
+		{ prompt: "Aká je rozumná výška dverí?", answer: "2 m", options: ["2 mm", "2 cm", "2 m", "2 km"] },
+		{ prompt: "Aká je približná dĺžka ceruzky?", answer: "18 cm", options: ["18 mm", "18 cm", "18 m", "18 km"] },
+	] as const;
+	const q = pick(variants);
+	return {
+		id: id(),
+		topic: "measurement",
+		prompt: q.prompt,
+		answer: q.answer,
+		choices: shuffle([...q.options]),
+		explanation: `${q.answer} je primeraný odhad.`,
+	};
+}
+
+function areaUnitQuestion(): Question {
+	const unit = pick(["cm²", "mm²"] as const);
+	const a = integer(2, 12);
+	const b = integer(2, 12);
+	const answer = a * b;
+	return {
+		id: id(),
+		topic: "measurement",
+		prompt: `Obdĺžnik má rozmery ${a} ${unit === "cm²" ? "cm" : "mm"} × ${b} ${unit === "cm²" ? "cm" : "mm"}. Aký je jeho obsah?`,
+		answer: `${answer} ${unit}`,
+		choices: shuffle([`${answer} ${unit}`, `${2 * (a + b)} ${unit}`, `${a + b} ${unit}`, `${answer} ${unit === "cm²" ? "cm" : "mm"}`]),
+		explanation: `${a} × ${b} = ${answer} ${unit}.`,
+	};
+}
+
+function cuboidUnitCubesQuestion(): Question {
+	const a = integer(2, 5);
+	const b = integer(2, 4);
+	const d = integer(2, 4);
+	const answer = a * b * d;
+	return {
+		id: id(),
+		topic: "geometry",
+		prompt: `Kváder je postavený z jednotkových kociek: ${a} na dĺžku, ${b} na šírku a ${d} na výšku. Koľko kociek obsahuje?`,
+		answer: String(answer),
+		choices: shuffle([String(answer), String(a + b + d), String(a * b), String(2 * (a + b + d))]),
+		explanation: `${a} × ${b} × ${d} = ${answer} jednotkových kociek.`,
+	};
+}
+
+function symmetryGridQuestion(): Question {
+	const mode = pick(["axis", "center"] as const);
+	let x = integer(-4, 4);
+	let y = integer(-4, 4);
+	if (x === 0) x = 2;
+	if (mode === "center" && y === 0) y = 2;
+	const targetX = -x;
+	const targetY = mode === "axis" ? y : -y;
+	const answer = `(${targetX};${targetY})`;
+	const options = new Set([answer, `(${x};${-y})`, `(${x};${y})`, `(${targetX};${-targetY})`]);
+	while (options.size < 4) options.add(`(${targetX + options.size};${targetY})`);
+	return {
+		id: id(),
+		topic: "symmetry",
+		prompt: mode === "axis"
+			? "Kde bude obraz bodu A pri osovej súmernosti podľa zvislej osi?"
+			: "Kde bude obraz bodu A pri stredovej súmernosti podľa bodu O?",
+		answer,
+		interaction: { kind: "symmetry-grid", mode, x, y, options: shuffle([...options]) },
+		explanation: mode === "axis"
+			? `Pri zrkadlení podľa zvislej osi sa zmení znamienko x: ${answer}.`
+			: `Pri stredovej súmernosti sa zmenia obe znamienka: ${answer}.`,
+	};
+}
+
+function directProportionQuestion(): Question {
+	const price = integer(2, 9);
+	const count = integer(3, 8);
+	const answer = price * count;
+	return storyChoice(
+		"applications",
+		"🥤",
+		`Jeden nápoj stojí ${price} €. Koľko stoja ${count} rovnaké nápoje?`,
+		String(answer),
+		[String(answer), String(price + count), String(answer - price), String(answer + price)],
+		"Viac rovnakých kusov znamená cenu násobiť počtom kusov.",
+		`${price} × ${count} = ${answer} €.`,
+	);
+}
+
+function inverseProportionQuestion(): Question {
+	const workers = pick([2, 3, 4] as const);
+	const days = pick([6, 8, 12] as const);
+	const doubledWorkers = workers * 2;
+	const answer = days / 2;
+	return storyChoice(
+		"applications",
+		"🧱",
+		`Ak ${workers} rovnako rýchli pracovníci urobia jednoduchú prácu za ${days} dní, za koľko dní ju pri rovnakom tempe urobí ${doubledWorkers} pracovníkov?`,
+		String(answer),
+		[String(answer), String(days), String(days * 2), String(Math.max(1, answer + 2))],
+		"Keď je pracovníkov dvojnásobok, potrebný čas je polovičný.",
+		`${doubledWorkers} je dvojnásobok ${workers}, preto ${days} ÷ 2 = ${answer} dní.`,
+	);
+}
+
+function dataTableQuestion(): Question {
+	const headers = ["Deň", "Knihy"];
+	const labels = ["Po", "Ut", "St", "Št"];
+	const values = shuffle([4, 7, 10, 13]);
+	const rows = labels.map((label, index) => [label, String(values[index])]);
+	const sorted = labels.map((label, index) => ({ label, value: values[index] })).sort((a, b) => a.value - b.value);
+	const answer = sorted.map((item) => item.label).join(" → ");
+	const alternatives = [
+		answer,
+		[...sorted].reverse().map((item) => item.label).join(" → "),
+		labels.join(" → "),
+		shuffle(labels).join(" → "),
+	];
+	const options = [...new Set(alternatives)];
+	while (options.length < 4) options.push(shuffle(labels).join(" → "));
+	return {
+		id: id(),
+		topic: "applications",
+		prompt: "Zoraď dni podľa údajov v tabuľke od najmenšej hodnoty po najväčšiu.",
+		answer,
+		interaction: { kind: "data-table", headers, rows, options: options.slice(0, 4) },
+		explanation: `Poradie hodnôt je ${sorted.map((item) => item.value).join(" < ")}, teda ${answer}.`,
+	};
+}
+
+function chartFromTableQuestion(): Question {
+	const headers = ["Tím", "Body"];
+	const rows = [["A", "3"], ["B", "6"], ["C", "9"]];
+	const answer = "A: 3, B: 6, C: 9";
+	return {
+		id: id(),
+		topic: "applications",
+		prompt: "Ktoré výšky stĺpcov správne znázorňujú údaje z tabuľky?",
+		answer,
+		interaction: {
+			kind: "data-table",
+			headers,
+			rows,
+			options: shuffle([answer, "A: 9, B: 6, C: 3", "A: 3, B: 9, C: 6", "A: 6, B: 3, C: 9"]),
+		},
+		explanation: "Stĺpce musia mať rovnaké hodnoty ako príslušné riadky tabuľky.",
+	};
+}
+
+const numbers = [roundingQuestion, directedRoundingQuestion, compareQuestion, parityQuestion, negativeIntroQuestion, numberLineQuestion, numberFilterQuestion, decompositionQuestion, romanQuestion] as const;
+const decimals = [decimalMoneyQuestion, decimalSubtractionQuestion, decimalCompareQuestion, decimalSortQuestion, decimalRoundingQuestion, decimalDirectedRoundingQuestion, decimalPowerQuestion] as const;
 const fractions = [fractionGridQuestion, fractionOfCollectionQuestion, fractionCompareQuestion] as const;
-const geometry = [shapePropertyQuestion, lineRelationQuestion, circleQuestion, cubeFactsQuestion, quadrilateralQuestion, solidQuestion, cubeStackQuestion, scaleGridQuestion, constructionQuestion] as const;
-const addition = [additionQuestion, subtractionQuestion, missingAddendQuestion, differenceComparisonQuestion, estimateSumQuestion, additionStoryQuestion] as const;
-const symmetry = [axisCountQuestion, symmetryTypeQuestion, mirrorDistanceQuestion, centralSymmetryQuestion, noAxisSymmetryQuestion] as const;
-const multiplication = [multiplicationQuestion, multiDigitMultiplicationQuestion, divisionQuestion, orderQuestion, bracketQuestion, powerOfTenQuestion, missingFactorQuestion, divisionRemainderQuestion, compoundStoryQuestion, divisionStoryQuestion] as const;
-const measurement = [perimeterQuestion, squarePerimeterQuestion, trianglePerimeterQuestion, areaQuestion, unitsQuestion, unitConversionQuestion, compoundLengthQuestion, compareLengthQuestion, gridAreaQuestion, differenceStoryQuestion, xylophoneQuestion] as const;
-const applications = [overlapStoryQuestion, financeStoryQuestion, possibleDiceSumQuestion, probabilityQuestion, chartDataQuestion, barChartQuestion, halfCollectionQuestion, pathsQuestion] as const;
+const geometry = [shapePropertyQuestion, lineRelationQuestion, circleQuestion, cubeFactsQuestion, quadrilateralQuestion, solidQuestion, cubeStackQuestion, cuboidUnitCubesQuestion, scaleGridQuestion, constructionQuestion] as const;
+const addition = [additionQuestion, subtractionQuestion, multiAddendQuestion, missingAddendQuestion, differenceComparisonQuestion, estimateSumQuestion, additionStoryQuestion] as const;
+const symmetry = [axisCountQuestion, symmetryTypeQuestion, mirrorDistanceQuestion, symmetryGridQuestion, centralSymmetryQuestion, noAxisSymmetryQuestion] as const;
+const multiplication = [multiplicationQuestion, multiDigitMultiplicationQuestion, divisionQuestion, orderQuestion, bracketQuestion, powerOfTenQuestion, quotientComparisonQuestion, distributiveQuestion, repeatedOperationQuestion, missingFactorQuestion, divisionRemainderQuestion, compoundStoryQuestion, divisionStoryQuestion] as const;
+const measurement = [perimeterQuestion, squarePerimeterQuestion, trianglePerimeterQuestion, areaQuestion, areaUnitQuestion, rulerQuestion, estimateDistanceQuestion, unitsQuestion, unitConversionQuestion, compoundLengthQuestion, compareLengthQuestion, gridAreaQuestion, differenceStoryQuestion, xylophoneQuestion] as const;
+const applications = [overlapStoryQuestion, financeStoryQuestion, directProportionQuestion, inverseProportionQuestion, possibleDiceSumQuestion, probabilityQuestion, chartDataQuestion, barChartQuestion, dataTableQuestion, chartFromTableQuestion, halfCollectionQuestion, pathsQuestion] as const;
 
 export const generators = { numbers, decimals, fractions, geometry, addition, symmetry, multiplication, measurement, applications };
 
@@ -1115,15 +1447,15 @@ export function generateQuestion(topic: TopicId): Question {
 }
 
 const interactiveGenerators = {
-	numbers: [compareQuestion, parityQuestion, numberLineQuestion, numberFilterQuestion, romanQuestion],
-	decimals: [decimalCompareQuestion, decimalRoundingQuestion, decimalPowerQuestion],
+	numbers: [compareQuestion, parityQuestion, negativeIntroQuestion, numberLineQuestion, numberFilterQuestion, romanQuestion],
+	decimals: [decimalCompareQuestion, decimalSortQuestion, decimalRoundingQuestion, decimalDirectedRoundingQuestion, decimalPowerQuestion],
 	fractions: [fractionGridQuestion, fractionOfCollectionQuestion, fractionCompareQuestion],
-	geometry: [shapePropertyQuestion, lineRelationQuestion, circleQuestion, cubeFactsQuestion, quadrilateralQuestion, solidQuestion, cubeStackQuestion, scaleGridQuestion, constructionQuestion],
+	geometry: [shapePropertyQuestion, lineRelationQuestion, circleQuestion, cubeFactsQuestion, quadrilateralQuestion, solidQuestion, cubeStackQuestion, cuboidUnitCubesQuestion, scaleGridQuestion, constructionQuestion],
 	addition: [missingAddendQuestion, differenceComparisonQuestion, estimateSumQuestion],
-	symmetry: [axisCountQuestion, symmetryTypeQuestion, mirrorDistanceQuestion, centralSymmetryQuestion, noAxisSymmetryQuestion],
-	multiplication: [missingFactorQuestion, divisionRemainderQuestion, bracketQuestion, powerOfTenQuestion, compoundStoryQuestion, divisionStoryQuestion],
-	measurement: [gridAreaQuestion, unitConversionQuestion, compoundLengthQuestion, compareLengthQuestion, differenceStoryQuestion, xylophoneQuestion],
-	applications: [overlapStoryQuestion, financeStoryQuestion, possibleDiceSumQuestion, probabilityQuestion, barChartQuestion, chartDataQuestion, halfCollectionQuestion, pathsQuestion],
+	symmetry: [axisCountQuestion, symmetryTypeQuestion, mirrorDistanceQuestion, symmetryGridQuestion, centralSymmetryQuestion, noAxisSymmetryQuestion],
+	multiplication: [missingFactorQuestion, divisionRemainderQuestion, bracketQuestion, powerOfTenQuestion, quotientComparisonQuestion, distributiveQuestion, repeatedOperationQuestion, compoundStoryQuestion, divisionStoryQuestion],
+	measurement: [gridAreaQuestion, rulerQuestion, estimateDistanceQuestion, areaUnitQuestion, unitConversionQuestion, compoundLengthQuestion, compareLengthQuestion, differenceStoryQuestion, xylophoneQuestion],
+	applications: [overlapStoryQuestion, financeStoryQuestion, directProportionQuestion, inverseProportionQuestion, possibleDiceSumQuestion, probabilityQuestion, barChartQuestion, dataTableQuestion, chartFromTableQuestion, chartDataQuestion, halfCollectionQuestion, pathsQuestion],
 } as const;
 
 const storyTopics = ["addition", "multiplication", "measurement", "applications"] as const;
@@ -1145,7 +1477,16 @@ export function normalizeAnswer(value: string): string {
 }
 
 export function isCorrect(question: Question, answer: string): boolean {
-	return normalizeAnswer(answer) === normalizeAnswer(question.answer);
+	const actual = normalizeAnswer(answer);
+	const expected = normalizeAnswer(question.answer);
+	if (actual === expected) return true;
+
+	const numericPattern = /^-?\\d+(?:\\.\\d+)?$/;
+	if (numericPattern.test(actual) && numericPattern.test(expected)) {
+		return Number(actual) === Number(expected);
+	}
+
+	return false;
 }
 
 export { shuffle };
