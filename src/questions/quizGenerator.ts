@@ -3,7 +3,7 @@ import {
 	isCorrect,
 	normalizeAnswer,
 } from "./generator";
-import { generateSlovakRoundQuestion } from "./slovakGenerator";
+import { generateBalancedSlovakQuestion } from "./balancedSlovakQuestion";
 import type { AnyTopicId, SlovakTopicId } from "./types";
 
 function isSlovakTopic(topic: AnyTopicId): topic is SlovakTopicId {
@@ -12,7 +12,7 @@ function isSlovakTopic(topic: AnyTopicId): topic is SlovakTopicId {
 
 export function generateRoundQuestion(topic: AnyTopicId, index: number) {
 	return isSlovakTopic(topic)
-		? generateSlovakRoundQuestion(topic, index)
+		? generateBalancedSlovakQuestion(topic, index)
 		: generateMathRoundQuestion(topic, index);
 }
 
