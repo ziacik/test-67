@@ -1,15 +1,7 @@
 import type { Question, SlovakTopicId } from "./types";
-import { spellingQuestions } from "./slovakSpelling";
+import { slovakQuestionBanks, type ChoiceSpec } from "./slovakBanks";
 
 type SlovakConcreteTopicId = Exclude<SlovakTopicId, "sk-mixed">;
-
-type ChoiceSpec = {
-	prompt: string;
-	answer: string;
-	choices: string[];
-	explanation: string;
-	hint?: string;
-};
 
 function pick<T>(values: readonly T[]): T {
 	return values[Math.floor(Math.random() * values.length)];
@@ -40,369 +32,7 @@ function fromSpec(topic: SlovakConcreteTopicId, spec: ChoiceSpec): Question {
 	};
 }
 
-const spelling: ChoiceSpec[] = spellingQuestions;
-const nouns: ChoiceSpec[] = [
-	{
-		prompt: "Podstatné meno učiteľ je...",
-		answer: "mužský rod, životné",
-		choices: ["mužský rod, životné", "mužský rod, neživotné", "ženský rod", "stredný rod"],
-		explanation: "Učiteľ označuje osobu mužského rodu, preto je životné podstatné meno.",
-	},
-	{
-		prompt: "Ktorý vzor má podstatné meno žiak?",
-		answer: "chlap",
-		choices: ["chlap", "hrdina", "dub", "stroj"],
-		explanation: "Žiak je mužské životné podstatné meno zakončené na spoluhlásku a skloňuje sa podľa vzoru chlap.",
-	},
-	{
-		prompt: "Ktorý vzor má podstatné meno futbalista?",
-		answer: "hrdina",
-		choices: ["chlap", "hrdina", "dub", "stroj"],
-		explanation: "Futbalista je mužské životné podstatné meno zakončené na -a, preto má vzor hrdina.",
-	},
-	{
-		prompt: "Ktorý vzor má podstatné meno počítač?",
-		answer: "stroj",
-		choices: ["chlap", "hrdina", "dub", "stroj"],
-		explanation: "Počítač je mužské neživotné podstatné meno a skloňuje sa podľa vzoru stroj.",
-	},
-	{
-		prompt: "Ktorý vzor má podstatné meno hrad?",
-		answer: "dub",
-		choices: ["chlap", "hrdina", "dub", "stroj"],
-		explanation: "Hrad je mužské neživotné podstatné meno a skloňuje sa podľa vzoru dub.",
-	},
-	{
-		prompt: "Ktorý vzor má podstatné meno stanica?",
-		answer: "ulica",
-		choices: ["žena", "ulica", "dlaň", "kosť"],
-		explanation: "Stanica je ženského rodu a skloňuje sa podľa vzoru ulica.",
-	},
-	{
-		prompt: "Ktorý vzor má podstatné meno pieseň?",
-		answer: "dlaň",
-		choices: ["žena", "ulica", "dlaň", "kosť"],
-		explanation: "Pieseň sa skloňuje podľa vzoru dlaň.",
-	},
-	{
-		prompt: "Ktorý vzor má podstatné meno radosť?",
-		answer: "kosť",
-		choices: ["žena", "ulica", "dlaň", "kosť"],
-		explanation: "Radosť sa skloňuje podľa vzoru kosť.",
-	},
-	{
-		prompt: "Ktorý vzor má podstatné meno námestie?",
-		answer: "vysvedčenie",
-		choices: ["mesto", "srdce", "vysvedčenie", "dievča"],
-		explanation: "Námestie je stredného rodu a skloňuje sa podľa vzoru vysvedčenie.",
-	},
-	{
-		prompt: "Urči pád zvýrazneného spojenia: Prišiel som ZO ŠKOLY.",
-		answer: "genitív",
-		choices: ["nominatív", "genitív", "datív", "lokál"],
-		explanation: "Pýtame sa: z koho, z čoho? Zo školy — genitív.",
-	},
-	{
-		prompt: "Urči pád zvýrazneného spojenia: Hovoríme O ŠKOLE.",
-		answer: "lokál",
-		choices: ["akuzatív", "datív", "lokál", "inštrumentál"],
-		explanation: "Pýtame sa: o kom, o čom? O škole — lokál.",
-	},
-	{
-		prompt: "Urči pád zvýrazneného spojenia: Idem SO SESTROU.",
-		answer: "inštrumentál",
-		choices: ["genitív", "datív", "akuzatív", "inštrumentál"],
-		explanation: "Pýtame sa: s kým, s čím? So sestrou — inštrumentál.",
-	},
-	{
-		prompt: "Prídavné meno školský je...",
-		answer: "vzťahové",
-		choices: ["akostné", "vzťahové", "privlastňovacie", "zámeno"],
-		explanation: "Školský vyjadruje vzťah ku škole, preto je vzťahové prídavné meno.",
-	},
-	{
-		prompt: "Prídavné meno pekný je...",
-		answer: "akostné",
-		choices: ["akostné", "vzťahové", "privlastňovacie", "číslovka"],
-		explanation: "Pekný pomenúva vlastnosť, ktorú možno stupňovať.",
-	},
-	{
-		prompt: "Ktorý tvar je 3. stupeň prídavného mena vysoký?",
-		answer: "najvyšší",
-		choices: ["vysoký", "vyšší", "najvyšší", "vysokejší"],
-		explanation: "Stupňovanie je vysoký — vyšší — najvyšší.",
-	},
-	{
-		prompt: "Podľa ktorého vzoru sa skloňuje prídavné meno svieži?",
-		answer: "cudzí",
-		choices: ["pekný", "cudzí", "páví", "otcov"],
-		explanation: "Svieži má mäkké zakončenie ako vzor cudzí.",
-	},
-];
-
-const vocabulary: ChoiceSpec[] = [
-	{
-		prompt: "Ktorá dvojica sú synonymá?",
-		answer: "pekný – krásny",
-		choices: ["pekný – krásny", "pekný – škaredý", "rýchly – pomaly", "malý – veľký"],
-		explanation: "Synonymá sú slová s rovnakým alebo veľmi podobným významom.",
-	},
-	{
-		prompt: "Ktorá dvojica sú antonymá?",
-		answer: "odvážny – bojazlivý",
-		choices: ["odvážny – bojazlivý", "odvážny – smelý", "dom – obydlie", "hovoriť – rozprávať"],
-		explanation: "Antonymá majú opačný význam.",
-	},
-	{
-		prompt: "Ktoré slovo je viacvýznamové?",
-		answer: "koruna",
-		choices: ["koruna", "žirafa", "semafor", "pondelok"],
-		explanation: "Koruna môže byť napríklad časť stromu, kráľovská koruna aj názov meny.",
-	},
-	{
-		prompt: "Ktorá dvojica obsahuje spisovné slovo a jeho nárečový variant?",
-		answer: "zemiaky – krumple",
-		choices: ["zemiaky – krumple", "stôl – stolička", "okno – dvere", "bežať – chodiť"],
-		explanation: "Zemiaky je spisovné pomenovanie, krumple je nárečové.",
-	},
-	{
-		prompt: "Ktoré spojenie je prirovnanie?",
-		answer: "biely ako sneh",
-		choices: ["biely ako sneh", "biely sneh", "sneh padá", "snehová guľa"],
-		explanation: "Prirovnanie porovnáva dve veci, často pomocou slov ako alebo sťa.",
-	},
-	{
-		prompt: "Ktorá veta je pranostika?",
-		answer: "Medardova kvapka štyridsať dní kvapká.",
-		choices: [
-			"Medardova kvapka štyridsať dní kvapká.",
-			"Bez práce nie sú koláče.",
-			"Kto neskoro chodí, sám sebe škodí.",
-			"Ráno som zaspal do školy.",
-		],
-		explanation: "Pranostiky sú ľudové výroky spojené najmä s počasím, prírodou a hospodárskym rokom.",
-	},
-	{
-		prompt: "Ktoré spojenie je ustálené slovné spojenie?",
-		answer: "mať hlavu v oblakoch",
-		choices: ["mať hlavu v oblakoch", "mať novú čiapku", "pozerať na oblohu", "nakresliť oblak"],
-		explanation: "Mať hlavu v oblakoch sa nepoužíva doslovne, ale ako ustálené obrazné spojenie.",
-	},
-	{
-		prompt: "Čo najlepšie vystihuje slovnú zásobu človeka?",
-		answer: "súbor slov, ktoré pozná a používa",
-		choices: [
-			"súbor slov, ktoré pozná a používa",
-			"iba slová v pravopisnom slovníku",
-			"iba vybrané slová",
-			"všetky písmená abecedy",
-		],
-		explanation: "Slovná zásoba je súbor slov, ktoré človek pozná a používa.",
-	},
-];
-
-const sentences: ChoiceSpec[] = [
-	{
-		prompt: "Aký druh vety podľa obsahu je: Kedy príde autobus?",
-		answer: "opytovacia",
-		choices: ["oznamovacia", "opytovacia", "rozkazovacia", "želacia"],
-		explanation: "Veta sa na niečo pýta a končí otáznikom.",
-	},
-	{
-		prompt: "Aký druh vety podľa obsahu je: Zavri, prosím, okno.",
-		answer: "rozkazovacia",
-		choices: ["oznamovacia", "opytovacia", "rozkazovacia", "zvolacia"],
-		explanation: "Veta vyjadruje príkaz alebo výzvu.",
-	},
-	{
-		prompt: "Aký druh vety podľa obsahu je: Kiež by zajtra svietilo slnko!",
-		answer: "želacia",
-		choices: ["oznamovacia", "opytovacia", "želacia", "rozkazovacia"],
-		explanation: "Veta vyjadruje želanie.",
-	},
-	{
-		prompt: "Ktorá veta má prirodzený a zrozumiteľný slovosled?",
-		answer: "Oli dnes číta novú knihu.",
-		choices: [
-			"Oli dnes číta novú knihu.",
-			"Novú dnes knihu Oli číta.",
-			"Číta knihu dnes Oli novú.",
-			"Dnes novú Oli knihu číta.",
-		],
-		explanation: "Slovosled má byť zrozumiteľný a má prirodzene usporiadať význam vety.",
-	},
-	{
-		prompt: "Ktoré interpunkčné znamienko patrí na koniec vety: Prídeš zajtra",
-		answer: "?",
-		choices: [".", "?", "!", ","],
-		explanation: "Je to otázka, preto patrí na koniec otáznik.",
-	},
-	{
-		prompt: "Ktorá veta je oznamovacia?",
-		answer: "V sobotu ideme na výlet.",
-		choices: [
-			"V sobotu ideme na výlet.",
-			"Ideme v sobotu na výlet?",
-			"Poď v sobotu na výlet!",
-			"Kiež by sme išli na výlet!",
-		],
-		explanation: "Oznamovacia veta podáva informáciu.",
-	},
-	{
-		prompt: "Ktorý zápis priamej reči je správny?",
-		answer: "Mama povedala: „Príď načas.“",
-		choices: [
-			"Mama povedala: „Príď načas.“",
-			"Mama povedala „Príď načas“.",
-			"Mama povedala, „Príď načas.“",
-			"Mama povedala. „Príď načas“",
-		],
-		explanation: "Po uvádzacej vete je dvojbodka a priama reč je v úvodzovkách.",
-	},
-];
-
-const reading: ChoiceSpec[] = [
-	{
-		prompt: "Prečítaj: „Nina našla pri chodníku malé mača. Tráslo sa od zimy, preto ho zabalila do mikiny a odniesla domov.“ Aká je hlavná myšlienka?",
-		answer: "Nina pomohla opustenému mačaťu.",
-		choices: [
-			"Nina pomohla opustenému mačaťu.",
-			"Nina si kúpila novú mikinu.",
-			"Mača ušlo z domu.",
-			"Na chodníku bolo veľa ľudí.",
-		],
-		explanation: "Hlavná myšlienka vystihuje najdôležitejšie posolstvo celého textu.",
-	},
-	{
-		prompt: "Prečítaj: „Ráno pršalo, poobede sa vyjasnilo a večer sa znova spustil lejak.“ Aká je téma textu?",
-		answer: "zmeny počasia počas dňa",
-		choices: ["zmeny počasia počas dňa", "školský výlet", "ročné obdobia", "predpoveď na celý týždeň"],
-		explanation: "Téma stručne pomenúva, o čom text je.",
-	},
-	{
-		prompt: "Ktorý útvar je najvhodnejší, keď sa pýtame hosťa pripravené otázky a zapisujeme jeho odpovede?",
-		answer: "interview",
-		choices: ["interview", "recept", "pozvánka", "báseň"],
-		explanation: "Cielený rozhovor — interview — je založený na otázkach a odpovediach.",
-	},
-	{
-		prompt: "Ktoré poradie patrí do opisu pracovného postupu pri príprave čaju?",
-		answer: "zovrieť vodu → zaliať čaj → nechať vylúhovať",
-		choices: [
-			"zovrieť vodu → zaliať čaj → nechať vylúhovať",
-			"nechať vylúhovať → zovrieť vodu → zaliať čaj",
-			"zaliať čaj → vypiť ho → zovrieť vodu",
-			"vypiť čaj → zaliať čaj → zovrieť vodu",
-		],
-		explanation: "Pracovný postup musí zachytiť jednotlivé kroky v logickom poradí.",
-	},
-	{
-		prompt: "Ktorá ukážka je rozprávanie s prvkami opisu?",
-		answer: "Vošiel som do tmavej, úzkej chodby. Dvere za mnou buchli a ja som sa rozbehol.",
-		choices: [
-			"Vošiel som do tmavej, úzkej chodby. Dvere za mnou buchli a ja som sa rozbehol.",
-			"Chodba je miestnosť spájajúca ostatné izby.",
-			"Najprv otvor dvere, potom prejdi chodbou.",
-			"Chodba má dĺžku päť metrov.",
-		],
-		explanation: "Ukážka rozvíja dej a zároveň opisuje prostredie.",
-	},
-	{
-		prompt: "Ktorý nadpis najlepšie vystihuje text: „Včely opeľujú rastliny a bez nich by mnohé plodiny prinášali omnoho menej úrody.“",
-		answer: "Prečo sú včely dôležité",
-		choices: ["Prečo sú včely dôležité", "Ako postaviť úľ", "Najväčší hmyz sveta", "Dejiny medu"],
-		explanation: "Dobrý nadpis stručne a presne pomenúva jadro textu.",
-	},
-];
-
-const literature: ChoiceSpec[] = [
-	{
-		prompt: "Ktorý literárny žáner rozpráva o živote svätcov a spája reálne prvky so zázračnými?",
-		answer: "legenda",
-		choices: ["legenda", "bájka", "povesť", "komiks"],
-		explanation: "Legenda je príbeh spätý najmä so životom svätcov a náboženskou tradíciou.",
-	},
-	{
-		prompt: "Ako sa nazýva povesť, ktorá vznikala medzi ľuďmi a nemá známeho autora?",
-		answer: "ľudová povesť",
-		choices: ["ľudová povesť", "autorská povesť", "román", "anekdota"],
-		explanation: "Ľudová povesť sa tradovala ústne a jej autor nie je známy.",
-	},
-	{
-		prompt: "Ktorá veta obsahuje personifikáciu?",
-		answer: "Vietor si pospevoval medzi stromami.",
-		choices: [
-			"Vietor si pospevoval medzi stromami.",
-			"Vietor bol veľmi silný.",
-			"Stromy sa ohýbali vo vetre.",
-			"Na kopci fúkal vietor.",
-		],
-		explanation: "Personifikácia pripisuje neživej veci alebo prírode ľudskú vlastnosť či činnosť.",
-	},
-	{
-		prompt: "Ktoré spojenie je epiteton — básnický prívlastok?",
-		answer: "strieborný mesiac",
-		choices: ["strieborný mesiac", "mesiac svieti", "veľký stôl", "tri mesiace"],
-		explanation: "Epiteton je obrazný, umelecky pôsobiaci prívlastok.",
-	},
-	{
-		prompt: "Ako sa nazýva opakujúca sa časť piesne?",
-		answer: "refrén",
-		choices: ["refrén", "kapitola", "odsek", "scenár"],
-		explanation: "Refrén sa v piesni pravidelne opakuje.",
-	},
-	{
-		prompt: "Kto v literárnom texte sprostredkúva príbeh čitateľovi?",
-		answer: "rozprávač",
-		choices: ["rozprávač", "režisér", "divák", "ilustrátor"],
-		explanation: "Rozprávač je ten, cez koho je príbeh podaný.",
-	},
-	{
-		prompt: "Ako sa nazýva text určený pre film alebo divadelnú inscenáciu, v ktorom sú repliky a pokyny?",
-		answer: "scenár",
-		choices: ["scenár", "refrén", "encyklopédia", "povesť"],
-		explanation: "Scenár obsahuje dej, repliky a pokyny pre realizáciu filmu či predstavenia.",
-	},
-	{
-		prompt: "Ktorá kniha patrí medzi náučnú literatúru?",
-		answer: "encyklopédia zvierat",
-		choices: ["encyklopédia zvierat", "zbierka rozprávok", "komiks", "básnická zbierka"],
-		explanation: "Náučná literatúra prináša vecné poznatky; typickým príkladom je encyklopédia.",
-	},
-	{
-		prompt: "Čo je typické pre nonsens v literatúre?",
-		answer: "zámerná nezmyselnosť a hra s logikou",
-		choices: [
-			"zámerná nezmyselnosť a hra s logikou",
-			"presný pracovný postup",
-			"iba historicky overené fakty",
-			"vždy smutný záver",
-		],
-		explanation: "Nonsens zámerne narúša bežnú logiku a využíva absurdnosť či slovnú hru.",
-	},
-	{
-		prompt: "Čo odlišuje pieseň od bežnej básne?",
-		answer: "je určená na spievanie a spája text s melódiou",
-		choices: [
-			"je určená na spievanie a spája text s melódiou",
-			"nemôže mať rým",
-			"nemá verše",
-			"musí byť vždy ľudová",
-		],
-		explanation: "Pieseň spája slovesnú a hudobnú zložku.",
-	},
-];
-
-const banks: Record<SlovakConcreteTopicId, readonly ChoiceSpec[]> = {
-	"sk-spelling": spelling,
-	"sk-nouns": nouns,
-	"sk-vocabulary": vocabulary,
-	"sk-sentences": sentences,
-	"sk-reading": reading,
-	"sk-literature": literature,
-};
-
-const concreteTopics = Object.keys(banks) as SlovakConcreteTopicId[];
+const concreteTopics = Object.keys(slovakQuestionBanks) as SlovakConcreteTopicId[];
 
 export const slovakCurriculumCoverage = [
 	"spelling-i-y-selected-words-and-derived-words",
@@ -421,17 +51,30 @@ export const slovakCurriculumCoverage = [
 
 export function generateSlovakQuestion(topic: SlovakTopicId): Question {
 	const resolved = topic === "sk-mixed" ? pick(concreteTopics) : topic;
-	return fromSpec(resolved, pick(banks[resolved]));
+	return fromSpec(resolved, pick(slovakQuestionBanks[resolved]));
 }
 
-let spellingRound: ChoiceSpec[] = [];
+type RoundItem = { topic: SlovakConcreteTopicId; spec: ChoiceSpec };
+const roundCache = new Map<SlovakTopicId, RoundItem[]>();
+
+function buildRound(topic: SlovakTopicId): RoundItem[] {
+	if (topic === "sk-mixed") {
+		const all = concreteTopics.flatMap((resolved) =>
+			slovakQuestionBanks[resolved].map((spec) => ({ topic: resolved, spec })),
+		);
+		return shuffle(all).slice(0, 10);
+	}
+
+	return shuffle(slovakQuestionBanks[topic])
+		.slice(0, 10)
+		.map((spec) => ({ topic, spec }));
+}
 
 export function generateSlovakRoundQuestion(topic: SlovakTopicId, index: number): Question {
-	if (topic === "sk-spelling") {
-		if (index === 0 || spellingRound.length !== 10) {
-			spellingRound = shuffle(spelling).slice(0, 10);
-		}
-		return fromSpec("sk-spelling", spellingRound[index % spellingRound.length]);
+	if (index === 0 || !roundCache.has(topic)) {
+		roundCache.set(topic, buildRound(topic));
 	}
-	return generateSlovakQuestion(topic);
+	const round = roundCache.get(topic) ?? buildRound(topic);
+	const item = round[index % round.length];
+	return fromSpec(item.topic, item.spec);
 }

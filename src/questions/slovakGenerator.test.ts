@@ -4,6 +4,7 @@ import {
 	generateSlovakRoundQuestion,
 	slovakCurriculumCoverage,
 } from "./slovakGenerator";
+import { slovakBankSizes } from "./slovakBanks";
 import {
 	nonSelectedWords,
 	selectedCoreWords,
@@ -38,13 +39,26 @@ describe("Slovak question generator", () => {
 		}
 	});
 
+	it.each(topics)("does not repeat prompts inside a ten-question round for %s", (topic) => {
+		const prompts = Array.from({ length: 10 }, (_, index) =>
+			generateSlovakRoundQuestion(topic, index).prompt,
+		);
+		expect(new Set(prompts).size).toBe(10);
+	});
+
 	it.each(topics.filter((topic) => topic !== "sk-mixed"))("keeps questions in selected topic %s", (topic) => {
 		for (let index = 0; index < 100; index += 1) {
 			expect(generateSlovakQuestion(topic).topic).toBe(topic);
 		}
 	});
 
-	it("has the complete large selected-word bank plus at least as many non-selected words", () => {
+	it("has at least 60 questions in every concrete Slovak topic", () => {
+		for (const size of Object.values(slovakBankSizes)) {
+			expect(size).toBeGreaterThanOrEqual(60);
+		}
+	});
+
+	it("has the large selected-word bank plus at least as many non-selected words", () => {
 		expect(selectedCoreWords.length).toBeGreaterThanOrEqual(130);
 		expect(nonSelectedWords.length).toBeGreaterThanOrEqual(selectedCoreWords.length);
 		expect(spellingQuestions.length).toBeGreaterThanOrEqual(300);
@@ -55,13 +69,6 @@ describe("Slovak question generator", () => {
 			expect(question.prompt).not.toContain("__");
 			expect((question.prompt.match(/_/g) ?? []).length).toBe(1);
 		}
-	});
-
-	it("does not repeat spelling questions inside a ten-question round", () => {
-		const prompts = Array.from({ length: 10 }, (_, index) =>
-			generateSlovakRoundQuestion("sk-spelling", index).prompt,
-		);
-		expect(new Set(prompts).size).toBe(10);
 	});
 
 	it("tracks the main fifth-grade curriculum areas covered by the bank", () => {
