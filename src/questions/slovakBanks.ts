@@ -861,7 +861,7 @@ const wordOrderQuestions = [
 		"V sobotu navštívime starých rodičov.",
 		"Starých v navštívime sobotu rodičov."
 	]
-].map(([correct, wrong], index) =>
+].map(([correct, wrong]) =>
 	choice("Ktorá veta má prirodzený a zrozumiteľný slovosled?", correct, [
 		correct,
 		wrong,
@@ -1184,7 +1184,7 @@ const personifications = [
 	"Ticho sedelo v prázdnej triede.",
 	"Jar zobudila záhradu."
 ];
-const personificationQuestions = personifications.map((answer, index) =>
+const personificationQuestions = personifications.map((answer) =>
 	choice("Ktorá veta obsahuje personifikáciu?", answer, [answer, "Vietor bol dnes silný.", "Strom stojí pri ceste.", "Na oblohe sú oblaky."], "Personifikácia pripisuje neživej veci alebo prírode ľudské vlastnosti alebo činnosť.")
 );
 
@@ -1210,7 +1210,7 @@ const epithets = [
 	"zlatisté pole",
 	"tajomná hmla"
 ];
-const epithetQuestions = epithets.map((answer, index) =>
+const epithetQuestions = epithets.map((answer) =>
 	choice("Ktoré spojenie je epiteton – básnický prívlastok?", answer, [answer, "veľký predmet", "tri stoly", "okno je otvorené"], "Epiteton je obrazný, umelecky pôsobiaci prívlastok.")
 );
 
