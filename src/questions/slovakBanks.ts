@@ -1,5 +1,5 @@
 import type { SpellingQuestionSpec } from "./slovakSpelling";
-import { spellingQuestions } from "./slovakSpelling";
+import { lYQuestions, nonSelectedWordQuestions, relatedSelectedWordQuestions, selectedWordQuestions, spellingQuestions } from "./slovakSpelling";
 
 export type ChoiceSpec = {
 	prompt: string;
@@ -314,12 +314,20 @@ const gradingQuestions: ChoiceSpec[] = [
 	choice(`Ktorý tvar je 3. stupeň prídavného mena „${first}“?`, third, [first,second,third,`naj${first}`].filter((v,i,a)=>a.indexOf(v)===i), `Stupňovanie je ${first} – ${second} – ${third}.`)
 ]);
 
+export const nounQuestionGroups = {
+	patterns: nounPatternQuestions,
+	gender: nounGenderQuestions,
+	cases: caseQuestions,
+	adjectiveTypes: adjectiveTypeQuestions,
+	grading: gradingQuestions,
+} as const;
+
 export const nounQuestions: ChoiceSpec[] = [
-	...nounPatternQuestions,
-	...nounGenderQuestions,
-	...caseQuestions,
-	...adjectiveTypeQuestions,
-	...gradingQuestions,
+	...nounQuestionGroups.patterns,
+	...nounQuestionGroups.gender,
+	...nounQuestionGroups.cases,
+	...nounQuestionGroups.adjectiveTypes,
+	...nounQuestionGroups.grading,
 ];
 
 const synonymPairs = [
@@ -725,15 +733,26 @@ const pranostikaQuestions = [
 	choice("Ktorá veta je pranostika?", answer, [answer, ["Bez práce nie sú koláče.","Kto druhému jamu kope, sám do nej padne.","Ráno múdrejšie večera.","Dvakrát meraj a raz rež.","Kto neskoro chodí, sám sebe škodí.","Aká práca, taká pláca.","Tichá voda brehy myje.","Darovanému koňovi na zuby nepozeraj.","Komu sa nelení, tomu sa zelení.","Všade dobre, doma najlepšie."][index % 10], "Dnes ráno pršalo.", "Poďme už domov."], "Pranostika je ľudový výrok spojený najmä s počasím a prírodou.")
 );
 
+export const vocabularyQuestionGroups = {
+	synonyms: synonymQuestions,
+	antonyms: antonymQuestions,
+	polysemy: polysemyQuestions,
+	dialects: dialectQuestions,
+	idioms: idiomQuestions,
+	comparisons: comparisonQuestions,
+	proverbs: proverbQuestions,
+	pranostikas: pranostikaQuestions,
+} as const;
+
 export const vocabularyQuestions: ChoiceSpec[] = [
-	...synonymQuestions,
-	...antonymQuestions,
-	...polysemyQuestions,
-	...dialectQuestions,
-	...idiomQuestions,
-	...comparisonQuestions,
-	...proverbQuestions,
-	...pranostikaQuestions,
+	...vocabularyQuestionGroups.synonyms,
+	...vocabularyQuestionGroups.antonyms,
+	...vocabularyQuestionGroups.polysemy,
+	...vocabularyQuestionGroups.dialects,
+	...vocabularyQuestionGroups.idioms,
+	...vocabularyQuestionGroups.comparisons,
+	...vocabularyQuestionGroups.proverbs,
+	...vocabularyQuestionGroups.pranostikas,
 ];
 
 const sentenceTypeGroups = {
@@ -1163,10 +1182,16 @@ const slohQuestions: ChoiceSpec[] = [
 	choice("Na čo slúžia poznámky pri čítaní alebo učení?", "na stručné zachytenie dôležitých informácií", ["na stručné zachytenie dôležitých informácií","na prepis celého textu slovo za slovom","iba na kreslenie obrázkov","na náhodné vety bez súvisu"], "Poznámky pomáhajú vybrať a zapamätať podstatné informácie."),
 ];
 
+export const readingQuestionGroups = {
+	comprehension: readingQuestions,
+	procedures: procedureQuestions,
+	sloh: slohQuestions,
+} as const;
+
 export const readingQuestionsBank: ChoiceSpec[] = [
-	...readingQuestions,
-	...procedureQuestions,
-	...slohQuestions,
+	...readingQuestionGroups.comprehension,
+	...readingQuestionGroups.procedures,
+	...readingQuestionGroups.sloh,
 ];
 
 const personifications = [
@@ -1300,12 +1325,26 @@ const extraLiterature: ChoiceSpec[] = [
 	choice("Kto v literárnom texte sprostredkúva príbeh čitateľovi?", "rozprávač", ["rozprávač","režisér","divák","ilustrátor"], "Príbeh čitateľovi sprostredkúva rozprávač."),
 ];
 
+export const literatureQuestionGroups = {
+	personification: personificationQuestions,
+	epithet: epithetQuestions,
+	definitions: definitionQuestions,
+	extra: extraLiterature,
+} as const;
+
 export const literatureQuestions: ChoiceSpec[] = [
-	...personificationQuestions,
-	...epithetQuestions,
-	...definitionQuestions,
-	...extraLiterature,
+	...literatureQuestionGroups.personification,
+	...literatureQuestionGroups.epithet,
+	...literatureQuestionGroups.definitions,
+	...literatureQuestionGroups.extra,
 ];
+
+export const spellingQuestionGroups = {
+	selected: selectedWordQuestions,
+	related: relatedSelectedWordQuestions,
+	nonSelected: nonSelectedWordQuestions,
+	afterL: lYQuestions,
+} as const;
 
 export const slovakQuestionBanks = {
 	"sk-spelling": spellingQuestions as ChoiceSpec[],
