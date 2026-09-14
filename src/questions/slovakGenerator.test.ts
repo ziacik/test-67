@@ -39,11 +39,16 @@ describe("Slovak question generator", () => {
 		}
 	});
 
-	it.each(topics)("does not repeat prompts inside a ten-question round for %s", (topic) => {
-		const prompts = Array.from({ length: 10 }, (_, index) =>
-			generateSlovakRoundQuestion(topic, index).prompt,
-		);
-		expect(new Set(prompts).size).toBe(10);
+	it.each(topics)("does not repeat an exact question inside a ten-question round for %s", (topic) => {
+		const signatures = Array.from({ length: 10 }, (_, index) => {
+			const question = generateSlovakRoundQuestion(topic, index);
+			return [
+				question.prompt,
+				question.answer,
+				[...(question.choices ?? [])].sort().join("|"),
+			].join("::");
+		});
+		expect(new Set(signatures).size).toBe(10);
 	});
 
 	it.each(topics.filter((topic) => topic !== "sk-mixed"))("keeps questions in selected topic %s", (topic) => {

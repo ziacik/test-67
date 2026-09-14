@@ -595,42 +595,10 @@ const polysemyQuestions = polysemy.map(([word, meaning], index) => {
 });
 
 const dialectPairs = [
-	[
-		"zemiaky",
-		"krumple"
-	],
-	[
-		"zemiaky",
-		"grule"
-	],
-	[
-		"chlieb",
-		"chleba"
-	],
-	[
-		"kukurička",
-		"kukurica"
-	],
-	[
-		"slivky",
-		"trnky"
-	],
-	[
-		"tekvica",
-		"dyňa"
-	],
-	[
-		"zástera",
-		"fertucha"
-	],
-	[
-		"dievča",
-		"dievka"
-	],
-	[
-		"chlapec",
-		"šuhaj"
-	]
+	["zemiaky", "krumple"],
+	["zemiaky", "grule"],
+	["zemiaky", "bandurky"],
+	["zástera", "fertucha"],
 ];
 const dialectQuestions = dialectPairs.map(([standard, dialect], index) => {
 	const answer = `${standard} – ${dialect}`;
@@ -894,7 +862,12 @@ const wordOrderQuestions = [
 		"Starých v navštívime sobotu rodičov."
 	]
 ].map(([correct, wrong], index) =>
-	choice("Ktorá veta má prirodzený a zrozumiteľný slovosled?", correct, [correct, wrong, `${wrong} ${index+1}`, correct.split(" ").reverse().join(" ")], "Správny slovosled má byť prirodzený a zrozumiteľný.")
+	choice("Ktorá veta má prirodzený a zrozumiteľný slovosled?", correct, [
+		correct,
+		wrong,
+		wrong.split(" ").reverse().join(" "),
+		correct.split(" ").slice(1).concat(correct.split(" ")[0]).join(" "),
+	], "Správny slovosled má byť prirodzený a zrozumiteľný.")
 );
 
 const directSpeechQuestions = [
@@ -1212,7 +1185,7 @@ const personifications = [
 	"Jar zobudila záhradu."
 ];
 const personificationQuestions = personifications.map((answer, index) =>
-	choice("Ktorá veta obsahuje personifikáciu?", answer, [answer, `Vietor bol dnes silný ${index+1}.`, "Strom stojí pri ceste.", "Na oblohe sú oblaky."], "Personifikácia pripisuje neživej veci alebo prírode ľudské vlastnosti alebo činnosť.")
+	choice("Ktorá veta obsahuje personifikáciu?", answer, [answer, "Vietor bol dnes silný.", "Strom stojí pri ceste.", "Na oblohe sú oblaky."], "Personifikácia pripisuje neživej veci alebo prírode ľudské vlastnosti alebo činnosť.")
 );
 
 const epithets = [
@@ -1238,7 +1211,7 @@ const epithets = [
 	"tajomná hmla"
 ];
 const epithetQuestions = epithets.map((answer, index) =>
-	choice("Ktoré spojenie je epiteton – básnický prívlastok?", answer, [answer, `veľký predmet ${index+1}`, "tri stoly", "okno je otvorené"], "Epiteton je obrazný, umelecky pôsobiaci prívlastok.")
+	choice("Ktoré spojenie je epiteton – básnický prívlastok?", answer, [answer, "veľký predmet", "tri stoly", "okno je otvorené"], "Epiteton je obrazný, umelecky pôsobiaci prívlastok.")
 );
 
 const literatureDefinitions = [

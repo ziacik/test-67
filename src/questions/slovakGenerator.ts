@@ -57,17 +57,30 @@ export function generateSlovakQuestion(topic: SlovakTopicId): Question {
 type RoundItem = { topic: SlovakConcreteTopicId; spec: ChoiceSpec };
 const roundCache = new Map<SlovakTopicId, RoundItem[]>();
 
+function questionSignature(spec: ChoiceSpec): string {
+	return [spec.prompt, spec.answer, [...spec.choices].sort().join("|")].join("::");
+}
+
+function uniqueItems(items: RoundItem[]): RoundItem[] {
+	const seen = new Set<string>();
+	return items.filter(({ spec }) => {
+		const signature = questionSignature(spec);
+		if (seen.has(signature)) return false;
+		seen.add(signature);
+		return true;
+	});
+}
+
 function buildRound(topic: SlovakTopicId): RoundItem[] {
 	if (topic === "sk-mixed") {
 		const all = concreteTopics.flatMap((resolved) =>
 			slovakQuestionBanks[resolved].map((spec) => ({ topic: resolved, spec })),
 		);
-		return shuffle(all).slice(0, 10);
+		return shuffle(uniqueItems(all)).slice(0, 10);
 	}
 
-	return shuffle(slovakQuestionBanks[topic])
-		.slice(0, 10)
-		.map((spec) => ({ topic, spec }));
+	const items = slovakQuestionBanks[topic].map((spec) => ({ topic, spec }));
+	return shuffle(uniqueItems(items)).slice(0, 10);
 }
 
 export function generateSlovakRoundQuestion(topic: SlovakTopicId, index: number): Question {
