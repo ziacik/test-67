@@ -1,5 +1,5 @@
 import type { Question, SlovakTopicId } from "./types";
-import { slovakQuestionBanks, type ChoiceSpec } from "./slovakBanks";
+import { sentenceQuestionGroups, slovakQuestionBanks, type ChoiceSpec } from "./slovakBanks";
 
 type SlovakConcreteTopicId = Exclude<SlovakTopicId, "sk-mixed">;
 
@@ -71,7 +71,32 @@ function uniqueItems(items: RoundItem[]): RoundItem[] {
 	});
 }
 
+function takeFromGroup(
+	topic: SlovakConcreteTopicId,
+	group: readonly ChoiceSpec[],
+	count: number,
+): RoundItem[] {
+	return shuffle(group)
+		.slice(0, count)
+		.map((spec) => ({ topic, spec }));
+}
+
+function buildSentenceRound(): RoundItem[] {
+	const topic: SlovakConcreteTopicId = "sk-sentences";
+	const balanced = [
+		...takeFromGroup(topic, sentenceQuestionGroups.types, 4),
+		...takeFromGroup(topic, sentenceQuestionGroups.wordOrder, 2),
+		...takeFromGroup(topic, sentenceQuestionGroups.directSpeech, 2),
+		...takeFromGroup(topic, sentenceQuestionGroups.punctuation, 2),
+	];
+	return shuffle(uniqueItems(balanced));
+}
+
 function buildRound(topic: SlovakTopicId): RoundItem[] {
+	if (topic === "sk-sentences") {
+		return buildSentenceRound();
+	}
+
 	if (topic === "sk-mixed") {
 		const all = concreteTopics.flatMap((resolved) =>
 			slovakQuestionBanks[resolved].map((spec) => ({ topic: resolved, spec })),

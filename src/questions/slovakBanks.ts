@@ -935,11 +935,18 @@ const directSpeechQuestions = [
 	choice("Ktorý zápis priamej reči je správny?", options[0], options, "Po uvádzacej vete je dvojbodka a priama reč je v úvodzovkách.")
 );
 
+export const sentenceQuestionGroups = {
+	types: sentenceTypeQuestions,
+	punctuation: punctuationQuestions,
+	wordOrder: wordOrderQuestions,
+	directSpeech: directSpeechQuestions,
+} as const;
+
 export const sentenceQuestions: ChoiceSpec[] = [
-	...sentenceTypeQuestions,
-	...punctuationQuestions,
-	...wordOrderQuestions,
-	...directSpeechQuestions,
+	...sentenceQuestionGroups.types,
+	...sentenceQuestionGroups.punctuation,
+	...sentenceQuestionGroups.wordOrder,
+	...sentenceQuestionGroups.directSpeech,
 ];
 
 const readings = [

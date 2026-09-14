@@ -51,6 +51,31 @@ describe("Slovak question generator", () => {
 		expect(new Set(signatures).size).toBe(10);
 	});
 
+	it("balances sentence rounds instead of flooding them with punctuation questions", () => {
+		for (let round = 0; round < 50; round += 1) {
+			const questions = Array.from({ length: 10 }, (_, index) =>
+				generateSlovakRoundQuestion("sk-sentences", index),
+			);
+			const punctuationCount = questions.filter((question) =>
+				question.prompt.startsWith("Ktoré znamienko patrí"),
+			).length;
+			const wordOrderCount = questions.filter((question) =>
+				question.prompt.startsWith("Ktorá veta má prirodzený"),
+			).length;
+			const directSpeechCount = questions.filter((question) =>
+				question.prompt.startsWith("Ktorý zápis priamej reči"),
+			).length;
+			const typeCount = questions.filter((question) =>
+				question.prompt.startsWith("Aký druh vety podľa obsahu"),
+			).length;
+
+			expect(punctuationCount).toBe(2);
+			expect(wordOrderCount).toBe(2);
+			expect(directSpeechCount).toBe(2);
+			expect(typeCount).toBe(4);
+		}
+	});
+
 	it.each(topics.filter((topic) => topic !== "sk-mixed"))("keeps questions in selected topic %s", (topic) => {
 		for (let index = 0; index < 100; index += 1) {
 			expect(generateSlovakQuestion(topic).topic).toBe(topic);
