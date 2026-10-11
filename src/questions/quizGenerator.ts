@@ -5,7 +5,8 @@ import {
 } from "./generator";
 import { generateBalancedSlovakQuestion } from "./balancedSlovakQuestion";
 import { generateBiologyRoundQuestion } from "./biologyGenerator";
-import type { AnyTopicId, SlovakTopicId } from "./types";
+import { generateHistoryRoundQuestion } from "./historyGenerator";
+import type { AnyTopicId, HistoryTopicId, SlovakTopicId } from "./types";
 
 function isSlovakTopic(topic: AnyTopicId): topic is SlovakTopicId {
 	return topic.startsWith("sk-");
@@ -13,6 +14,7 @@ function isSlovakTopic(topic: AnyTopicId): topic is SlovakTopicId {
 
 export function generateRoundQuestion(topic: AnyTopicId, index: number) {
 	if (topic === "bio-microbes") return generateBiologyRoundQuestion(index);
+	if (topic.startsWith("hist-")) return generateHistoryRoundQuestion(topic as HistoryTopicId, index);
 	return isSlovakTopic(topic)
 		? generateBalancedSlovakQuestion(topic, index)
 		: generateMathRoundQuestion(topic, index);
