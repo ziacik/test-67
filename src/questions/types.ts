@@ -20,8 +20,9 @@ export type SlovakTopicId =
 	| "sk-literature";
 
 export type BiologyTopicId = "bio-microbes";
-export type AnyTopicId = TopicId | SlovakTopicId | BiologyTopicId;
-export type SubjectId = "math" | "slovak" | "biology";
+export type HistoryTopicId = "hist-mixed" | "hist-obdobia" | "hist-archeologia" | "hist-vyvoj" | "hist-paleolit" | "hist-neolit" | "hist-kovy";
+export type AnyTopicId = TopicId | SlovakTopicId | BiologyTopicId | HistoryTopicId;
+export type SubjectId = "math" | "slovak" | "biology" | "history";
 
 export type QuestionInteraction =
 	| { kind: "input" }
@@ -55,7 +56,8 @@ export type QuestionInteraction =
 export type QuestionTopicId =
 	| Exclude<TopicId, "mixed">
 	| Exclude<SlovakTopicId, "sk-mixed">
-	| BiologyTopicId;
+	| BiologyTopicId
+	| Exclude<HistoryTopicId, "hist-mixed">;
 
 export type Question = {
 	id: string;
