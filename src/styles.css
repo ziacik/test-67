@@ -655,6 +655,9 @@ input:focus {
 
 .big-button { min-width: 128px; padding: 15px 18px; }
 
+.subject-actions { flex-wrap: wrap; }
+.subject-actions .big-button { flex: 1 1 145px; min-width: 0; }
+
 @keyframes cardIn {
 	from { opacity: 0; transform: translateY(7px) scale(.995); }
 	to { opacity: 1; transform: translateY(0) scale(1); }
