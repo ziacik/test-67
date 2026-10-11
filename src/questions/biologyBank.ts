@@ -8,7 +8,7 @@ export const biologyGroups = {
 		q("Ako sa nazývajú organizmy, ktoré vidíme iba pod mikroskopom?", "Mikroorganizmy", ["Stavovce", "Semená rastlín", "Bezstavovce"], "Mikroorganizmy sú veľmi drobné organizmy, ktoré pozorujeme mikroskopom."),
 		q("Čím pozorujeme jednotlivé baktérie?", "Mikroskopom", ["Ďalekohľadom", "Voľným okom", "Pravítkom"], "Jednotlivé baktérie sú príliš malé na pozorovanie voľným okom."),
 		q("Kde sa podľa učiva vyskytujú baktérie?", "V okolí človeka aj v jeho tele", ["Iba v hlbokom mori", "Iba v ľade", "Len na listoch stromov"], "Baktérie žijú okolo nás i v našom tele."),
-		q("Aké prostredie vyhovuje mnohým baktériám?", "Teplé a vlhké", ["Suché a veľmi studené", "Vákuum", "Výhradne žeravá láva"], "Mnohé baktérie sa darí vo vlhkom a teplom prostredí."),
+		q("Aké prostredie vyhovuje mnohým baktériám?", "Teplé a vlhké", ["Suché a veľmi studené", "Vákuum", "Výhradne žeravá láva"], "Mnohým baktériám sa darí vo vlhkom a teplom prostredí."),
 		q("Z koľkých buniek sa skladá jedna baktéria?", "Z jednej", ["Z dvoch", "Zo stoviek", "Z tisícov"], "Baktérie sú jednobunkové organizmy."),
 		q("Ktoré dva organizmy z učiva sú mikroskopické?", "Baktéria a kvasinka", ["Dub a smrek", "Myš a mačka", "Motýľ a mravec"], "Baktérie a kvasinky sú drobné organizmy."),
 		q("Sú všetky baktérie pre človeka škodlivé?", "Nie, mnohé sú užitočné", ["Áno, všetky spôsobujú choroby", "Áno, všetky kazia potraviny", "Nie, žiadna nikdy neuškodí"], "Baktérie môžu byť pre človeka prospešné aj škodlivé."),
