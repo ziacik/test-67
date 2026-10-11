@@ -19,8 +19,9 @@ export type SlovakTopicId =
 	| "sk-reading"
 	| "sk-literature";
 
-export type AnyTopicId = TopicId | SlovakTopicId;
-export type SubjectId = "math" | "slovak";
+export type BiologyTopicId = "bio-microbes";
+export type AnyTopicId = TopicId | SlovakTopicId | BiologyTopicId;
+export type SubjectId = "math" | "slovak" | "biology";
 
 export type QuestionInteraction =
 	| { kind: "input" }
@@ -53,7 +54,8 @@ export type QuestionInteraction =
 
 export type QuestionTopicId =
 	| Exclude<TopicId, "mixed">
-	| Exclude<SlovakTopicId, "sk-mixed">;
+	| Exclude<SlovakTopicId, "sk-mixed">
+	| BiologyTopicId;
 
 export type Question = {
 	id: string;
