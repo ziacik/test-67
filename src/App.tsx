@@ -162,6 +162,7 @@ function App() {
 		const success = stats.totalAnswered ? Math.round((stats.totalCorrect / stats.totalAnswered) * 100) : 0;
 		const slovak = subject === "slovak";
 		const biology = subject === "biology";
+		const history = subject === "history";
 
 		return (
 			<main className="shell home-shell">
@@ -170,9 +171,11 @@ function App() {
 						<div className="brand">TEST <b>67</b></div>
 						<div className="level-chip">LVL {level}</div>
 					</div>
-					<h1>{biology ? "Biológia." : slovak ? "Slovenčina." : "Matika."}<br /><em>Ale nech to žije.</em></h1>
+					<h1>{history ? "Dejepis." : biology ? "Biológia." : slovak ? "Slovenčina." : "Matika."}<br /><em>Ale nech to žije.</em></h1>
 					<p>
-						{biology
+						{history
+							? "Od praveku po dobu železnú. Desať rôznych otázok, combo a boss na konci."
+							: biology
 							? "Baktérie, plesne a kvasinky podľa učebnice. Desať otázok, combo a boss na konci."
 							: slovak
 								? "Pravopis, gramatika, čítanie aj literatúra. Desať otázok, combo a boss na konci."
@@ -218,6 +221,13 @@ function App() {
 						onClick={() => setSubject("biology")}
 					>
 						🦠 BIOLÓGIA
+					</button>
+					<button
+						type="button"
+						className={subject === "history" ? "primary big-button" : "secondary big-button"}
+						onClick={() => setSubject("history")}
+					>
+						🏺 DEJEPIS
 					</button>
 				</div>
 
