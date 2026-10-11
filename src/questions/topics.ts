@@ -120,4 +120,11 @@ export const topics: Topic[] = [
 		description: "Pieseň, legenda, povesť, rozprávač, personifikácia, epiteton, rytmus a refrén.",
 		icon: "🎭",
 	},
+	{
+		id: "bio-microbes",
+		subject: "biology",
+		name: "Mikroorganizmy žijúce s človekom",
+		description: "Baktérie, plesne, kvasinky a ich úloha v živote človeka. 101 otázok podľa učebnice.",
+		icon: "🦠",
+	},
 ];
