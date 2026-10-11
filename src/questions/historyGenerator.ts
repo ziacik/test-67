@@ -40,7 +40,7 @@ function draw(group: HistoryGroupId, count: number): HistorySpec[] {
 function buildRound(topic: HistoryTopicId): Array<{ group: HistoryGroupId; spec: HistorySpec }> {
 	// Každý Mix obsahuje všetkých šesť oblastí; dvojnásobné zastúpenie rotuje.
 	const distribution: Array<[HistoryGroupId, number]> = topic === "hist-mixed"
-		? groups.map((group, index) => [group, ((index - roundNumber + groups.length) % groups.length) < 4 ? 2 : 1])
+		? groups.map((group, index): [HistoryGroupId, number] => [group, ((index - (roundNumber % groups.length) + groups.length) % groups.length) < 4 ? 2 : 1])
 		: [[topic.slice(5) as HistoryGroupId, 10]];
 	const chosen = distribution.flatMap(([group, count]) =>
 		draw(group, count).map((spec) => ({ group, spec })),
