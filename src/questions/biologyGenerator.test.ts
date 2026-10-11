@@ -1,6 +1,5 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { biologyBankSize, biologyGroups } from "./biologyBank";
-import { generateBiologyRoundQuestion } from "./biologyGenerator";
 import { generateRoundQuestion, isCorrect } from "./quizGenerator";
 import { topics } from "./topics";
 
@@ -41,7 +40,9 @@ describe("Biológia – Mikroorganizmy žijúce s človekom", () => {
 		}
 	});
 
-	it("does not recycle questions during the first five rounds", () => {
+	it("does not recycle questions during the first five rounds", async () => {
+		vi.resetModules();
+		const { generateBiologyRoundQuestion } = await import("./biologyGenerator");
 		const all: string[] = [];
 		for (let attempt = 0; attempt < 5; attempt++) {
 			for (let index = 0; index < 10; index++) {
