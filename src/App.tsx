@@ -161,6 +161,7 @@ function App() {
 	if (!topic) {
 		const success = stats.totalAnswered ? Math.round((stats.totalCorrect / stats.totalAnswered) * 100) : 0;
 		const slovak = subject === "slovak";
+		const biology = subject === "biology";
 
 		return (
 			<main className="shell home-shell">
@@ -169,11 +170,13 @@ function App() {
 						<div className="brand">TEST <b>67</b></div>
 						<div className="level-chip">LVL {level}</div>
 					</div>
-					<h1>{slovak ? "Slovenčina." : "Matika."}<br /><em>Ale nech to žije.</em></h1>
+					<h1>{biology ? "Biológia." : slovak ? "Slovenčina." : "Matika."}<br /><em>Ale nech to žije.</em></h1>
 					<p>
-						{slovak
-							? "Pravopis, gramatika, čítanie aj literatúra. Desať otázok, combo a boss na konci."
-							: "Vyber si mód, zbieraj XP, drž combo a na konci zlož bossa. Áno, stále je to učenie. Len menej podozrivé."}
+						{biology
+							? "Baktérie, plesne a kvasinky podľa učebnice. Desať otázok, combo a boss na konci."
+							: slovak
+								? "Pravopis, gramatika, čítanie aj literatúra. Desať otázok, combo a boss na konci."
+								: "Vyber si mód, zbieraj XP, drž combo a na konci zlož bossa. Áno, stále je to učenie. Len menej podozrivé."}
 					</p>
 				</header>
 
@@ -194,7 +197,7 @@ function App() {
 					<div><span>ACCURACY</span><strong>{success}%</strong></div>
 				</section>
 
-				<div className="result-actions" style={{ marginBottom: "28px" }} aria-label="Predmet">
+				<div className="result-actions subject-actions" style={{ marginBottom: "28px" }} aria-label="Predmet">
 					<button
 						type="button"
 						className={subject === "math" ? "primary big-button" : "secondary big-button"}
@@ -208,6 +211,13 @@ function App() {
 						onClick={() => setSubject("slovak")}
 					>
 						✍️ SLOVENČINA
+					</button>
+					<button
+						type="button"
+						className={subject === "biology" ? "primary big-button" : "secondary big-button"}
+						onClick={() => setSubject("biology")}
+					>
+						🦠 BIOLÓGIA
 					</button>
 				</div>
 
