@@ -4,6 +4,7 @@ import {
 	normalizeAnswer,
 } from "./generator";
 import { generateBalancedSlovakQuestion } from "./balancedSlovakQuestion";
+import { generateBiologyRoundQuestion } from "./biologyGenerator";
 import type { AnyTopicId, SlovakTopicId } from "./types";
 
 function isSlovakTopic(topic: AnyTopicId): topic is SlovakTopicId {
@@ -11,6 +12,7 @@ function isSlovakTopic(topic: AnyTopicId): topic is SlovakTopicId {
 }
 
 export function generateRoundQuestion(topic: AnyTopicId, index: number) {
+	if (topic === "bio-microbes") return generateBiologyRoundQuestion(index);
 	return isSlovakTopic(topic)
 		? generateBalancedSlovakQuestion(topic, index)
 		: generateMathRoundQuestion(topic, index);
