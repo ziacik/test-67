@@ -1038,11 +1038,11 @@ export const pronounGroups = {
       "answer": "ma",
       "choices": [
         "ma",
-        "vami",
-        "nami",
-        "tebou"
+        "mňa",
+        "mi",
+        "mne"
       ],
-      "explanation": "Krátky tvar zámena „ja“ je „ma“."
+      "explanation": "Zámeno „ja“: v páde genitív je dlhší tvar „mňa“ a kratší „ma“."
     },
     {
       "prompt": "Ktorý dlhší tvar zámena „ja“ možno použiť v páde genitív?",
@@ -1060,11 +1060,11 @@ export const pronounGroups = {
       "answer": "mi",
       "choices": [
         "mi",
-        "vami",
-        "nami",
-        "tebou"
+        "mne",
+        "ma",
+        "mňa"
       ],
-      "explanation": "Krátky tvar zámena „ja“ je „mi“."
+      "explanation": "Zámeno „ja“: v páde datív je dlhší tvar „mne“ a kratší „mi“."
     },
     {
       "prompt": "Ktorý dlhší tvar zámena „ja“ možno použiť v páde datív?",
@@ -1082,11 +1082,11 @@ export const pronounGroups = {
       "answer": "ma",
       "choices": [
         "ma",
-        "vami",
-        "nami",
-        "tebou"
+        "mňa",
+        "mi",
+        "mne"
       ],
-      "explanation": "Krátky tvar zámena „ja“ je „ma“."
+      "explanation": "Zámeno „ja“: v páde akuzatív je dlhší tvar „mňa“ a kratší „ma“."
     },
     {
       "prompt": "Ktorý dlhší tvar zámena „ja“ možno použiť v páde akuzatív?",
@@ -1104,11 +1104,11 @@ export const pronounGroups = {
       "answer": "ťa",
       "choices": [
         "ťa",
-        "vami",
-        "nami",
-        "tebou"
+        "teba",
+        "ti",
+        "tebe"
       ],
-      "explanation": "Krátky tvar zámena „ty“ je „ťa“."
+      "explanation": "Zámeno „ty“: v páde genitív je dlhší tvar „teba“ a kratší „ťa“."
     },
     {
       "prompt": "Ktorý dlhší tvar zámena „ty“ možno použiť v páde genitív?",
@@ -1126,11 +1126,11 @@ export const pronounGroups = {
       "answer": "ti",
       "choices": [
         "ti",
-        "vami",
-        "nami",
-        "tebou"
+        "tebe",
+        "ťa",
+        "teba"
       ],
-      "explanation": "Krátky tvar zámena „ty“ je „ti“."
+      "explanation": "Zámeno „ty“: v páde datív je dlhší tvar „tebe“ a kratší „ti“."
     },
     {
       "prompt": "Ktorý dlhší tvar zámena „ty“ možno použiť v páde datív?",
@@ -1148,11 +1148,11 @@ export const pronounGroups = {
       "answer": "ťa",
       "choices": [
         "ťa",
-        "vami",
-        "nami",
-        "tebou"
+        "teba",
+        "ti",
+        "tebe"
       ],
-      "explanation": "Krátky tvar zámena „ty“ je „ťa“."
+      "explanation": "Zámeno „ty“: v páde akuzatív je dlhší tvar „teba“ a kratší „ťa“."
     },
     {
       "prompt": "Ktorý dlhší tvar zámena „ty“ možno použiť v páde akuzatív?",
@@ -1170,11 +1170,11 @@ export const pronounGroups = {
       "answer": "ho",
       "choices": [
         "ho",
-        "vami",
-        "nami",
-        "tebou"
+        "jeho",
+        "mu",
+        "jemu"
       ],
-      "explanation": "Krátky tvar zámena „on“ je „ho“."
+      "explanation": "Zámeno „on“: v páde genitív je dlhší tvar „jeho“ a kratší „ho“."
     },
     {
       "prompt": "Ktorý dlhší tvar zámena „on“ možno použiť v páde genitív?",
@@ -1192,11 +1192,11 @@ export const pronounGroups = {
       "answer": "mu",
       "choices": [
         "mu",
-        "vami",
-        "nami",
-        "tebou"
+        "jemu",
+        "jeho",
+        "ho"
       ],
-      "explanation": "Krátky tvar zámena „on“ je „mu“."
+      "explanation": "Zámeno „on“: v páde datív je dlhší tvar „jemu“ a kratší „mu“."
     },
     {
       "prompt": "Ktorý dlhší tvar zámena „on“ možno použiť v páde datív?",
@@ -1214,11 +1214,11 @@ export const pronounGroups = {
       "answer": "ho",
       "choices": [
         "ho",
-        "vami",
-        "nami",
-        "tebou"
+        "jeho",
+        "mu",
+        "jemu"
       ],
-      "explanation": "Krátky tvar zámena „on“ je „ho“."
+      "explanation": "Zámeno „on“: v páde akuzatív je dlhší tvar „jeho“ a kratší „ho“."
     },
     {
       "prompt": "Ktorý dlhší tvar zámena „on“ možno použiť v páde akuzatív?",
@@ -1236,11 +1236,11 @@ export const pronounGroups = {
       "answer": "jej",
       "choices": [
         "jej",
-        "nami",
-        "tebou",
-        "neho"
+        "nej",
+        "ju",
+        "ňu"
       ],
-      "explanation": "V genitíve môžeme použiť kratší tvar „jej“, po predložke „nej“."
+      "explanation": "Zámeno „ona“: v páde genitív je dlhší tvar „nej“ a kratší „jej“."
     },
     {
       "prompt": "Ktorý dlhší tvar zámena „ona“ možno použiť v páde genitív?",
@@ -1258,11 +1258,11 @@ export const pronounGroups = {
       "answer": "ju",
       "choices": [
         "ju",
-        "vami",
-        "nami",
-        "tebou"
+        "ňu",
+        "nej",
+        "jej"
       ],
-      "explanation": "Krátky tvar zámena „ona“ je „ju“."
+      "explanation": "Zámeno „ona“: v páde akuzatív je dlhší tvar „ňu“ a kratší „ju“."
     },
     {
       "prompt": "Ktorý dlhší tvar zámena „ona“ možno použiť v páde akuzatív?",
@@ -1581,220 +1581,220 @@ export const pronounGroups = {
       "answer": "my",
       "choices": [
         "my",
-        "ju",
-        "ma",
-        "ich"
+        "mi",
+        "ty",
+        "ti"
       ],
-      "explanation": "Rozhoduje osoba, pád a význam vety. My a ty sú základné tvary, mi a ti sú datívové krátke tvary; napadla mi myšlienka, ale napadol ma niekto."
+      "explanation": "My je tvar nominatívu množného čísla; mi je krátky datív jednotného čísla (mne)."
     },
     {
       "prompt": "Vyber správne slovo: „___ vám pomôžeme.“",
       "answer": "my",
       "choices": [
         "my",
-        "ju",
-        "mňa",
-        "oni"
+        "mi",
+        "ty",
+        "ti"
       ],
-      "explanation": "Rozhoduje osoba, pád a význam vety. My a ty sú základné tvary, mi a ti sú datívové krátke tvary; napadla mi myšlienka, ale napadol ma niekto."
+      "explanation": "My je tvar nominatívu množného čísla; mi je krátky datív jednotného čísla (mne)."
     },
     {
       "prompt": "Vyber správne slovo: „___ pôjdeme pešo.“",
       "answer": "my",
       "choices": [
         "my",
-        "ju",
-        "mne",
-        "ňou"
+        "mi",
+        "ty",
+        "ti"
       ],
-      "explanation": "Rozhoduje osoba, pád a význam vety. My a ty sú základné tvary, mi a ti sú datívové krátke tvary; napadla mi myšlienka, ale napadol ma niekto."
+      "explanation": "My je tvar nominatívu množného čísla; mi je krátky datív jednotného čísla (mne)."
     },
     {
       "prompt": "Vyber správne slovo: „___ ešte nekončíme.“",
       "answer": "my",
       "choices": [
         "my",
-        "ju",
-        "jemu",
-        "napadlo"
+        "mi",
+        "ty",
+        "ti"
       ],
-      "explanation": "Rozhoduje osoba, pád a význam vety. My a ty sú základné tvary, mi a ti sú datívové krátke tvary; napadla mi myšlienka, ale napadol ma niekto."
+      "explanation": "My je tvar nominatívu množného čísla; mi je krátky datív jednotného čísla (mne)."
     },
     {
       "prompt": "Vyber správne slovo: „Daj ___ prosím loptu. (ja)“",
       "answer": "mi",
       "choices": [
         "mi",
-        "ju",
-        "ona",
-        "vy"
+        "my",
+        "ty",
+        "ti"
       ],
-      "explanation": "Rozhoduje osoba, pád a význam vety. My a ty sú základné tvary, mi a ti sú datívové krátke tvary; napadla mi myšlienka, ale napadol ma niekto."
+      "explanation": "My je tvar nominatívu množného čísla; mi je krátky datív jednotného čísla (mne)."
     },
     {
       "prompt": "Vyber správne slovo: „Napíš ___ správu. (ja)“",
       "answer": "mi",
       "choices": [
         "mi",
-        "ju",
-        "teba",
-        "on"
+        "my",
+        "ty",
+        "ti"
       ],
-      "explanation": "Rozhoduje osoba, pád a význam vety. My a ty sú základné tvary, mi a ti sú datívové krátke tvary; napadla mi myšlienka, ale napadol ma niekto."
+      "explanation": "My je tvar nominatívu množného čísla; mi je krátky datív jednotného čísla (mne)."
     },
     {
       "prompt": "Vyber správne slovo: „Povedz ___ tajomstvo. (ja)“",
       "answer": "mi",
       "choices": [
         "mi",
-        "ju",
-        "ti",
-        "nám"
+        "my",
+        "ty",
+        "ti"
       ],
-      "explanation": "Rozhoduje osoba, pád a význam vety. My a ty sú základné tvary, mi a ti sú datívové krátke tvary; napadla mi myšlienka, ale napadol ma niekto."
+      "explanation": "My je tvar nominatívu množného čísla; mi je krátky datív jednotného čísla (mne)."
     },
     {
       "prompt": "Vyber správne slovo: „Pošli ___ pozdrav. (ja)“",
       "answer": "mi",
       "choices": [
         "mi",
-        "ju",
+        "my",
         "ty",
-        "vás"
+        "ti"
       ],
-      "explanation": "Rozhoduje osoba, pád a význam vety. My a ty sú základné tvary, mi a ti sú datívové krátke tvary; napadla mi myšlienka, ale napadol ma niekto."
+      "explanation": "My je tvar nominatívu množného čísla; mi je krátky datív jednotného čísla (mne)."
     },
     {
       "prompt": "Vyber správne slovo: „___ si to vedel.“",
       "answer": "ty",
       "choices": [
         "ty",
-        "ju",
-        "ma",
-        "ich"
+        "ti",
+        "my",
+        "mi"
       ],
-      "explanation": "Rozhoduje osoba, pád a význam vety. My a ty sú základné tvary, mi a ti sú datívové krátke tvary; napadla mi myšlienka, ale napadol ma niekto."
+      "explanation": "Ty je tvar nominatívu jednotného čísla; ti je krátky datív (tebe)."
     },
     {
       "prompt": "Vyber správne slovo: „___ prídeš večer.“",
       "answer": "ty",
       "choices": [
         "ty",
-        "ju",
-        "mňa",
-        "oni"
+        "ti",
+        "my",
+        "mi"
       ],
-      "explanation": "Rozhoduje osoba, pád a význam vety. My a ty sú základné tvary, mi a ti sú datívové krátke tvary; napadla mi myšlienka, ale napadol ma niekto."
+      "explanation": "Ty je tvar nominatívu jednotného čísla; ti je krátky datív (tebe)."
     },
     {
       "prompt": "Vyber správne slovo: „___ si vyhrala.“",
       "answer": "ty",
       "choices": [
         "ty",
-        "ju",
-        "mne",
-        "ňou"
+        "ti",
+        "my",
+        "mi"
       ],
-      "explanation": "Rozhoduje osoba, pád a význam vety. My a ty sú základné tvary, mi a ti sú datívové krátke tvary; napadla mi myšlienka, ale napadol ma niekto."
+      "explanation": "Ty je tvar nominatívu jednotného čísla; ti je krátky datív (tebe)."
     },
     {
       "prompt": "Vyber správne slovo: „___ sa rozhodneš.“",
       "answer": "ty",
       "choices": [
         "ty",
-        "ju",
-        "jemu",
-        "napadlo"
+        "ti",
+        "my",
+        "mi"
       ],
-      "explanation": "Rozhoduje osoba, pád a význam vety. My a ty sú základné tvary, mi a ti sú datívové krátke tvary; napadla mi myšlienka, ale napadol ma niekto."
+      "explanation": "Ty je tvar nominatívu jednotného čísla; ti je krátky datív (tebe)."
     },
     {
       "prompt": "Vyber správne slovo: „Poviem ___ pravdu. (ty)“",
       "answer": "ti",
       "choices": [
         "ti",
-        "ju",
-        "ona",
-        "vy"
+        "ty",
+        "my",
+        "mi"
       ],
-      "explanation": "Rozhoduje osoba, pád a význam vety. My a ty sú základné tvary, mi a ti sú datívové krátke tvary; napadla mi myšlienka, ale napadol ma niekto."
+      "explanation": "Ty je tvar nominatívu jednotného čísla; ti je krátky datív (tebe)."
     },
     {
       "prompt": "Vyber správne slovo: „Dám ___ druhú šancu. (ty)“",
       "answer": "ti",
       "choices": [
         "ti",
-        "ju",
+        "ty",
         "my",
-        "on"
+        "mi"
       ],
-      "explanation": "Rozhoduje osoba, pád a význam vety. My a ty sú základné tvary, mi a ti sú datívové krátke tvary; napadla mi myšlienka, ale napadol ma niekto."
+      "explanation": "Ty je tvar nominatívu jednotného čísla; ti je krátky datív (tebe)."
     },
     {
       "prompt": "Vyber správne slovo: „Pošlem ___ odkaz. (ty)“",
       "answer": "ti",
       "choices": [
         "ti",
-        "ju",
-        "teba",
-        "nám"
+        "ty",
+        "my",
+        "mi"
       ],
-      "explanation": "Rozhoduje osoba, pád a význam vety. My a ty sú základné tvary, mi a ti sú datívové krátke tvary; napadla mi myšlienka, ale napadol ma niekto."
+      "explanation": "Ty je tvar nominatívu jednotného čísla; ti je krátky datív (tebe)."
     },
     {
       "prompt": "Vyber správne slovo: „Poradím ___ s príkladom. (ty)“",
       "answer": "ti",
       "choices": [
         "ti",
-        "ju",
-        "teba",
-        "vás"
+        "ty",
+        "my",
+        "mi"
       ],
-      "explanation": "Rozhoduje osoba, pád a význam vety. My a ty sú základné tvary, mi a ti sú datívové krátke tvary; napadla mi myšlienka, ale napadol ma niekto."
+      "explanation": "Ty je tvar nominatívu jednotného čísla; ti je krátky datív (tebe)."
     },
     {
       "prompt": "Vyber správne slovo: „___ mi výborná myšlienka.“",
       "answer": "napadla",
       "choices": [
         "napadla",
-        "ju",
-        "ma",
-        "ich"
+        "napadol",
+        "napadlo",
+        "napadli"
       ],
-      "explanation": "Rozhoduje osoba, pád a význam vety. My a ty sú základné tvary, mi a ti sú datívové krátke tvary; napadla mi myšlienka, ale napadol ma niekto."
+      "explanation": "Napadla mi myšlienka znamená, že som dostal nápad; napadol ma niekto znamená, že ma ohrozil."
     },
     {
       "prompt": "Vyber správne slovo: „Včera ma ___ nepriateľ.“",
       "answer": "napadol",
       "choices": [
         "napadol",
-        "ju",
-        "mňa",
-        "oni"
+        "napadla",
+        "napadlo",
+        "napadli"
       ],
-      "explanation": "Rozhoduje osoba, pád a význam vety. My a ty sú základné tvary, mi a ti sú datívové krátke tvary; napadla mi myšlienka, ale napadol ma niekto."
+      "explanation": "Napadla mi myšlienka znamená, že som dostal nápad; napadol ma niekto znamená, že ma ohrozil."
     },
     {
       "prompt": "Vyber správne slovo: „Zrazu mi ___ dobrá myšlienka.“",
       "answer": "napadla",
       "choices": [
         "napadla",
-        "ju",
-        "mne",
-        "ňou"
+        "napadol",
+        "napadlo",
+        "napadli"
       ],
-      "explanation": "Rozhoduje osoba, pád a význam vety. My a ty sú základné tvary, mi a ti sú datívové krátke tvary; napadla mi myšlienka, ale napadol ma niekto."
+      "explanation": "Napadla mi myšlienka znamená, že som dostal nápad; napadol ma niekto znamená, že ma ohrozil."
     },
     {
       "prompt": "Vyber správne slovo: „V lese ma ___ diviak.“",
       "answer": "napadol",
       "choices": [
         "napadol",
-        "ju",
-        "jemu",
-        "napadlo"
+        "napadla",
+        "napadlo",
+        "napadli"
       ],
-      "explanation": "Rozhoduje osoba, pád a význam vety. My a ty sú základné tvary, mi a ti sú datívové krátke tvary; napadla mi myšlienka, ale napadol ma niekto."
+      "explanation": "Napadla mi myšlienka znamená, že som dostal nápad; napadol ma niekto znamená, že ma ohrozil."
     }
   ],
   "oni_ony": [
@@ -2172,7 +2172,7 @@ export const pronounGroups = {
         "zo svojím",
         "s svojím"
       ],
-      "explanation": "Správne píšeme „so svojím“. Pri s/so a k/ku pred osobnými zámenami sa pri výslovnosti neuplatňuje spodobovanie; vokalizácia uľahčuje výslovnosť."
+      "explanation": "Pri privlastňovacích zámenách dbáme na správny zápis predložky a na zakončenie „-ím“ v inštrumentáli jednotného čísla. Správne: so svojím."
     },
     {
       "prompt": "Vyber správny pravopisný tvar: predložka s/so a zámeno váš v inštrumentáli.",
@@ -2183,7 +2183,7 @@ export const pronounGroups = {
         "z vaším",
         "zo vaším"
       ],
-      "explanation": "Správne píšeme „s vaším“. Pri s/so a k/ku pred osobnými zámenami sa pri výslovnosti neuplatňuje spodobovanie; vokalizácia uľahčuje výslovnosť."
+      "explanation": "Pri privlastňovacích zámenách dbáme na správny zápis predložky a na zakončenie „-ím“ v inštrumentáli jednotného čísla. Správne: s vaším."
     },
     {
       "prompt": "Vyber správny pravopisný tvar: predložka s/so a zámeno môj v inštrumentáli.",
@@ -2194,10 +2194,10 @@ export const pronounGroups = {
         "z mojím",
         "so mojím"
       ],
-      "explanation": "Správne píšeme „s mojím“. Pri s/so a k/ku pred osobnými zámenami sa pri výslovnosti neuplatňuje spodobovanie; vokalizácia uľahčuje výslovnosť."
+      "explanation": "Pri privlastňovacích zámenách dbáme na správny zápis predložky a na zakončenie „-ím“ v inštrumentáli jednotného čísla. Správne: s mojím."
     },
     {
-      "prompt": "Vyber správny pravopisný tvar: správny zápis spojenia so mnou.",
+      "prompt": "Vyber správny zápis spojenia predložky s/so a zámena ja (po predložke).",
       "answer": "so mnou",
       "choices": [
         "so mnou",
@@ -2208,7 +2208,7 @@ export const pronounGroups = {
       "explanation": "Správne píšeme „so mnou“. Pri s/so a k/ku pred osobnými zámenami sa pri výslovnosti neuplatňuje spodobovanie; vokalizácia uľahčuje výslovnosť."
     },
     {
-      "prompt": "Vyber správny pravopisný tvar: správny zápis spojenia ku mne.",
+      "prompt": "Vyber správny zápis spojenia predložky k/ku a zámena ja (po predložke).",
       "answer": "ku mne",
       "choices": [
         "ku mne",
@@ -2219,7 +2219,7 @@ export const pronounGroups = {
       "explanation": "Správne píšeme „ku mne“. Pri s/so a k/ku pred osobnými zámenami sa pri výslovnosti neuplatňuje spodobovanie; vokalizácia uľahčuje výslovnosť."
     },
     {
-      "prompt": "Vyber správny pravopisný tvar: správny zápis spojenia s tebou.",
+      "prompt": "Vyber správny zápis spojenia predložky s/so a zámena ty (po predložke).",
       "answer": "s tebou",
       "choices": [
         "s tebou",
@@ -2230,7 +2230,7 @@ export const pronounGroups = {
       "explanation": "Správne píšeme „s tebou“. Pri s/so a k/ku pred osobnými zámenami sa pri výslovnosti neuplatňuje spodobovanie; vokalizácia uľahčuje výslovnosť."
     },
     {
-      "prompt": "Vyber správny pravopisný tvar: správny zápis spojenia k nám.",
+      "prompt": "Vyber správny zápis spojenia predložky k/ku a zámena my (po predložke).",
       "answer": "k nám",
       "choices": [
         "k nám",
@@ -2271,7 +2271,7 @@ export const pronounGroups = {
         "svaším",
         "so vašímm"
       ],
-      "explanation": "Predložku píšeme s, aj keď pri výslovnosti môže znieť ako z."
+      "explanation": "Pri privlastňovacích zámenách dbáme na správny zápis predložky a na zakončenie „-ím“ v inštrumentáli jednotného čísla. Správne: s vaším."
     }
   ],
   "privlast_skl": [
@@ -2291,9 +2291,9 @@ export const pronounGroups = {
       "answer": "môjho",
       "choices": [
         "môjho",
-        "moja",
-        "moje",
-        "moji"
+        "môjmu",
+        "mojom",
+        "mojím"
       ],
       "explanation": "V spojení mužský životný jednotné a v páde genitív má zámeno „môj“ tvar „môjho“."
     },
@@ -2302,9 +2302,9 @@ export const pronounGroups = {
       "answer": "môjmu",
       "choices": [
         "môjmu",
-        "moje",
-        "moji",
-        "môjho"
+        "môjho",
+        "mojom",
+        "mojim"
       ],
       "explanation": "V spojení mužský životný jednotné a v páde datív má zámeno „môj“ tvar „môjmu“."
     },
@@ -2313,9 +2313,9 @@ export const pronounGroups = {
       "answer": "môjho",
       "choices": [
         "môjho",
-        "moji",
         "môjmu",
-        "mojej"
+        "mojom",
+        "mojím"
       ],
       "explanation": "V spojení mužský životný jednotné a v páde akuzatív má zámeno „môj“ tvar „môjho“."
     },
@@ -2324,9 +2324,9 @@ export const pronounGroups = {
       "answer": "mojom",
       "choices": [
         "mojom",
+        "mojím",
         "môjho",
-        "môjmu",
-        "mojej"
+        "môjmu"
       ],
       "explanation": "V spojení mužský životný jednotné a v páde lokál má zámeno „môj“ tvar „mojom“."
     },
@@ -2335,9 +2335,9 @@ export const pronounGroups = {
       "answer": "mojím",
       "choices": [
         "mojím",
-        "môjmu",
-        "mojej",
-        "moju"
+        "mojim",
+        "mojimi",
+        "mojom"
       ],
       "explanation": "V spojení mužský životný jednotné a v páde inštrumentál má zámeno „môj“ tvar „mojím“."
     },
@@ -2346,9 +2346,9 @@ export const pronounGroups = {
       "answer": "môj",
       "choices": [
         "môj",
-        "moju",
-        "mojom",
-        "mojím"
+        "moja",
+        "moje",
+        "moji"
       ],
       "explanation": "V spojení mužský neživotný jednotné a v páde nominatív má zámeno „môj“ tvar „môj“."
     },
@@ -2357,9 +2357,9 @@ export const pronounGroups = {
       "answer": "môjho",
       "choices": [
         "môjho",
+        "môjmu",
         "mojom",
-        "mojím",
-        "mojou"
+        "mojím"
       ],
       "explanation": "V spojení mužský neživotný jednotné a v páde genitív má zámeno „môj“ tvar „môjho“."
     },
@@ -2368,9 +2368,9 @@ export const pronounGroups = {
       "answer": "môjmu",
       "choices": [
         "môjmu",
-        "mojím",
-        "mojou",
-        "mojich"
+        "môjho",
+        "mojom",
+        "mojim"
       ],
       "explanation": "V spojení mužský neživotný jednotné a v páde datív má zámeno „môj“ tvar „môjmu“."
     },
@@ -2379,9 +2379,9 @@ export const pronounGroups = {
       "answer": "môj",
       "choices": [
         "môj",
-        "mojou",
-        "mojich",
-        "mojim"
+        "moja",
+        "moje",
+        "moji"
       ],
       "explanation": "V spojení mužský neživotný jednotné a v páde akuzatív má zámeno „môj“ tvar „môj“."
     },
@@ -2390,9 +2390,9 @@ export const pronounGroups = {
       "answer": "mojom",
       "choices": [
         "mojom",
-        "mojich",
-        "mojim",
-        "mojimi"
+        "mojím",
+        "môjho",
+        "môjmu"
       ],
       "explanation": "V spojení mužský neživotný jednotné a v páde lokál má zámeno „môj“ tvar „mojom“."
     },
@@ -2403,7 +2403,7 @@ export const pronounGroups = {
         "mojím",
         "mojim",
         "mojimi",
-        "môj"
+        "mojom"
       ],
       "explanation": "V spojení mužský neživotný jednotné a v páde inštrumentál má zámeno „môj“ tvar „mojím“."
     },
@@ -2412,9 +2412,9 @@ export const pronounGroups = {
       "answer": "moje",
       "choices": [
         "moje",
-        "mojimi",
-        "môj",
-        "moja"
+        "moja",
+        "moji",
+        "môj"
       ],
       "explanation": "V spojení stredný jednotné a v páde nominatív má zámeno „môj“ tvar „moje“."
     },
@@ -2423,9 +2423,9 @@ export const pronounGroups = {
       "answer": "môjho",
       "choices": [
         "môjho",
-        "môj",
-        "moja",
-        "moje"
+        "môjmu",
+        "mojom",
+        "mojím"
       ],
       "explanation": "V spojení stredný jednotné a v páde genitív má zámeno „môj“ tvar „môjho“."
     },
@@ -2434,9 +2434,9 @@ export const pronounGroups = {
       "answer": "môjmu",
       "choices": [
         "môjmu",
-        "moja",
-        "moje",
-        "moji"
+        "môjho",
+        "mojom",
+        "mojim"
       ],
       "explanation": "V spojení stredný jednotné a v páde datív má zámeno „môj“ tvar „môjmu“."
     },
@@ -2445,9 +2445,9 @@ export const pronounGroups = {
       "answer": "moje",
       "choices": [
         "moje",
+        "moja",
         "moji",
-        "môjho",
-        "môjmu"
+        "môj"
       ],
       "explanation": "V spojení stredný jednotné a v páde akuzatív má zámeno „môj“ tvar „moje“."
     },
@@ -2456,7 +2456,7 @@ export const pronounGroups = {
       "answer": "mojom",
       "choices": [
         "mojom",
-        "moji",
+        "mojím",
         "môjho",
         "môjmu"
       ],
@@ -2467,9 +2467,9 @@ export const pronounGroups = {
       "answer": "mojím",
       "choices": [
         "mojím",
-        "môjho",
-        "môjmu",
-        "mojej"
+        "mojim",
+        "mojimi",
+        "mojom"
       ],
       "explanation": "V spojení stredný jednotné a v páde inštrumentál má zámeno „môj“ tvar „mojím“."
     },
@@ -2478,9 +2478,9 @@ export const pronounGroups = {
       "answer": "moja",
       "choices": [
         "moja",
-        "mojej",
         "moju",
-        "mojom"
+        "moje",
+        "môj"
       ],
       "explanation": "V spojení ženský jednotné a v páde nominatív má zámeno „môj“ tvar „moja“."
     },
@@ -2489,8 +2489,8 @@ export const pronounGroups = {
       "answer": "mojej",
       "choices": [
         "mojej",
+        "mojou",
         "moju",
-        "mojom",
         "mojím"
       ],
       "explanation": "V spojení ženský jednotné a v páde genitív má zámeno „môj“ tvar „mojej“."
@@ -2500,9 +2500,9 @@ export const pronounGroups = {
       "answer": "mojej",
       "choices": [
         "mojej",
-        "mojom",
-        "mojím",
-        "mojou"
+        "mojou",
+        "moju",
+        "mojím"
       ],
       "explanation": "V spojení ženský jednotné a v páde datív má zámeno „môj“ tvar „mojej“."
     },
@@ -2511,9 +2511,9 @@ export const pronounGroups = {
       "answer": "moju",
       "choices": [
         "moju",
-        "mojím",
-        "mojou",
-        "mojich"
+        "moja",
+        "mojej",
+        "mojou"
       ],
       "explanation": "V spojení ženský jednotné a v páde akuzatív má zámeno „môj“ tvar „moju“."
     },
@@ -2523,8 +2523,8 @@ export const pronounGroups = {
       "choices": [
         "mojej",
         "mojou",
-        "mojich",
-        "mojim"
+        "moju",
+        "mojím"
       ],
       "explanation": "V spojení ženský jednotné a v páde lokál má zámeno „môj“ tvar „mojej“."
     },
@@ -2533,9 +2533,9 @@ export const pronounGroups = {
       "answer": "mojou",
       "choices": [
         "mojou",
-        "mojich",
-        "mojim",
-        "mojimi"
+        "mojej",
+        "moju",
+        "mojím"
       ],
       "explanation": "V spojení ženský jednotné a v páde inštrumentál má zámeno „môj“ tvar „mojou“."
     },
@@ -2544,9 +2544,9 @@ export const pronounGroups = {
       "answer": "moji",
       "choices": [
         "moji",
-        "mojim",
-        "mojimi",
-        "môj"
+        "moje",
+        "mojich",
+        "mojim"
       ],
       "explanation": "V spojení mužský životný množné a v páde nominatív má zámeno „môj“ tvar „moji“."
     },
@@ -2555,9 +2555,9 @@ export const pronounGroups = {
       "answer": "mojich",
       "choices": [
         "mojich",
+        "mojim",
         "mojimi",
-        "môj",
-        "moja"
+        "moji"
       ],
       "explanation": "V spojení mužský životný množné a v páde genitív má zámeno „môj“ tvar „mojich“."
     },
@@ -2566,9 +2566,9 @@ export const pronounGroups = {
       "answer": "mojim",
       "choices": [
         "mojim",
-        "môj",
-        "moja",
-        "moje"
+        "mojím",
+        "mojich",
+        "mojimi"
       ],
       "explanation": "V spojení mužský životný množné a v páde datív má zámeno „môj“ tvar „mojim“."
     },
@@ -2577,8 +2577,8 @@ export const pronounGroups = {
       "answer": "mojich",
       "choices": [
         "mojich",
-        "moja",
-        "moje",
+        "mojim",
+        "mojimi",
         "moji"
       ],
       "explanation": "V spojení mužský životný množné a v páde akuzatív má zámeno „môj“ tvar „mojich“."
@@ -2588,9 +2588,9 @@ export const pronounGroups = {
       "answer": "mojich",
       "choices": [
         "mojich",
-        "moje",
-        "moji",
-        "môjho"
+        "mojim",
+        "mojimi",
+        "moji"
       ],
       "explanation": "V spojení mužský životný množné a v páde lokál má zámeno „môj“ tvar „mojich“."
     },
@@ -2599,9 +2599,9 @@ export const pronounGroups = {
       "answer": "mojimi",
       "choices": [
         "mojimi",
-        "moji",
-        "môjho",
-        "môjmu"
+        "mojim",
+        "mojím",
+        "mojich"
       ],
       "explanation": "V spojení mužský životný množné a v páde inštrumentál má zámeno „môj“ tvar „mojimi“."
     },
@@ -2610,9 +2610,9 @@ export const pronounGroups = {
       "answer": "moje",
       "choices": [
         "moje",
-        "môjmu",
-        "mojej",
-        "moju"
+        "moja",
+        "moji",
+        "môj"
       ],
       "explanation": "V spojení ostatné rody množné a v páde nominatív má zámeno „môj“ tvar „moje“."
     },
@@ -2621,9 +2621,9 @@ export const pronounGroups = {
       "answer": "mojich",
       "choices": [
         "mojich",
-        "môjmu",
-        "mojej",
-        "moju"
+        "mojim",
+        "mojimi",
+        "moji"
       ],
       "explanation": "V spojení ostatné rody množné a v páde genitív má zámeno „môj“ tvar „mojich“."
     },
@@ -2632,9 +2632,9 @@ export const pronounGroups = {
       "answer": "mojim",
       "choices": [
         "mojim",
-        "mojej",
-        "moju",
-        "mojom"
+        "mojím",
+        "mojich",
+        "mojimi"
       ],
       "explanation": "V spojení ostatné rody množné a v páde datív má zámeno „môj“ tvar „mojim“."
     },
@@ -2643,9 +2643,9 @@ export const pronounGroups = {
       "answer": "moje",
       "choices": [
         "moje",
-        "mojom",
-        "mojím",
-        "mojou"
+        "moja",
+        "moji",
+        "môj"
       ],
       "explanation": "V spojení ostatné rody množné a v páde akuzatív má zámeno „môj“ tvar „moje“."
     },
@@ -2654,9 +2654,9 @@ export const pronounGroups = {
       "answer": "mojich",
       "choices": [
         "mojich",
-        "mojom",
-        "mojím",
-        "mojou"
+        "mojim",
+        "mojimi",
+        "moji"
       ],
       "explanation": "V spojení ostatné rody množné a v páde lokál má zámeno „môj“ tvar „mojich“."
     },
@@ -2665,8 +2665,8 @@ export const pronounGroups = {
       "answer": "mojimi",
       "choices": [
         "mojimi",
+        "mojim",
         "mojím",
-        "mojou",
         "mojich"
       ],
       "explanation": "V spojení ostatné rody množné a v páde inštrumentál má zámeno „môj“ tvar „mojimi“."
@@ -2828,7 +2828,7 @@ export const pronounGroups = {
   ],
   "vyznam": [
     {
-      "prompt": "Zámeno „jeho“, „jej“ alebo „ich“ vo vete „Jeho som včera stretla.“ je osobné...",
+      "prompt": "Vo vete „Jeho som včera stretla.“ je zámeno „Jeho“ osobné...",
       "answer": "základné",
       "choices": [
         "základné",
@@ -2839,7 +2839,7 @@ export const pronounGroups = {
       "explanation": "Pýtame sa pádovou otázkou (koho? komu?)."
     },
     {
-      "prompt": "Zámeno „jeho“, „jej“ alebo „ich“ vo vete „Jeho bunda je modrá.“ je osobné...",
+      "prompt": "Vo vete „Jeho bunda je modrá.“ je zámeno „Jeho“ osobné...",
       "answer": "privlastňovacie",
       "choices": [
         "privlastňovacie",
@@ -2850,7 +2850,7 @@ export const pronounGroups = {
       "explanation": "Pýtame sa čí? čia? čie?"
     },
     {
-      "prompt": "Zámeno „jeho“, „jej“ alebo „ich“ vo vete „Dala som jej list.“ je osobné...",
+      "prompt": "Vo vete „Dala som jej list.“ je zámeno „jej“ osobné...",
       "answer": "základné",
       "choices": [
         "základné",
@@ -2861,7 +2861,7 @@ export const pronounGroups = {
       "explanation": "Pýtame sa pádovou otázkou (koho? komu?)."
     },
     {
-      "prompt": "Zámeno „jeho“, „jej“ alebo „ich“ vo vete „Jej list je na stole.“ je osobné...",
+      "prompt": "Vo vete „Jej list je na stole.“ je zámeno „Jej“ osobné...",
       "answer": "privlastňovacie",
       "choices": [
         "privlastňovacie",
@@ -2872,7 +2872,7 @@ export const pronounGroups = {
       "explanation": "Pýtame sa čí? čia? čie?"
     },
     {
-      "prompt": "Zámeno „jeho“, „jej“ alebo „ich“ vo vete „Videla som ich.“ je osobné...",
+      "prompt": "Vo vete „Videla som ich.“ je zámeno „ich“ osobné...",
       "answer": "základné",
       "choices": [
         "základné",
@@ -2883,7 +2883,7 @@ export const pronounGroups = {
       "explanation": "Pýtame sa pádovou otázkou (koho? komu?)."
     },
     {
-      "prompt": "Zámeno „jeho“, „jej“ alebo „ich“ vo vete „Ich bicykle stoja pri dome.“ je osobné...",
+      "prompt": "Vo vete „Ich bicykle stoja pri dome.“ je zámeno „Ich“ osobné...",
       "answer": "privlastňovacie",
       "choices": [
         "privlastňovacie",
@@ -2905,7 +2905,7 @@ export const pronounGroups = {
       "explanation": "Pýtame sa pádovou otázkou (koho? komu?)."
     },
     {
-      "prompt": "Zámeno „jeho“, „jej“ alebo „ich“ vo vete „O jeho veci sa nestaraj.“ je osobné...",
+      "prompt": "Vo vete „O jeho veci sa nestaraj.“ je zámeno „jeho“ osobné...",
       "answer": "privlastňovacie",
       "choices": [
         "privlastňovacie",
@@ -2916,7 +2916,7 @@ export const pronounGroups = {
       "explanation": "Pýtame sa čí? čia? čie?"
     },
     {
-      "prompt": "Zámeno „jeho“, „jej“ alebo „ich“ vo vete „Požičal som jej pero.“ je osobné...",
+      "prompt": "Vo vete „Požičal som jej pero.“ je zámeno „jej“ osobné...",
       "answer": "základné",
       "choices": [
         "základné",
@@ -2927,7 +2927,7 @@ export const pronounGroups = {
       "explanation": "Pýtame sa pádovou otázkou (koho? komu?)."
     },
     {
-      "prompt": "Zámeno „jeho“, „jej“ alebo „ich“ vo vete „Jej pero sa stratilo.“ je osobné...",
+      "prompt": "Vo vete „Jej pero sa stratilo.“ je zámeno „Jej“ osobné...",
       "answer": "privlastňovacie",
       "choices": [
         "privlastňovacie",
@@ -2938,7 +2938,7 @@ export const pronounGroups = {
       "explanation": "Pýtame sa čí? čia? čie?"
     },
     {
-      "prompt": "Zámeno „jeho“, „jej“ alebo „ich“ vo vete „Videl si ich pri škole.“ je osobné...",
+      "prompt": "Vo vete „Videl si ich pri škole.“ je zámeno „ich“ osobné...",
       "answer": "základné",
       "choices": [
         "základné",
@@ -2949,7 +2949,7 @@ export const pronounGroups = {
       "explanation": "Pýtame sa pádovou otázkou (koho? komu?)."
     },
     {
-      "prompt": "Zámeno „jeho“, „jej“ alebo „ich“ vo vete „Ich škola je nová.“ je osobné...",
+      "prompt": "Vo vete „Ich škola je nová.“ je zámeno „Ich“ osobné...",
       "answer": "privlastňovacie",
       "choices": [
         "privlastňovacie",
@@ -2960,7 +2960,7 @@ export const pronounGroups = {
       "explanation": "Pýtame sa čí? čia? čie?"
     },
     {
-      "prompt": "Zámeno „jeho“, „jej“ alebo „ich“ vo vete „Pomôžeme jej zajtra.“ je osobné...",
+      "prompt": "Vo vete „Pomôžeme jej zajtra.“ je zámeno „jej“ osobné...",
       "answer": "základné",
       "choices": [
         "základné",
@@ -2971,7 +2971,7 @@ export const pronounGroups = {
       "explanation": "Pýtame sa pádovou otázkou (koho? komu?)."
     },
     {
-      "prompt": "Zámeno „jeho“, „jej“ alebo „ich“ vo vete „Jej mama je doma.“ je osobné...",
+      "prompt": "Vo vete „Jej mama je doma.“ je zámeno „Jej“ osobné...",
       "answer": "privlastňovacie",
       "choices": [
         "privlastňovacie",
@@ -2982,7 +2982,7 @@ export const pronounGroups = {
       "explanation": "Pýtame sa čí? čia? čie?"
     },
     {
-      "prompt": "Zámeno „jeho“, „jej“ alebo „ich“ vo vete „Stretol som jeho.“ je osobné...",
+      "prompt": "Vo vete „Stretol som jeho.“ je zámeno „jeho“ osobné...",
       "answer": "základné",
       "choices": [
         "základné",
@@ -2993,7 +2993,7 @@ export const pronounGroups = {
       "explanation": "Pýtame sa pádovou otázkou (koho? komu?)."
     },
     {
-      "prompt": "Zámeno „jeho“, „jej“ alebo „ich“ vo vete „Jeho mama nás zavolala.“ je osobné...",
+      "prompt": "Vo vete „Jeho mama nás zavolala.“ je zámeno „Jeho“ osobné...",
       "answer": "privlastňovacie",
       "choices": [
         "privlastňovacie",
