@@ -121,6 +121,13 @@ export const topics: Topic[] = [
 		icon: "🎭",
 	},
 	{
+		id: "sk-pronouns",
+		subject: "slovak",
+		name: "Osobné zámená",
+		description: "Základné aj privlastňovacie zámená: skloňovanie, tvary, pravopis a použitie vo vetách. 279 otázok zo 6. ročníka.",
+		icon: "👥",
+	},
+	{
 		id: "bio-microbes",
 		subject: "biology",
 		name: "Mikroorganizmy žijúce s človekom",
