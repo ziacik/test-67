@@ -1,4 +1,5 @@
 import type { SpellingQuestionSpec } from "./slovakSpelling";
+import { pronounBank } from "./pronounsBank";
 import { lYQuestions, nonSelectedWordQuestions, relatedSelectedWordQuestions, selectedWordQuestions, spellingQuestions } from "./slovakSpelling";
 
 export type ChoiceSpec = {
@@ -1353,6 +1354,7 @@ export const slovakQuestionBanks = {
 	"sk-sentences": sentenceQuestions,
 	"sk-reading": readingQuestionsBank,
 	"sk-literature": literatureQuestions,
+	"sk-pronouns": pronounBank,
 } as const;
 
 export const slovakBankSizes = Object.fromEntries(
