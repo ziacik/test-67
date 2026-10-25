@@ -18,6 +18,7 @@ const topics = [
 	"sk-sentences",
 	"sk-reading",
 	"sk-literature",
+	"sk-pronouns",
 	"sk-mixed",
 ] as const;
 
