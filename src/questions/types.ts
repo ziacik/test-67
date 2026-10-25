@@ -17,7 +17,8 @@ export type SlovakTopicId =
 	| "sk-vocabulary"
 	| "sk-sentences"
 	| "sk-reading"
-	| "sk-literature";
+	| "sk-literature"
+	| "sk-pronouns";
 
 export type BiologyTopicId = "bio-microbes";
 export type HistoryTopicId = "hist-mixed" | "hist-obdobia" | "hist-archeologia" | "hist-vyvoj" | "hist-paleolit" | "hist-neolit" | "hist-kovy";
