@@ -1,4 +1,5 @@
 import type { SlovakTopicId } from "./types";
+import { pronounGroups, type PronounGroupId, type PronounSpec } from "./pronounsBank";
 import {
 	literatureQuestionGroups,
 	nounQuestionGroups,
@@ -104,14 +105,46 @@ function literatureRound(): SlovakRoundItem[] {
 	]));
 }
 
+
+// Každé kolo obsahuje všetkých desať oblastí učiva.
+// Otázky ťaháme zo zásobníkov, aby sa neopakovali pred ich vyčerpaním.
+const pronounBags = new Map<PronounGroupId, PronounSpec[]>();
+let previousPronounRound = new Set<PronounSpec>();
+
+function drawPronoun(group: PronounGroupId): PronounSpec {
+	let bag = pronounBags.get(group) ?? [];
+	if (bag.length === 0) {
+		const pool = pronounGroups[group];
+		bag = [
+			...shuffle(pool.filter((spec) => !previousPronounRound.has(spec))),
+			...shuffle(pool.filter((spec) => previousPronounRound.has(spec))),
+		];
+	}
+	const chosen = bag.shift();
+	if (!chosen) throw new Error("Empty pronoun group: " + group);
+	pronounBags.set(group, bag);
+	return chosen;
+}
+
+function pronounRound(): SlovakRoundItem[] {
+	const topic: SlovakConcreteTopicId = "sk-pronouns";
+	const selected = (Object.keys(pronounGroups) as PronounGroupId[]).map((group) => ({
+		topic,
+		spec: drawPronoun(group),
+	}));
+	previousPronounRound = new Set(selected.map(({ spec }) => spec));
+	return shuffle(selected);
+}
+
 function mixedRound(): SlovakRoundItem[] {
 	const plan: Array<[SlovakConcreteTopicId, number]> = [
 		["sk-spelling", 2],
 		["sk-nouns", 2],
 		["sk-vocabulary", 2],
-		["sk-sentences", 2],
+		["sk-sentences", 1],
 		["sk-reading", 1],
 		["sk-literature", 1],
+		["sk-pronouns", 1],
 	];
 	return shuffle(plan.flatMap(([topic, count]) => take(topic, slovakQuestionBanks[topic], count)));
 }
@@ -124,6 +157,7 @@ export function buildBalancedSlovakRound(topic: SlovakTopicId): SlovakRoundItem[
 		case "sk-sentences": return sentenceRound();
 		case "sk-reading": return readingRound();
 		case "sk-literature": return literatureRound();
+		case "sk-pronouns": return pronounRound();
 		case "sk-mixed": return mixedRound();
 	}
 }
