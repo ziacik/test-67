@@ -67,9 +67,10 @@ describe("balanced Slovak quiz rounds", () => {
 			expect(count("sk-spelling")).toBe(2);
 			expect(count("sk-nouns")).toBe(2);
 			expect(count("sk-vocabulary")).toBe(2);
-			expect(count("sk-sentences")).toBe(2);
+			expect(count("sk-sentences")).toBe(1);
 			expect(count("sk-reading")).toBe(1);
 			expect(count("sk-literature")).toBe(1);
+			expect(count("sk-pronouns")).toBe(1);
 		}
 	});
 });
