@@ -110,7 +110,7 @@ export const pronounGroups = {
         "pádovými otázkami",
         "výhradne otázkou čí?",
         "výhradne otázkou koľko?",
-        "výhradne otázkou aký? sati? "
+        "výhradne otázkou aký?"
       ],
       "explanation": "Na osobné základné zámená sa pýtame otázkami príslušného pádu (kto, koho, komu...)."
     },
@@ -172,7 +172,7 @@ export const pronounGroups = {
   ],
   "triedenie": [
     {
-      "prompt": "Urči druh zvýrazneného zámena vo vete: „Ja som prišiel včas.“ (zámeno Ja).",
+      "prompt": "Vo vete „Ja som prišiel včas.“ je zámeno „Ja“ akého druhu?",
       "answer": "osobné základné",
       "choices": [
         "osobné základné",
@@ -183,7 +183,7 @@ export const pronounGroups = {
       "explanation": "Zámeno tu zastupuje osobu; pýtame sa pádovou otázkou."
     },
     {
-      "prompt": "Urči druh zvýrazneného zámena vo vete: „Ty si to vedela.“ (zámeno Ty).",
+      "prompt": "Vo vete „Ty si to vedela.“ je zámeno „Ty“ akého druhu?",
       "answer": "osobné základné",
       "choices": [
         "osobné základné",
@@ -194,7 +194,7 @@ export const pronounGroups = {
       "explanation": "Zámeno tu zastupuje osobu; pýtame sa pádovou otázkou."
     },
     {
-      "prompt": "Urči druh zvýrazneného zámena vo vete: „On už odišiel.“ (zámeno On).",
+      "prompt": "Vo vete „On už odišiel.“ je zámeno „On“ akého druhu?",
       "answer": "osobné základné",
       "choices": [
         "osobné základné",
@@ -205,7 +205,7 @@ export const pronounGroups = {
       "explanation": "Zámeno tu zastupuje osobu; pýtame sa pádovou otázkou."
     },
     {
-      "prompt": "Urči druh zvýrazneného zámena vo vete: „Ona sa usmieva.“ (zámeno Ona).",
+      "prompt": "Vo vete „Ona sa usmieva.“ je zámeno „Ona“ akého druhu?",
       "answer": "osobné základné",
       "choices": [
         "osobné základné",
@@ -216,7 +216,7 @@ export const pronounGroups = {
       "explanation": "Zámeno tu zastupuje osobu; pýtame sa pádovou otázkou."
     },
     {
-      "prompt": "Urči druh zvýrazneného zámena vo vete: „Ono sa stratilo.“ (zámeno Ono).",
+      "prompt": "Vo vete „Ono sa stratilo.“ je zámeno „Ono“ akého druhu?",
       "answer": "osobné základné",
       "choices": [
         "osobné základné",
@@ -227,7 +227,7 @@ export const pronounGroups = {
       "explanation": "Zámeno tu zastupuje osobu; pýtame sa pádovou otázkou."
     },
     {
-      "prompt": "Urči druh zvýrazneného zámena vo vete: „My sa vraciame.“ (zámeno My).",
+      "prompt": "Vo vete „My sa vraciame.“ je zámeno „My“ akého druhu?",
       "answer": "osobné základné",
       "choices": [
         "osobné základné",
@@ -238,7 +238,7 @@ export const pronounGroups = {
       "explanation": "Zámeno tu zastupuje osobu; pýtame sa pádovou otázkou."
     },
     {
-      "prompt": "Urči druh zvýrazneného zámena vo vete: „Vy ste pripravení.“ (zámeno Vy).",
+      "prompt": "Vo vete „Vy ste pripravení.“ je zámeno „Vy“ akého druhu?",
       "answer": "osobné základné",
       "choices": [
         "osobné základné",
@@ -249,7 +249,7 @@ export const pronounGroups = {
       "explanation": "Zámeno tu zastupuje osobu; pýtame sa pádovou otázkou."
     },
     {
-      "prompt": "Urči druh zvýrazneného zámena vo vete: „Oni sú v škole.“ (zámeno Oni).",
+      "prompt": "Vo vete „Oni sú v škole.“ je zámeno „Oni“ akého druhu?",
       "answer": "osobné základné",
       "choices": [
         "osobné základné",
@@ -260,7 +260,7 @@ export const pronounGroups = {
       "explanation": "Zámeno tu zastupuje osobu; pýtame sa pádovou otázkou."
     },
     {
-      "prompt": "Urči druh zvýrazneného zámena vo vete: „Ony ešte čakajú.“ (zámeno Ony).",
+      "prompt": "Vo vete „Ony ešte čakajú.“ je zámeno „Ony“ akého druhu?",
       "answer": "osobné základné",
       "choices": [
         "osobné základné",
@@ -271,7 +271,7 @@ export const pronounGroups = {
       "explanation": "Zámeno tu zastupuje osobu; pýtame sa pádovou otázkou."
     },
     {
-      "prompt": "Urči druh zvýrazneného zámena vo vete: „Videla som ho.“ (zámeno ho).",
+      "prompt": "Vo vete „Videla som ho.“ je zámeno „ho“ akého druhu?",
       "answer": "osobné základné",
       "choices": [
         "osobné základné",
@@ -282,7 +282,7 @@ export const pronounGroups = {
       "explanation": "Zámeno tu zastupuje osobu; pýtame sa pádovou otázkou."
     },
     {
-      "prompt": "Urči druh zvýrazneného zámena vo vete: „Zavolám jej.“ (zámeno jej).",
+      "prompt": "Vo vete „Zavolám jej.“ je zámeno „jej“ akého druhu?",
       "answer": "osobné základné",
       "choices": [
         "osobné základné",
@@ -293,7 +293,7 @@ export const pronounGroups = {
       "explanation": "Zámeno tu zastupuje osobu; pýtame sa pádovou otázkou."
     },
     {
-      "prompt": "Urči druh zvýrazneného zámena vo vete: „Zavolaj mi.“ (zámeno mi).",
+      "prompt": "Vo vete „Zavolaj mi.“ je zámeno „mi“ akého druhu?",
       "answer": "osobné základné",
       "choices": [
         "osobné základné",
@@ -304,7 +304,7 @@ export const pronounGroups = {
       "explanation": "Zámeno tu zastupuje osobu; pýtame sa pádovou otázkou."
     },
     {
-      "prompt": "Urči druh zvýrazneného zámena vo vete: „Bez neho nepôjdeme.“ (zámeno neho).",
+      "prompt": "Vo vete „Bez neho nepôjdeme.“ je zámeno „neho“ akého druhu?",
       "answer": "osobné základné",
       "choices": [
         "osobné základné",
@@ -315,7 +315,7 @@ export const pronounGroups = {
       "explanation": "Zámeno tu zastupuje osobu; pýtame sa pádovou otázkou."
     },
     {
-      "prompt": "Urči druh zvýrazneného zámena vo vete: „S nami to zvládneš.“ (zámeno nami).",
+      "prompt": "Vo vete „S nami to zvládneš.“ je zámeno „nami“ akého druhu?",
       "answer": "osobné základné",
       "choices": [
         "osobné základné",
@@ -326,7 +326,7 @@ export const pronounGroups = {
       "explanation": "Zámeno tu zastupuje osobu; pýtame sa pádovou otázkou."
     },
     {
-      "prompt": "Urči druh zvýrazneného zámena vo vete: „Počujem ich.“ (zámeno ich).",
+      "prompt": "Vo vete „Počujem ich.“ je zámeno „ich“ akého druhu?",
       "answer": "osobné základné",
       "choices": [
         "osobné základné",
@@ -337,7 +337,7 @@ export const pronounGroups = {
       "explanation": "Zámeno tu zastupuje osobu; pýtame sa pádovou otázkou."
     },
     {
-      "prompt": "Urči druh privlastňovacieho zámena vo vete: „Môj zošit zostal doma.“",
+      "prompt": "Vo vete „Môj zošit zostal doma.“ je zámeno „Môj“ akého druhu?",
       "answer": "osobné privlastňovacie",
       "choices": [
         "osobné privlastňovacie",
@@ -348,7 +348,7 @@ export const pronounGroups = {
       "explanation": "Vo vete „Môj zošit zostal doma.“ zámeno vyjadruje, čí je predmet alebo osoba."
     },
     {
-      "prompt": "Urči druh privlastňovacieho zámena vo vete: „Tvoj pes je veselý.“",
+      "prompt": "Vo vete „Tvoj pes je veselý.“ je zámeno „Tvoj“ akého druhu?",
       "answer": "osobné privlastňovacie",
       "choices": [
         "osobné privlastňovacie",
@@ -359,7 +359,7 @@ export const pronounGroups = {
       "explanation": "Vo vete „Tvoj pes je veselý.“ zámeno vyjadruje, čí je predmet alebo osoba."
     },
     {
-      "prompt": "Urči druh privlastňovacieho zámena vo vete: „Jeho bicykel je nový.“",
+      "prompt": "Vo vete „Jeho bicykel je nový.“ je zámeno „Jeho“ akého druhu?",
       "answer": "osobné privlastňovacie",
       "choices": [
         "osobné privlastňovacie",
@@ -370,7 +370,7 @@ export const pronounGroups = {
       "explanation": "Vo vete „Jeho bicykel je nový.“ zámeno vyjadruje, čí je predmet alebo osoba."
     },
     {
-      "prompt": "Urči druh privlastňovacieho zámena vo vete: „Jej mikina je modrá.“",
+      "prompt": "Vo vete „Jej mikina je modrá.“ je zámeno „Jej“ akého druhu?",
       "answer": "osobné privlastňovacie",
       "choices": [
         "osobné privlastňovacie",
@@ -381,7 +381,7 @@ export const pronounGroups = {
       "explanation": "Vo vete „Jej mikina je modrá.“ zámeno vyjadruje, čí je predmet alebo osoba."
     },
     {
-      "prompt": "Urči druh privlastňovacieho zámena vo vete: „Naša škola vyhrala.“",
+      "prompt": "Vo vete „Naša škola vyhrala.“ je zámeno „Naša“ akého druhu?",
       "answer": "osobné privlastňovacie",
       "choices": [
         "osobné privlastňovacie",
@@ -392,7 +392,7 @@ export const pronounGroups = {
       "explanation": "Vo vete „Naša škola vyhrala.“ zámeno vyjadruje, čí je predmet alebo osoba."
     },
     {
-      "prompt": "Urči druh privlastňovacieho zámena vo vete: „Váš dom je pekný.“",
+      "prompt": "Vo vete „Váš dom je pekný.“ je zámeno „Váš“ akého druhu?",
       "answer": "osobné privlastňovacie",
       "choices": [
         "osobné privlastňovacie",
@@ -403,7 +403,7 @@ export const pronounGroups = {
       "explanation": "Vo vete „Váš dom je pekný.“ zámeno vyjadruje, čí je predmet alebo osoba."
     },
     {
-      "prompt": "Urči druh privlastňovacieho zámena vo vete: „Ich tašky ležia pri dverách.“",
+      "prompt": "Vo vete „Ich tašky ležia pri dverách.“ je zámeno „Ich“ akého druhu?",
       "answer": "osobné privlastňovacie",
       "choices": [
         "osobné privlastňovacie",
@@ -414,7 +414,7 @@ export const pronounGroups = {
       "explanation": "Vo vete „Ich tašky ležia pri dverách.“ zámeno vyjadruje, čí je predmet alebo osoba."
     },
     {
-      "prompt": "Urči druh privlastňovacieho zámena vo vete: „Na mojom stole leží mapa.“",
+      "prompt": "Vo vete „Na mojom stole leží mapa.“ je zámeno „mojom“ akého druhu?",
       "answer": "osobné privlastňovacie",
       "choices": [
         "osobné privlastňovacie",
@@ -425,7 +425,7 @@ export const pronounGroups = {
       "explanation": "Vo vete „Na mojom stole leží mapa.“ zámeno vyjadruje, čí je predmet alebo osoba."
     },
     {
-      "prompt": "Urči druh privlastňovacieho zámena vo vete: „Pre tvoju sestru mám dar.“",
+      "prompt": "Vo vete „Pre tvoju sestru mám dar.“ je zámeno „tvoju“ akého druhu?",
       "answer": "osobné privlastňovacie",
       "choices": [
         "osobné privlastňovacie",
@@ -436,7 +436,7 @@ export const pronounGroups = {
       "explanation": "Vo vete „Pre tvoju sestru mám dar.“ zámeno vyjadruje, čí je predmet alebo osoba."
     },
     {
-      "prompt": "Urči druh privlastňovacieho zámena vo vete: „Za vaším domom je záhrada.“",
+      "prompt": "Vo vete „Za vaším domom je záhrada.“ je zámeno „vaším“ akého druhu?",
       "answer": "osobné privlastňovacie",
       "choices": [
         "osobné privlastňovacie",
@@ -447,7 +447,7 @@ export const pronounGroups = {
       "explanation": "Vo vete „Za vaším domom je záhrada.“ zámeno vyjadruje, čí je predmet alebo osoba."
     },
     {
-      "prompt": "Urči druh privlastňovacieho zámena vo vete: „Vidím jej knihu.“",
+      "prompt": "Vo vete „Vidím jej knihu.“ je zámeno „jej“ akého druhu?",
       "answer": "osobné privlastňovacie",
       "choices": [
         "osobné privlastňovacie",
@@ -458,7 +458,7 @@ export const pronounGroups = {
       "explanation": "Vo vete „Vidím jej knihu.“ zámeno vyjadruje, čí je predmet alebo osoba."
     },
     {
-      "prompt": "Urči druh privlastňovacieho zámena vo vete: „Poznáme ich rodičov.“",
+      "prompt": "Vo vete „Poznáme ich rodičov.“ je zámeno „ich“ akého druhu?",
       "answer": "osobné privlastňovacie",
       "choices": [
         "osobné privlastňovacie",
@@ -469,7 +469,7 @@ export const pronounGroups = {
       "explanation": "Vo vete „Poznáme ich rodičov.“ zámeno vyjadruje, čí je predmet alebo osoba."
     },
     {
-      "prompt": "Urči druh privlastňovacieho zámena vo vete: „Hľadám svoju bundu.“",
+      "prompt": "Vo vete „Hľadám tvoju bundu.“ je zámeno „tvoju“ akého druhu?",
       "answer": "osobné privlastňovacie",
       "choices": [
         "osobné privlastňovacie",
@@ -480,7 +480,7 @@ export const pronounGroups = {
       "explanation": "Vo vete „Hľadám svoju bundu.“ zámeno vyjadruje, čí je predmet alebo osoba."
     },
     {
-      "prompt": "Urči druh privlastňovacieho zámena vo vete: „Naše deti spievajú.“",
+      "prompt": "Vo vete „Naše deti spievajú.“ je zámeno „Naše“ akého druhu?",
       "answer": "osobné privlastňovacie",
       "choices": [
         "osobné privlastňovacie",
@@ -491,7 +491,7 @@ export const pronounGroups = {
       "explanation": "Vo vete „Naše deti spievajú.“ zámeno vyjadruje, čí je predmet alebo osoba."
     },
     {
-      "prompt": "Urči druh privlastňovacieho zámena vo vete: „S mojím kamarátom sa učím.“",
+      "prompt": "Vo vete „S mojím kamarátom sa učím.“ je zámeno „mojím“ akého druhu?",
       "answer": "osobné privlastňovacie",
       "choices": [
         "osobné privlastňovacie",
@@ -504,7 +504,7 @@ export const pronounGroups = {
   ],
   "sklonovanie": [
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „ja“ v nominatívee? (nominatív)",
+      "prompt": "Ktorý tvar má zámeno „ja“ v páde nominatív?",
       "answer": "ja",
       "choices": [
         "ja",
@@ -515,7 +515,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „ja“ má v páde nominatív tvar „ja“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „ja“ v genitívee? (genitív)",
+      "prompt": "Ktorý tvar má zámeno „ja“ v páde genitív?",
       "answer": "mňa",
       "choices": [
         "mňa",
@@ -526,7 +526,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „ja“ má v páde genitív tvar „mňa“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „ja“ v datívee? (datív)",
+      "prompt": "Ktorý tvar má zámeno „ja“ v páde datív?",
       "answer": "mne",
       "choices": [
         "mne",
@@ -537,7 +537,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „ja“ má v páde datív tvar „mne“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „ja“ v akuzatívee? (akuzatív)",
+      "prompt": "Ktorý tvar má zámeno „ja“ v páde akuzatív?",
       "answer": "mňa",
       "choices": [
         "mňa",
@@ -548,7 +548,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „ja“ má v páde akuzatív tvar „mňa“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „ja“ v lokále? (lokál)",
+      "prompt": "Ktorý tvar má zámeno „ja“ v páde lokál?",
       "answer": "mne",
       "choices": [
         "mne",
@@ -559,7 +559,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „ja“ má v páde lokál tvar „mne“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „ja“ v inštrumentále? (inštrumentál)",
+      "prompt": "Ktorý tvar má zámeno „ja“ v páde inštrumentál?",
       "answer": "mnou",
       "choices": [
         "mnou",
@@ -570,7 +570,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „ja“ má v páde inštrumentál tvar „mnou“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „ty“ v nominatívee? (nominatív)",
+      "prompt": "Ktorý tvar má zámeno „ty“ v páde nominatív?",
       "answer": "ty",
       "choices": [
         "ty",
@@ -581,7 +581,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „ty“ má v páde nominatív tvar „ty“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „ty“ v genitívee? (genitív)",
+      "prompt": "Ktorý tvar má zámeno „ty“ v páde genitív?",
       "answer": "teba",
       "choices": [
         "teba",
@@ -592,7 +592,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „ty“ má v páde genitív tvar „teba“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „ty“ v datívee? (datív)",
+      "prompt": "Ktorý tvar má zámeno „ty“ v páde datív?",
       "answer": "tebe",
       "choices": [
         "tebe",
@@ -603,7 +603,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „ty“ má v páde datív tvar „tebe“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „ty“ v akuzatívee? (akuzatív)",
+      "prompt": "Ktorý tvar má zámeno „ty“ v páde akuzatív?",
       "answer": "teba",
       "choices": [
         "teba",
@@ -614,7 +614,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „ty“ má v páde akuzatív tvar „teba“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „ty“ v lokále? (lokál)",
+      "prompt": "Ktorý tvar má zámeno „ty“ v páde lokál?",
       "answer": "tebe",
       "choices": [
         "tebe",
@@ -625,7 +625,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „ty“ má v páde lokál tvar „tebe“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „ty“ v inštrumentále? (inštrumentál)",
+      "prompt": "Ktorý tvar má zámeno „ty“ v páde inštrumentál?",
       "answer": "tebou",
       "choices": [
         "tebou",
@@ -636,7 +636,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „ty“ má v páde inštrumentál tvar „tebou“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „on“ v nominatívee? (nominatív)",
+      "prompt": "Ktorý tvar má zámeno „on“ v páde nominatív?",
       "answer": "on",
       "choices": [
         "on",
@@ -647,7 +647,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „on“ má v páde nominatív tvar „on“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „on“ v genitívee? (genitív)",
+      "prompt": "Ktorý tvar má zámeno „on“ v páde genitív?",
       "answer": "jeho",
       "choices": [
         "jeho",
@@ -658,7 +658,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „on“ má v páde genitív tvar „jeho“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „on“ v datívee? (datív)",
+      "prompt": "Ktorý tvar má zámeno „on“ v páde datív?",
       "answer": "jemu",
       "choices": [
         "jemu",
@@ -669,7 +669,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „on“ má v páde datív tvar „jemu“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „on“ v akuzatívee? (akuzatív)",
+      "prompt": "Ktorý tvar má zámeno „on“ v páde akuzatív?",
       "answer": "jeho",
       "choices": [
         "jeho",
@@ -680,7 +680,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „on“ má v páde akuzatív tvar „jeho“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „on“ v lokále? (lokál)",
+      "prompt": "Ktorý tvar má zámeno „on“ v páde lokál?",
       "answer": "ňom",
       "choices": [
         "ňom",
@@ -691,7 +691,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „on“ má v páde lokál tvar „ňom“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „on“ v inštrumentále? (inštrumentál)",
+      "prompt": "Ktorý tvar má zámeno „on“ v páde inštrumentál?",
       "answer": "ním",
       "choices": [
         "ním",
@@ -702,7 +702,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „on“ má v páde inštrumentál tvar „ním“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „ona“ v nominatívee? (nominatív)",
+      "prompt": "Ktorý tvar má zámeno „ona“ v páde nominatív?",
       "answer": "ona",
       "choices": [
         "ona",
@@ -713,7 +713,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „ona“ má v páde nominatív tvar „ona“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „ona“ v genitívee? (genitív)",
+      "prompt": "Ktorý tvar má zámeno „ona“ v páde genitív?",
       "answer": "jej",
       "choices": [
         "jej",
@@ -724,7 +724,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „ona“ má v páde genitív tvar „jej“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „ona“ v datívee? (datív)",
+      "prompt": "Ktorý tvar má zámeno „ona“ v páde datív?",
       "answer": "jej",
       "choices": [
         "jej",
@@ -735,7 +735,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „ona“ má v páde datív tvar „jej“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „ona“ v akuzatívee? (akuzatív)",
+      "prompt": "Ktorý tvar má zámeno „ona“ v páde akuzatív?",
       "answer": "ju",
       "choices": [
         "ju",
@@ -746,7 +746,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „ona“ má v páde akuzatív tvar „ju“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „ona“ v lokále? (lokál)",
+      "prompt": "Ktorý tvar má zámeno „ona“ v páde lokál?",
       "answer": "nej",
       "choices": [
         "nej",
@@ -757,7 +757,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „ona“ má v páde lokál tvar „nej“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „ona“ v inštrumentále? (inštrumentál)",
+      "prompt": "Ktorý tvar má zámeno „ona“ v páde inštrumentál?",
       "answer": "ňou",
       "choices": [
         "ňou",
@@ -768,7 +768,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „ona“ má v páde inštrumentál tvar „ňou“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „my“ v nominatívee? (nominatív)",
+      "prompt": "Ktorý tvar má zámeno „my“ v páde nominatív?",
       "answer": "my",
       "choices": [
         "my",
@@ -779,7 +779,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „my“ má v páde nominatív tvar „my“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „my“ v genitívee? (genitív)",
+      "prompt": "Ktorý tvar má zámeno „my“ v páde genitív?",
       "answer": "nás",
       "choices": [
         "nás",
@@ -790,7 +790,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „my“ má v páde genitív tvar „nás“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „my“ v datívee? (datív)",
+      "prompt": "Ktorý tvar má zámeno „my“ v páde datív?",
       "answer": "nám",
       "choices": [
         "nám",
@@ -801,7 +801,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „my“ má v páde datív tvar „nám“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „my“ v akuzatívee? (akuzatív)",
+      "prompt": "Ktorý tvar má zámeno „my“ v páde akuzatív?",
       "answer": "nás",
       "choices": [
         "nás",
@@ -812,7 +812,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „my“ má v páde akuzatív tvar „nás“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „my“ v lokále? (lokál)",
+      "prompt": "Ktorý tvar má zámeno „my“ v páde lokál?",
       "answer": "nás",
       "choices": [
         "nás",
@@ -823,7 +823,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „my“ má v páde lokál tvar „nás“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „my“ v inštrumentále? (inštrumentál)",
+      "prompt": "Ktorý tvar má zámeno „my“ v páde inštrumentál?",
       "answer": "nami",
       "choices": [
         "nami",
@@ -834,7 +834,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „my“ má v páde inštrumentál tvar „nami“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „vy“ v nominatívee? (nominatív)",
+      "prompt": "Ktorý tvar má zámeno „vy“ v páde nominatív?",
       "answer": "vy",
       "choices": [
         "vy",
@@ -845,7 +845,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „vy“ má v páde nominatív tvar „vy“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „vy“ v genitívee? (genitív)",
+      "prompt": "Ktorý tvar má zámeno „vy“ v páde genitív?",
       "answer": "vás",
       "choices": [
         "vás",
@@ -856,7 +856,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „vy“ má v páde genitív tvar „vás“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „vy“ v datívee? (datív)",
+      "prompt": "Ktorý tvar má zámeno „vy“ v páde datív?",
       "answer": "vám",
       "choices": [
         "vám",
@@ -867,7 +867,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „vy“ má v páde datív tvar „vám“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „vy“ v akuzatívee? (akuzatív)",
+      "prompt": "Ktorý tvar má zámeno „vy“ v páde akuzatív?",
       "answer": "vás",
       "choices": [
         "vás",
@@ -878,7 +878,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „vy“ má v páde akuzatív tvar „vás“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „vy“ v lokále? (lokál)",
+      "prompt": "Ktorý tvar má zámeno „vy“ v páde lokál?",
       "answer": "vás",
       "choices": [
         "vás",
@@ -889,7 +889,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „vy“ má v páde lokál tvar „vás“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „vy“ v inštrumentále? (inštrumentál)",
+      "prompt": "Ktorý tvar má zámeno „vy“ v páde inštrumentál?",
       "answer": "vami",
       "choices": [
         "vami",
@@ -900,7 +900,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „vy“ má v páde inštrumentál tvar „vami“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „oni“ v nominatívee? (nominatív)",
+      "prompt": "Ktorý tvar má zámeno „oni“ v páde nominatív?",
       "answer": "oni",
       "choices": [
         "oni",
@@ -911,7 +911,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „oni“ má v páde nominatív tvar „oni“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „oni“ v genitívee? (genitív)",
+      "prompt": "Ktorý tvar má zámeno „oni“ v páde genitív?",
       "answer": "ich",
       "choices": [
         "ich",
@@ -922,7 +922,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „oni“ má v páde genitív tvar „ich“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „oni“ v datívee? (datív)",
+      "prompt": "Ktorý tvar má zámeno „oni“ v páde datív?",
       "answer": "im",
       "choices": [
         "im",
@@ -933,7 +933,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „oni“ má v páde datív tvar „im“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „oni“ v akuzatívee? (akuzatív)",
+      "prompt": "Ktorý tvar má zámeno „oni“ v páde akuzatív?",
       "answer": "ich",
       "choices": [
         "ich",
@@ -944,7 +944,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „oni“ má v páde akuzatív tvar „ich“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „oni“ v lokále? (lokál)",
+      "prompt": "Ktorý tvar má zámeno „oni“ v páde lokál?",
       "answer": "nich",
       "choices": [
         "nich",
@@ -955,7 +955,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „oni“ má v páde lokál tvar „nich“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „oni“ v inštrumentále? (inštrumentál)",
+      "prompt": "Ktorý tvar má zámeno „oni“ v páde inštrumentál?",
       "answer": "nimi",
       "choices": [
         "nimi",
@@ -966,7 +966,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „oni“ má v páde inštrumentál tvar „nimi“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „ony“ v nominatívee? (nominatív)",
+      "prompt": "Ktorý tvar má zámeno „ony“ v páde nominatív?",
       "answer": "ony",
       "choices": [
         "ony",
@@ -977,7 +977,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „ony“ má v páde nominatív tvar „ony“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „ony“ v genitívee? (genitív)",
+      "prompt": "Ktorý tvar má zámeno „ony“ v páde genitív?",
       "answer": "ich",
       "choices": [
         "ich",
@@ -988,7 +988,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „ony“ má v páde genitív tvar „ich“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „ony“ v datívee? (datív)",
+      "prompt": "Ktorý tvar má zámeno „ony“ v páde datív?",
       "answer": "im",
       "choices": [
         "im",
@@ -999,7 +999,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „ony“ má v páde datív tvar „im“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „ony“ v akuzatívee? (akuzatív)",
+      "prompt": "Ktorý tvar má zámeno „ony“ v páde akuzatív?",
       "answer": "ich",
       "choices": [
         "ich",
@@ -1010,7 +1010,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „ony“ má v páde akuzatív tvar „ich“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „ony“ v lokále? (lokál)",
+      "prompt": "Ktorý tvar má zámeno „ony“ v páde lokál?",
       "answer": "nich",
       "choices": [
         "nich",
@@ -1021,7 +1021,7 @@ export const pronounGroups = {
       "explanation": "Zámeno „ony“ má v páde lokál tvar „nich“."
     },
     {
-      "prompt": "Ktorý uvedený tvar môže mať zámeno „ony“ v inštrumentále? (inštrumentál)",
+      "prompt": "Ktorý tvar má zámeno „ony“ v páde inštrumentál?",
       "answer": "nimi",
       "choices": [
         "nimi",
@@ -1240,7 +1240,7 @@ export const pronounGroups = {
         "tebou",
         "neho"
       ],
-      "explanation": "Krátky tvar zámena „ona“ je „jej“."
+      "explanation": "V genitíve môžeme použiť kratší tvar „jej“, po predložke „nej“."
     },
     {
       "prompt": "Ktorý dlhší tvar zámena „ona“ možno použiť v páde genitív?",
@@ -1753,7 +1753,7 @@ export const pronounGroups = {
       "explanation": "Rozhoduje osoba, pád a význam vety. My a ty sú základné tvary, mi a ti sú datívové krátke tvary; napadla mi myšlienka, ale napadol ma niekto."
     },
     {
-      "prompt": "Vyber správne slovo: „___ mi výborný nápad. (myšlienka)“",
+      "prompt": "Vyber správne slovo: „___ mi výborná myšlienka.“",
       "answer": "napadla",
       "choices": [
         "napadla",
@@ -2065,7 +2065,7 @@ export const pronounGroups = {
   ],
   "predlozky": [
     {
-      "prompt": "Vyber pravopisne správne spojenie predložky s osobným zámenom (príklad 1).",
+      "prompt": "Vyber správny pravopisný tvar: predložka s/so a zámeno ja v inštrumentáli.",
       "answer": "so mnou",
       "choices": [
         "so mnou",
@@ -2076,7 +2076,7 @@ export const pronounGroups = {
       "explanation": "Správne píšeme „so mnou“. Pri s/so a k/ku pred osobnými zámenami sa pri výslovnosti neuplatňuje spodobovanie; vokalizácia uľahčuje výslovnosť."
     },
     {
-      "prompt": "Vyber pravopisne správne spojenie predložky s osobným zámenom (príklad 2).",
+      "prompt": "Vyber správny pravopisný tvar: predložka s/so a zámeno ty v inštrumentáli.",
       "answer": "s tebou",
       "choices": [
         "s tebou",
@@ -2087,7 +2087,7 @@ export const pronounGroups = {
       "explanation": "Správne píšeme „s tebou“. Pri s/so a k/ku pred osobnými zámenami sa pri výslovnosti neuplatňuje spodobovanie; vokalizácia uľahčuje výslovnosť."
     },
     {
-      "prompt": "Vyber pravopisne správne spojenie predložky s osobným zámenom (príklad 3).",
+      "prompt": "Vyber správny pravopisný tvar: predložka s/so a zámeno my v inštrumentáli.",
       "answer": "s nami",
       "choices": [
         "s nami",
@@ -2098,7 +2098,7 @@ export const pronounGroups = {
       "explanation": "Správne píšeme „s nami“. Pri s/so a k/ku pred osobnými zámenami sa pri výslovnosti neuplatňuje spodobovanie; vokalizácia uľahčuje výslovnosť."
     },
     {
-      "prompt": "Vyber pravopisne správne spojenie predložky s osobným zámenom (príklad 4).",
+      "prompt": "Vyber správny pravopisný tvar: predložka s/so a zámeno vy v inštrumentáli.",
       "answer": "s vami",
       "choices": [
         "s vami",
@@ -2109,7 +2109,7 @@ export const pronounGroups = {
       "explanation": "Správne píšeme „s vami“. Pri s/so a k/ku pred osobnými zámenami sa pri výslovnosti neuplatňuje spodobovanie; vokalizácia uľahčuje výslovnosť."
     },
     {
-      "prompt": "Vyber pravopisne správne spojenie predložky s osobným zámenom (príklad 5).",
+      "prompt": "Vyber správny pravopisný tvar: predložka k/ku a zámeno ja v datíve.",
       "answer": "ku mne",
       "choices": [
         "ku mne",
@@ -2120,7 +2120,7 @@ export const pronounGroups = {
       "explanation": "Správne píšeme „ku mne“. Pri s/so a k/ku pred osobnými zámenami sa pri výslovnosti neuplatňuje spodobovanie; vokalizácia uľahčuje výslovnosť."
     },
     {
-      "prompt": "Vyber pravopisne správne spojenie predložky s osobným zámenom (príklad 6).",
+      "prompt": "Vyber správny pravopisný tvar: predložka k/ku a zámeno ty v datíve.",
       "answer": "ku tebe",
       "choices": [
         "ku tebe",
@@ -2131,7 +2131,7 @@ export const pronounGroups = {
       "explanation": "Správne píšeme „ku tebe“. Pri s/so a k/ku pred osobnými zámenami sa pri výslovnosti neuplatňuje spodobovanie; vokalizácia uľahčuje výslovnosť."
     },
     {
-      "prompt": "Vyber pravopisne správne spojenie predložky s osobným zámenom (príklad 7).",
+      "prompt": "Vyber správny pravopisný tvar: predložka k/ku a zámeno my v datíve.",
       "answer": "k nám",
       "choices": [
         "k nám",
@@ -2142,7 +2142,7 @@ export const pronounGroups = {
       "explanation": "Správne píšeme „k nám“. Pri s/so a k/ku pred osobnými zámenami sa pri výslovnosti neuplatňuje spodobovanie; vokalizácia uľahčuje výslovnosť."
     },
     {
-      "prompt": "Vyber pravopisne správne spojenie predložky s osobným zámenom (príklad 8).",
+      "prompt": "Vyber správny pravopisný tvar: predložka k/ku a zámeno vy v datíve.",
       "answer": "k vám",
       "choices": [
         "k vám",
@@ -2153,7 +2153,7 @@ export const pronounGroups = {
       "explanation": "Správne píšeme „k vám“. Pri s/so a k/ku pred osobnými zámenami sa pri výslovnosti neuplatňuje spodobovanie; vokalizácia uľahčuje výslovnosť."
     },
     {
-      "prompt": "Vyber pravopisne správne spojenie predložky s osobným zámenom (príklad 9).",
+      "prompt": "Vyber správny pravopisný tvar: predložka k/ku a zámeno ona v datíve.",
       "answer": "k nej",
       "choices": [
         "k nej",
@@ -2164,7 +2164,7 @@ export const pronounGroups = {
       "explanation": "Správne píšeme „k nej“. Pri s/so a k/ku pred osobnými zámenami sa pri výslovnosti neuplatňuje spodobovanie; vokalizácia uľahčuje výslovnosť."
     },
     {
-      "prompt": "Vyber pravopisne správne spojenie predložky s osobným zámenom (príklad 10).",
+      "prompt": "Vyber správny pravopisný tvar: predložka s/so a zámeno svoj v inštrumentáli.",
       "answer": "so svojím",
       "choices": [
         "so svojím",
@@ -2175,7 +2175,7 @@ export const pronounGroups = {
       "explanation": "Správne píšeme „so svojím“. Pri s/so a k/ku pred osobnými zámenami sa pri výslovnosti neuplatňuje spodobovanie; vokalizácia uľahčuje výslovnosť."
     },
     {
-      "prompt": "Vyber pravopisne správne spojenie predložky s osobným zámenom (príklad 11).",
+      "prompt": "Vyber správny pravopisný tvar: predložka s/so a zámeno váš v inštrumentáli.",
       "answer": "s vaším",
       "choices": [
         "s vaším",
@@ -2186,7 +2186,7 @@ export const pronounGroups = {
       "explanation": "Správne píšeme „s vaším“. Pri s/so a k/ku pred osobnými zámenami sa pri výslovnosti neuplatňuje spodobovanie; vokalizácia uľahčuje výslovnosť."
     },
     {
-      "prompt": "Vyber pravopisne správne spojenie predložky s osobným zámenom (príklad 12).",
+      "prompt": "Vyber správny pravopisný tvar: predložka s/so a zámeno môj v inštrumentáli.",
       "answer": "s mojím",
       "choices": [
         "s mojím",
@@ -2197,7 +2197,7 @@ export const pronounGroups = {
       "explanation": "Správne píšeme „s mojím“. Pri s/so a k/ku pred osobnými zámenami sa pri výslovnosti neuplatňuje spodobovanie; vokalizácia uľahčuje výslovnosť."
     },
     {
-      "prompt": "Vyber pravopisne správne spojenie predložky s osobným zámenom (príklad 13).",
+      "prompt": "Vyber správny pravopisný tvar: správny zápis spojenia so mnou.",
       "answer": "so mnou",
       "choices": [
         "so mnou",
@@ -2208,7 +2208,7 @@ export const pronounGroups = {
       "explanation": "Správne píšeme „so mnou“. Pri s/so a k/ku pred osobnými zámenami sa pri výslovnosti neuplatňuje spodobovanie; vokalizácia uľahčuje výslovnosť."
     },
     {
-      "prompt": "Vyber pravopisne správne spojenie predložky s osobným zámenom (príklad 14).",
+      "prompt": "Vyber správny pravopisný tvar: správny zápis spojenia ku mne.",
       "answer": "ku mne",
       "choices": [
         "ku mne",
@@ -2219,7 +2219,7 @@ export const pronounGroups = {
       "explanation": "Správne píšeme „ku mne“. Pri s/so a k/ku pred osobnými zámenami sa pri výslovnosti neuplatňuje spodobovanie; vokalizácia uľahčuje výslovnosť."
     },
     {
-      "prompt": "Vyber pravopisne správne spojenie predložky s osobným zámenom (príklad 15).",
+      "prompt": "Vyber správny pravopisný tvar: správny zápis spojenia s tebou.",
       "answer": "s tebou",
       "choices": [
         "s tebou",
@@ -2230,7 +2230,7 @@ export const pronounGroups = {
       "explanation": "Správne píšeme „s tebou“. Pri s/so a k/ku pred osobnými zámenami sa pri výslovnosti neuplatňuje spodobovanie; vokalizácia uľahčuje výslovnosť."
     },
     {
-      "prompt": "Vyber pravopisne správne spojenie predložky s osobným zámenom (príklad 16).",
+      "prompt": "Vyber správny pravopisný tvar: správny zápis spojenia k nám.",
       "answer": "k nám",
       "choices": [
         "k nám",
