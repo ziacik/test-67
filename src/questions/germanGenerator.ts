@@ -42,12 +42,14 @@ export const germanQuestionBanks: Record<GermanLessonId, GermanSpec[]> = Object.
 // Podobne ako pri dejepise ponechá naposledy použité otázky na koniec zásoby.
 const bags = new Map<GermanLessonId, GermanSpec[]>();
 let previousRound = new Set<GermanSpec>();
+let previousRoundPrompts = new Set<string>();
 let activeRound: Array<{ lesson: GermanLessonId; spec: GermanSpec }> = [];
 let activeTopic: GermanTopicId | null = null;
 let roundNumber = 0;
 
-function draw(lesson: GermanLessonId, count: number): GermanSpec[] {
+function draw(lesson: GermanLessonId, count: number, blockedPrompts: Set<string>): GermanSpec[] {
   const selected: GermanSpec[] = [];
+  const deferred: GermanSpec[] = [];
   let bag = bags.get(lesson) ?? [];
   while (selected.length < count) {
     if (bag.length === 0) {
@@ -58,9 +60,17 @@ function draw(lesson: GermanLessonId, count: number): GermanSpec[] {
       ];
     }
     const spec = bag.shift();
-    if (spec && !selected.includes(spec)) selected.push(spec);
+    if (!spec) continue;
+    if (blockedPrompts.has(spec.prompt)) {
+      deferred.push(spec);
+      continue;
+    }
+    if (!selected.includes(spec)) {
+      selected.push(spec);
+      blockedPrompts.add(spec.prompt);
+    }
   }
-  bags.set(lesson, bag);
+  bags.set(lesson, [...deferred, ...bag]);
   return selected;
 }
 
@@ -69,8 +79,10 @@ function createRound(topic: GermanTopicId): Array<{ lesson: GermanLessonId; spec
   const chosen: GermanLessonId[] = topic === "de-mixed"
     ? Array.from({ length: 10 }, (_, i) => germanLessonIds[(roundNumber * 10 + i) % germanLessonIds.length])
     : [topic];
-  const items = chosen.flatMap(lesson => draw(lesson, topic === "de-mixed" ? 1 : 10).map(spec => ({ lesson, spec })));
+  const blockedPrompts = new Set(previousRoundPrompts);
+  const items = chosen.flatMap(lesson => draw(lesson, topic === "de-mixed" ? 1 : 10, blockedPrompts).map(spec => ({ lesson, spec })));
   previousRound = new Set(items.map(item => item.spec));
+  previousRoundPrompts = new Set(items.map(item => item.spec.prompt));
   roundNumber++;
   return shuffle(items);
 }
