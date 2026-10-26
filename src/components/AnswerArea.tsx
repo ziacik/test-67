@@ -51,7 +51,7 @@ export function AnswerArea({
 	return (
 		<input
 			ref={inputRef}
-			inputMode="decimal"
+			inputMode={question.topic.startsWith("de-") ? "text" : "decimal"}
 			autoComplete="off"
 			value={answer}
 			onChange={(event) => onInputChange(event.target.value)}
