@@ -1,6 +1,6 @@
 import {
 	generateRoundQuestion as generateMathRoundQuestion,
-	isCorrect,
+	isCorrect as isMathCorrect,
 	normalizeAnswer,
 } from "./generator";
 import { generateBalancedSlovakQuestion } from "./balancedSlovakQuestion";
@@ -30,4 +30,24 @@ export function generateRoundQuestion(topic: AnyTopicId, index: number) {
 		: generateMathRoundQuestion(topic, index);
 }
 
-export { isCorrect, normalizeAnswer };
+
+function normalizedGermanAnswer(value: string): string {
+  return value
+    .toLocaleLowerCase("de-DE")
+    .replace(/[.!?¡¿]/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .replace(/ä/g, "ae")
+    .replace(/ö/g, "oe")
+    .replace(/ü/g, "ue")
+    .replace(/ß/g, "ss");
+}
+
+export function isCorrect(question: import("./types").Question, answer: string): boolean {
+  if (question.topic.startsWith("de-")) {
+    return normalizedGermanAnswer(question.answer) === normalizedGermanAnswer(answer);
+  }
+  return isMathCorrect(question, answer);
+}
+
+export { normalizeAnswer };
