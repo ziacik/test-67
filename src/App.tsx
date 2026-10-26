@@ -163,6 +163,7 @@ function App() {
 		const slovak = subject === "slovak";
 		const biology = subject === "biology";
 		const history = subject === "history";
+		const german = subject === "german";
 
 		return (
 			<main className="shell home-shell">
@@ -171,9 +172,11 @@ function App() {
 						<div className="brand">TEST <b>67</b></div>
 						<div className="level-chip">LVL {level}</div>
 					</div>
-					<h1>{history ? "Dejepis." : biology ? "Biológia." : slovak ? "Slovenčina." : "Matika."}<br /><em>Ale nech to žije.</em></h1>
+					<h1>{german ? "Nemčina." : history ? "Dejepis." : biology ? "Biológia." : slovak ? "Slovenčina." : "Matika."}<br /><em>Ale nech to žije.</em></h1>
 					<p>
-						{history
+						{german
+							? "Nemčina podľa Wir 1. Dvanásť lekcií, slovíčka aj gramatika, bez nudného opakovania."
+							: history
 							? "Od praveku po dobu železnú. Desať rôznych otázok, combo a boss na konci."
 							: biology
 							? "Baktérie, plesne a kvasinky podľa učebnice. Desať otázok, combo a boss na konci."
@@ -228,6 +231,13 @@ function App() {
 						onClick={() => setSubject("history")}
 					>
 						🏺 DEJEPIS
+					</button>
+					<button
+						type="button"
+						className={subject === "german" ? "primary big-button" : "secondary big-button"}
+						onClick={() => setSubject("german")}
+					>
+						🇩🇪 NEMČINA
 					</button>
 				</div>
 
