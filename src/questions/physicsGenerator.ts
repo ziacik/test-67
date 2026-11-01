@@ -211,23 +211,27 @@ function shuffle<T>(values: readonly T[]): T[] {
 }
 
 const bags = new Map<PhysicsGroupId, PhysicsSpec[]>();
-const previous = new Map<PhysicsGroupId, Set<PhysicsSpec>>();
+const previousRounds = new Map<PhysicsGroupId, Set<PhysicsSpec>>();
 let activeTopic: PhysicsGroupId | "fy-mixed" | null = null;
 let activeRound: Array<{ group: PhysicsGroupId; spec: PhysicsSpec }> = [];
 let roundIndex = 0;
 let mixedCursor = 0;
 const mixedOrder = shuffle(physicsGroupIds);
 
-function draw(group: PhysicsGroupId): PhysicsSpec {
+function draw(group: PhysicsGroupId, usedInRound: ReadonlySet<PhysicsSpec>): PhysicsSpec {
   let bag = bags.get(group) ?? [];
   if (bag.length === 0) {
-    const prev = previous.get(group) ?? new Set<PhysicsSpec>();
-    bag = [...shuffle(physicsGroups[group].filter((q) => !prev.has(q))),
-           ...shuffle(physicsGroups[group].filter((q) => prev.has(q)))];
+    // Pri vyčerpaní zásobníka nesmieme zopakovať nič z aktuálneho ani predošlého kola.
+    const eligible = physicsGroups[group].filter((q) => !usedInRound.has(q));
+    const previous = previousRounds.get(group) ?? new Set<PhysicsSpec>();
+    bag = [...shuffle(eligible.filter((q) => !previous.has(q))),
+           ...shuffle(eligible.filter((q) => previous.has(q)))];
   }
-  const chosen = bag.shift()!;
+  const chosen = bag.shift();
+  if (!chosen || usedInRound.has(chosen)) {
+    throw new Error("Fyzika: nepodarilo sa vybrať jedinečnú otázku pre " + group);
+  }
   bags.set(group, bag);
-  previous.set(group, new Set([chosen]));
   return chosen;
 }
 
@@ -240,8 +244,17 @@ function buildRound(topic: PhysicsGroupId | "fy-mixed"): Array<{ group: PhysicsG
   } else {
     for (let i = 0; i < 10; i++) groups.push(topic);
   }
+  const used = new Map<PhysicsGroupId, Set<PhysicsSpec>>();
+  const round = groups.map((group) => {
+    const selected = used.get(group) ?? new Set<PhysicsSpec>();
+    const spec = draw(group, selected);
+    selected.add(spec);
+    used.set(group, selected);
+    return { group, spec };
+  });
+  for (const [group, selected] of used) previousRounds.set(group, selected);
   roundIndex++;
-  return shuffle(groups.map((group) => ({ group, spec: draw(group) })));
+  return shuffle(round);
 }
 
 export function generatePhysicsRoundQuestion(topic: PhysicsGroupId | "fy-mixed", index: number): Question {
