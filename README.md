@@ -13,6 +13,20 @@ Krátke interaktívne testy pre 5. ročník ZŠ. Prvá verzia obsahuje matematik
 - streak a dlhodobé štatistiky v `localStorage`
 - generované príklady + automatické testy generátora
 
+
+## Fyzika – 6. ročník
+
+Fyzika je samostatný predmet: 19 tém a mix, v ktorom dve nasledujúce kolá pokryjú všetky témy.
+Otázky pokrývajú vlastnosti kvapalín, plynov a tuhých látok, meranie dĺžky, hmotnosti
+a objemu, prevody jednotiek, plávanie telies, hustotu a vplyv teploty.
+
+- Podklad: Viera Lapitková a kol., *Fyzika pre 6. ročník ZŠ* (Expol Pedagogika,
+  ISBN 978-80-8091-540-7), https://www.expolpedagogika.sk/zakladna-skola-a-osemrocne-gymnazium/fyzika-pre-6-rocnik-zakladnej-skoly-a-1-rocnik-gymnazia-s-osemrocnym-studiom
+- Podrobnejší rozpis tém: https://www.smartbooks.sk/fyzika-temy-6-rocnik-zs/
+- Autorsky vytvorené otázky podľa týchto tematických okruhov, nie doslovný prepis učebnice
+- Vyše 600 otázok a príkladov vrátane generovaných prevodov a výpočtov
+- V rámci každého 10-otázkového kola sa rovnaká otázka neopakuje
+
 ## Spustenie
 
 ```bash
