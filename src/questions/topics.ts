@@ -1,3 +1,4 @@
+import { physicsTopics } from "./physicsBank";
 import type { Topic } from "./types";
 
 export const topics: Topic[] = [
@@ -196,4 +197,6 @@ export const topics: Topic[] = [
 	{ id: "de-10", subject: "german", name: "M3 · Meine Schulsachen", description: "Školské potreby, predmety, dni v týždni a brauchen.", icon: "🎒" },
 	{ id: "de-11", subject: "german", name: "M3 · Was gibt es im Fernsehen?", description: "Televízny program, filmy, sehen a hören.", icon: "📺" },
 	{ id: "de-12", subject: "german", name: "M3 · Um wie viel Uhr stehst du auf?", description: "Čas, denný režim a odlučiteľné slovesá.", icon: "⏰" },
+	{ id: "fy-mixed", subject: "physics", name: "Mix · Fyzika 6", description: "Mix všetkých 19 tém učiva z fyziky šiesteho ročníka.", icon: "⚡" },
+	...physicsTopics.map((item) => ({ ...item, subject: "physics" as const })),
 ];
