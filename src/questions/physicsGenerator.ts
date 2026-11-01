@@ -104,7 +104,7 @@ for (const cm of [15, 24, 38, 45, 65, 75, 120, 135, 175, 240, 325, 475]) {
   addNum("fy-length-units", "Premeň " + cm + " cm na metre.", cm / 100, "m",
     [cm / 10, cm / 1000, cm * 10], "Centimetre na metre delíme 100.");
 }
-for (const km of [0.25, 0.4, 0.75, 1.25, 1.6, 2.35, 3.5, 4.75, 5.6, 6.25, 7.8, 8.45]) {
+for (const km of [0.25, 0.4, 0.75, 1.25, 2.35, 3.5, 4.75, 5.6, 6.25, 7.8, 8.45]) {
   addNum("fy-length-units", "Koľko metrov je " + fmt(km) + " km?", km * 1000, "m",
     [km * 100, km * 10, km * 10000], "Kilometre na metre násobíme 1000.");
 }
