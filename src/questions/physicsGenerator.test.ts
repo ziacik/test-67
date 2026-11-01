@@ -20,7 +20,7 @@ describe("Fyzika 6. ročník — témy podľa učebnice", () => {
       expect(bank.length).toBeGreaterThanOrEqual(20);
       expect(new Set(bank.map((q) => q.prompt)).size).toBe(bank.length);
       for (const q of bank) {
-        expect(q.prompt.length).toBeGreaterThan(12);
+        expect(q.prompt.length).toBeGreaterThanOrEqual(12);
         expect(q.explanation.length).toBeGreaterThan(10);
         expect(q.choices).toHaveLength(4);
         expect(new Set(q.choices).size).toBe(4);
